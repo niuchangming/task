@@ -74,6 +74,9 @@
 		70D3923A1B87653A00EB7F37 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D392291B87653A00EB7F37 /* UIImageView+WebCache.m */; };
 		70D3923B1B87653A00EB7F37 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D3922B1B87653A00EB7F37 /* UIView+WebCacheOperation.m */; };
 		70D3923E1B8793C900EB7F37 /* TaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D3923D1B8793C900EB7F37 /* TaskCell.m */; };
+		70E416991BD7714200758D18 /* QRCodeScannerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E416981BD7714200758D18 /* QRCodeScannerVC.m */; settings = {ASSET_TAGS = (); }; };
+		70E416A11BD77F2400758D18 /* QRItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E4169C1BD77F2400758D18 /* QRItem.m */; settings = {ASSET_TAGS = (); }; };
+		70E416A31BD77F2400758D18 /* QRView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E416A01BD77F2400758D18 /* QRView.m */; settings = {ASSET_TAGS = (); }; };
 		F106F7D326DBB7C63D1AF1BF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A62FBF10DB37A84852F06BD1 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -197,6 +200,12 @@
 		70D3922B1B87653A00EB7F37 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		70D3923C1B8793C900EB7F37 /* TaskCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskCell.h; sourceTree = "<group>"; };
 		70D3923D1B8793C900EB7F37 /* TaskCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskCell.m; sourceTree = "<group>"; };
+		70E416971BD7714200758D18 /* QRCodeScannerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeScannerVC.h; sourceTree = "<group>"; };
+		70E416981BD7714200758D18 /* QRCodeScannerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeScannerVC.m; sourceTree = "<group>"; };
+		70E4169B1BD77F2400758D18 /* QRItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRItem.h; sourceTree = "<group>"; };
+		70E4169C1BD77F2400758D18 /* QRItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRItem.m; sourceTree = "<group>"; };
+		70E4169F1BD77F2400758D18 /* QRView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRView.h; sourceTree = "<group>"; };
+		70E416A01BD77F2400758D18 /* QRView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRView.m; sourceTree = "<group>"; };
 		A62FBF10DB37A84852F06BD1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D39FCAC5C4638FF782221BA5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FA330CF720664E9944C91E2D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -268,6 +277,8 @@
 				70CF6DA91B8EFA8D008C9F51 /* ProfileVC.m */,
 				70C6A9E51B90677400FE6061 /* TaskDetailVC.h */,
 				70C6A9E61B90677400FE6061 /* TaskDetailVC.m */,
+				70E416971BD7714200758D18 /* QRCodeScannerVC.h */,
+				70E416981BD7714200758D18 /* QRCodeScannerVC.m */,
 				7078BB9E1B8029C6002290E4 /* Main.storyboard */,
 				7078BBA11B8029C6002290E4 /* Images.xcassets */,
 				7078BBA31B8029C6002290E4 /* LaunchScreen.xib */,
@@ -420,6 +431,7 @@
 		70D391DF1B86EC8400EB7F37 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				70E4169A1BD77F2400758D18 /* QRView */,
 				70D3920A1B87653A00EB7F37 /* SDWebImage */,
 				70D391E01B86ECAB00EB7F37 /* TopAlertView */,
 				70D3923C1B8793C900EB7F37 /* TaskCell.h */,
@@ -497,6 +509,17 @@
 				70D3922B1B87653A00EB7F37 /* UIView+WebCacheOperation.m */,
 			);
 			path = SDWebImage;
+			sourceTree = "<group>";
+		};
+		70E4169A1BD77F2400758D18 /* QRView */ = {
+			isa = PBXGroup;
+			children = (
+				70E4169B1BD77F2400758D18 /* QRItem.h */,
+				70E4169C1BD77F2400758D18 /* QRItem.m */,
+				70E4169F1BD77F2400758D18 /* QRView.h */,
+				70E416A01BD77F2400758D18 /* QRView.m */,
+			);
+			path = QRView;
 			sourceTree = "<group>";
 		};
 		F001B85B591474F25480F307 /* Frameworks */ = {
@@ -682,6 +705,7 @@
 				70D3923A1B87653A00EB7F37 /* UIImageView+WebCache.m in Sources */,
 				707811821B9C22CB00BB66DC /* SDSegmentedControl.m in Sources */,
 				70D392351B87653A00EB7F37 /* UIButton+WebCache.m in Sources */,
+				70E416A11BD77F2400758D18 /* QRItem.m in Sources */,
 				709C09531B81FDF60001E321 /* ConstantValues.m in Sources */,
 				70D391D81B86C87000EB7F37 /* Product.m in Sources */,
 				709C09341B81AFF70001E321 /* RAMFumeAnimation.swift in Sources */,
@@ -702,11 +726,13 @@
 				70C96A4B1B92B53500BBDCD5 /* TaskDetailInfoView.m in Sources */,
 				7078BB9D1B8029C6002290E4 /* TaskController.m in Sources */,
 				709C09351B81AFF70001E321 /* RAMRotationAnimation.swift in Sources */,
+				70E416991BD7714200758D18 /* QRCodeScannerVC.m in Sources */,
 				709C09331B81AFF70001E321 /* RAMFrameItemAnimation.swift in Sources */,
 				709C09521B81FDF60001E321 /* CommonUtils.m in Sources */,
 				70D3923B1B87653A00EB7F37 /* UIView+WebCacheOperation.m in Sources */,
 				70D392391B87653A00EB7F37 /* UIImageView+HighlightedWebCache.m in Sources */,
 				7078BB941B8029C6002290E4 /* main.m in Sources */,
+				70E416A31BD77F2400758D18 /* QRView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

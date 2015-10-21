@@ -46,19 +46,33 @@
                         <segment title="Reward"/>
                         <segment title="Product"/>
                     </segments>
+                    <connections>
+                        <action selector="segmentChanged:" destination="iN0-l3-epB" eventType="valueChanged" id="MO2-0f-fw3"/>
+                    </connections>
                 </segmentedControl>
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nBJ-0I-kBM">
+                    <rect key="frame" x="0.0" y="110" width="320" height="200"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="320" id="6ld-aC-rwF"/>
+                        <constraint firstAttribute="height" constant="200" id="bnL-0Z-2at"/>
+                    </constraints>
+                </webView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="jee-CR-OVu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="29V-UK-pBE"/>
                 <constraint firstItem="UGd-TS-HpV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="4xk-cq-kAK"/>
+                <constraint firstAttribute="trailing" secondItem="nBJ-0I-kBM" secondAttribute="trailing" id="5Pg-uu-FQ1"/>
                 <constraint firstAttribute="trailing" secondItem="QiL-nc-IOa" secondAttribute="trailing" constant="8" id="CXi-be-eXv"/>
                 <constraint firstItem="eSi-vj-ol2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="GeS-iM-LJ1"/>
                 <constraint firstItem="QiL-nc-IOa" firstAttribute="leading" secondItem="jee-CR-OVu" secondAttribute="trailing" constant="8" id="H1n-cR-qSP"/>
+                <constraint firstItem="nBJ-0I-kBM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="IRw-Ag-CoJ"/>
                 <constraint firstItem="QiL-nc-IOa" firstAttribute="top" secondItem="UGd-TS-HpV" secondAttribute="bottom" constant="3" id="KYU-46-vRR"/>
                 <constraint firstItem="jee-CR-OVu" firstAttribute="top" secondItem="UGd-TS-HpV" secondAttribute="bottom" id="MEn-NP-1a9"/>
                 <constraint firstItem="UGd-TS-HpV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="R6M-zP-wHD"/>
                 <constraint firstAttribute="trailing" secondItem="UGd-TS-HpV" secondAttribute="trailing" constant="8" id="U4W-iK-vgd"/>
+                <constraint firstItem="nBJ-0I-kBM" firstAttribute="top" secondItem="eSi-vj-ol2" secondAttribute="bottom" constant="8" id="Vep-JU-Blp"/>
                 <constraint firstAttribute="trailing" secondItem="eSi-vj-ol2" secondAttribute="trailing" id="uyA-JM-But"/>
                 <constraint firstItem="eSi-vj-ol2" firstAttribute="top" secondItem="jee-CR-OVu" secondAttribute="bottom" constant="10" id="yPr-aU-H1M"/>
             </constraints>
@@ -67,8 +81,10 @@
                 <outlet property="companyLogo" destination="jee-CR-OVu" id="IkE-IU-QQf"/>
                 <outlet property="companyNameLbl" destination="QiL-nc-IOa" id="hA0-bI-Fch"/>
                 <outlet property="contentSegment" destination="eSi-vj-ol2" id="rN7-7x-dpQ"/>
+                <outlet property="infoWebView" destination="nBJ-0I-kBM" id="c1J-3O-ww7"/>
                 <outlet property="taskTitleLbl" destination="UGd-TS-HpV" id="45U-4d-YCx"/>
             </connections>
+            <point key="canvasLocation" x="384" y="222"/>
         </view>
     </objects>
     <resources>

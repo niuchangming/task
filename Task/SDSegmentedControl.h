@@ -21,19 +21,12 @@ typedef enum {
 
 @interface SDSegmentedControl : UISegmentedControl <UIScrollViewDelegate>
 
-@property (retain, nonatomic) UIColor *backgroundColor UI_APPEARANCE_SELECTOR;
-@property (retain, nonatomic) UIColor *borderColor UI_APPEARANCE_SELECTOR;
-@property (assign, nonatomic) CGFloat borderWidth UI_APPEARANCE_SELECTOR;
 @property (assign, nonatomic) CGFloat arrowSize UI_APPEARANCE_SELECTOR;
 @property (assign, nonatomic) SDSegmentedArrowPosition arrowPosition UI_APPEARANCE_SELECTOR;
 @property (assign, nonatomic) CGFloat arrowHeightFactor UI_APPEARANCE_SELECTOR;
 @property (assign, nonatomic) CFTimeInterval animationDuration UI_APPEARANCE_SELECTOR;
 @property (assign, nonatomic) CGFloat interItemSpace UI_APPEARANCE_SELECTOR;
 @property (assign, nonatomic) UIEdgeInsets stainEdgeInsets UI_APPEARANCE_SELECTOR;
-@property (retain, nonatomic) UIColor *shadowColor UI_APPEARANCE_SELECTOR;
-@property (assign, nonatomic) CGFloat shadowRadius UI_APPEARANCE_SELECTOR;
-@property (assign, nonatomic) CGFloat shadowOpacity UI_APPEARANCE_SELECTOR;
-@property (assign, nonatomic) CGSize shadowOffset UI_APPEARANCE_SELECTOR;
 @property (retain, nonatomic) UIFont *titleFont UI_APPEARANCE_SELECTOR;
 @property (retain, nonatomic) UIFont *selectedTitleFont UI_APPEARANCE_SELECTOR;
 @property (assign, nonatomic) BOOL centerSegmentsIfPossible UI_APPEARANCE_SELECTOR;

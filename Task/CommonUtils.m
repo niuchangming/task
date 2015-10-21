@@ -26,6 +26,11 @@
     return ([response statusCode] == 200) ? YES : NO;
 }
 
++ (BOOL)validateCamera {
+    return [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] &&
+    [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear];
+}
+
 + (UIColor *)colorFromHexString:(NSString *)hexString {
     unsigned rgbValue = 0;
     NSScanner *scanner = [NSScanner scannerWithString:hexString];
@@ -75,6 +80,43 @@
         return YES;
     return (str.intValue != 0);
 }
+
++ (CGRect)screenBounds {
+    UIScreen *screen = [UIScreen mainScreen];
+    CGRect screenRect;
+    if (![screen respondsToSelector:@selector(fixedCoordinateSpace)] && UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+        screenRect = CGRectMake(0, 0, screen.bounds.size.height, screen.bounds.size.width);
+    } else {
+        screenRect = screen.bounds;
+    }
+    
+    return screenRect;
+    
+}
+
++ (AVCaptureVideoOrientation) videoOrientationFromCurrentDeviceOrientation {
+    
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if (orientation == UIInterfaceOrientationPortrait) {
+        NSLog(@"UIInterfaceOrientationPortrait");
+        return AVCaptureVideoOrientationPortrait;
+        
+    } else if (orientation == UIInterfaceOrientationLandscapeLeft) {
+        NSLog(@"AVCaptureVideoOrientationLandscapeLeft");
+        return AVCaptureVideoOrientationLandscapeLeft;
+        
+    } else if (orientation == UIInterfaceOrientationLandscapeRight){
+        NSLog(@"UIInterfaceOrientationLandscapeRight");
+        return AVCaptureVideoOrientationLandscapeRight;
+    } else if (orientation == UIInterfaceOrientationPortraitUpsideDown) {
+        
+        NSLog(@"UIInterfaceOrientationPortraitUpsideDown");
+        return AVCaptureVideoOrientationPortraitUpsideDown;
+    }
+    
+    return AVCaptureVideoOrientationPortrait;
+}
+
 @end
 
 

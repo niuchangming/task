@@ -19,25 +19,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    
-    
-    
-    NSString *str = @"skus={062101186,062101694,062101186,062101694,062101186,062101694,062101186,062101694}";
-    
-    NSString *param = nil;
-    NSRange start = [str rangeOfString:@"skus="];
-    if(start.location != NSNotFound){
-        param = [str substringFromIndex:start.location + start.length + 1];
-        
-        NSRange end = [param rangeOfString:@"}"];
-        if (end.location != NSNotFound){
-            param = [param substringToIndex:end.location];
-        }
-        
-    }
-    
-    
-    
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                            didFinishLaunchingWithOptions:launchOptions];;
 }

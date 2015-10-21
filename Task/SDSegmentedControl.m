@@ -97,7 +97,6 @@ const CGFloat kSDSegmentedControlScrollOffset = 20;
     
     self.backgroundColor = [UIColor clearColor];
     
-    
     // Init border bottom layer
     [self.layer addSublayer:_borderBottomLayer = CAShapeLayer.layer];
 
@@ -832,31 +831,6 @@ const CGFloat kSDSegmentedControlScrollOffset = 20;
 
 - (void)addArrowAtPoint:(CGPoint)point toPath:(UIBezierPath *)path withLineWidth:(CGFloat)lineWidth
 {
-    // The arrow is added like below, whereas P is the point argument
-    // and 1-5 are the points which were added to the path. It must be
-    // always five points, otherwise animations will look ugly.
-    //
-    // P: point.x
-    // s: self.arrowSize - line.width
-    // w: self.bounds.size.width
-    //
-    //
-    //   s < P < w-s:      P < -s:         P = MAX:       w+s < P:
-    //
-    //        3
-    //       / \
-    //      /   \
-    //  1--2  P  4--5   1234--------5   1--2--3--4--5   1--------2345
-    //
-    //
-    //    0 < P < s:       -s < P:
-    //
-    //     3
-    //    / \           123
-    //  12   \             \
-    //     P  4-----5    P  4------5
-    //
-    
     const CGFloat left = CGRectGetMinX(self.bounds);
     const CGFloat right = CGRectGetMaxX(self.bounds);
     const CGFloat center = (right-left) / 2;

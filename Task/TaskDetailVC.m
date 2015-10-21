@@ -64,15 +64,19 @@ static CGFloat PageControlHeight = 20.0f;
     [pageControl setHidesForSinglePage:YES];
     
     contentView = [[[NSBundle mainBundle] loadNibNamed:@"TaskDetailInfoView" owner:self options:nil] objectAtIndex:0];
+    contentView.infoWebView.delegate = contentView;
     contentView.frame = contentScrollView.frame;
     contentView.taskTitleLbl.text =  [task.title uppercaseString];
     contentView.companyNameLbl.text = @"Company name";
+    contentView.task = task;
+    [contentView.infoWebView loadHTMLString:task.desc baseURL:nil];
+    [contentView.contentSegment setSelectedSegmentIndex:0];
     
     [contentScrollView addSubview:contentView];
     [contentScrollView addSubview:pageControl];
     [self.view addSubview:imageScroller];
-    [self.view addSubview:contentScrollView];
     [self.view addSubview:transparentScroller];
+    [self.view addSubview:contentScrollView];
 }
 
 - (void)addImage:(Image*)image atIndex:(int)index{

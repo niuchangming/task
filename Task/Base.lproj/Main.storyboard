@@ -355,7 +355,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YhM-hw-IJN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="109" y="-830"/>
+            <point key="canvasLocation" x="23" y="-929"/>
         </scene>
         <!--Home-->
         <scene sceneID="H3y-Be-P9P">
@@ -535,6 +535,7 @@
                         <outlet property="taskCV" destination="9Is-CD-53s" id="k1h-M7-Xrf"/>
                         <segue destination="ESF-4M-nuO" kind="presentation" identifier="login_fr_home" id="M2C-z0-l2h"/>
                         <segue destination="fXA-Cc-olh" kind="show" identifier="taskdetail_fr_home" id="Cj1-Kc-yMV"/>
+                        <segue destination="56T-Ps-eXJ" kind="show" identifier="qrscan_fr_home" id="bAn-SG-eRO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S8A-wf-lqo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -554,6 +555,25 @@
             </objects>
             <point key="canvasLocation" x="74" y="-248"/>
         </scene>
+        <!--QR Code Scanner-->
+        <scene sceneID="EXU-9b-3qC">
+            <objects>
+                <viewController id="56T-Ps-eXJ" customClass="QRCodeScannerVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="sdh-I2-gU8"/>
+                        <viewControllerLayoutGuide type="bottom" id="eiw-dn-R0w"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hf2-Hg-Rwh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="QR Code Scanner" id="A3g-iy-iop"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rt3-FI-tzI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="445" y="-783"/>
+        </scene>
         <!--Task Detail-->
         <scene sceneID="JEg-JX-b9y">
             <objects>
@@ -565,11 +585,12 @@
                     <view key="view" contentMode="scaleToFill" id="q05-Wd-os2">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Task Detail" id="ue3-t2-lvd">
                         <barButtonItem key="rightBarButtonItem" image="share.png" id="9kx-v7-FUu">
+                            <inset key="imageInsets" minX="8" minY="4" maxX="0.0" maxY="4"/>
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
                     </navigationItem>

@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface CommonUtils : NSObject
 + (BOOL)hasNetwork;
+
++ (BOOL)validateCamera;
 
 + (UIColor *)colorFromHexString:(NSString *)hexString;
 
@@ -25,5 +28,9 @@
 + (BOOL)isValidEmail:(NSString *) emailStr;
 
 + (NSString*) accessToken;
+
++ (CGRect)screenBounds;
+
++ (AVCaptureVideoOrientation) videoOrientationFromCurrentDeviceOrientation;
 
 @end

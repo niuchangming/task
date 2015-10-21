@@ -7,11 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Task.h"
 
-@interface TaskDetailInfoView : UIView
+@interface TaskDetailInfoView : UIView <UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *taskTitleLbl;
 @property (weak, nonatomic) IBOutlet UIImageView *companyLogo;
 @property (weak, nonatomic) IBOutlet UILabel *companyNameLbl;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *contentSegment;
+@property (strong, nonatomic) Task *task;
+
+@property (weak, nonatomic) IBOutlet UIWebView *infoWebView;
+
+- (IBAction)segmentChanged:(id)sender;
+
+-(void) fitSize;
 
 @end
