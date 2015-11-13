@@ -9,10 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "Task.h"
 #import "TaskDetailInfoView.h"
+#import "ShareView.h"
+#import "TaskDetailInfoView.h"
+#import "Job.h"
+#import "WXApi.h"
+#import <MessageUI/MessageUI.h>
 
 @class TaskDetailVC;
 
-@interface TaskDetailVC : UIViewController
+@interface TaskDetailVC : UIViewController<TaskDetailInfoDelegate, ShareViewDelegate, WXApiDelegate, MFMailComposeViewControllerDelegate>
 
 @property (strong, nonatomic) Task *task;
 @property (nonatomic, strong) NSMutableArray *imageViews;
@@ -21,6 +26,12 @@
 @property (nonatomic, strong) UIScrollView *contentScrollView;
 @property (nonatomic, strong) TaskDetailInfoView *contentView;
 @property (nonatomic, strong) UIPageControl *pageControl;
+@property (nonatomic, strong) Job *job;
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *shareBtn;
+@property (strong, nonatomic) ShareView *shareContainer;
+
+- (IBAction)shareBtnClicked:(id)sender;
 
 - (void)addImages:(NSArray*)moreImages;
 - (void)addImage:(id)image atIndex:(int)index;

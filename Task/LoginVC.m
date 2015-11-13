@@ -24,8 +24,9 @@
 @synthesize fbLoadingBar;
 @synthesize fbLoginBtn;
 @synthesize delegate;
+@synthesize signupPopView;
 
--(void)viewDidLoad{
+-(void)viewDidLoad{    
     accountTF.leftViewMode = UITextFieldViewModeAlways;
     
     UIView *userIcon = [[UIView alloc] init];
@@ -56,7 +57,24 @@
     fbLoginBtn.delegate = self;
 }
 
+- (IBAction)signupBtnClicked:(id)sender {
+    if(signupPopView == nil){
+        SignupView *signupView = [[SignupView alloc] initWithFrame:CGRectMake(0, 0, 300, 200)];
+        signupView.delegate = self;
+        signupPopView = [[JCAlertView alloc] initWithCustomView:signupView dismissWhenTouchedBackground:NO];
+    }
+    
+    [signupPopView show];
+}
+
+- (IBAction)forgotBtnClicked:(id)sender {
+    
+}
+
 - (IBAction)loginBtnClicked:(id)sender {
+    [loginLoadingBar startAnimating];
+    [loginBtn setEnabled:false];
+    
     if(![CommonUtils hasNetwork]) {
         [MozTopAlertView showWithType:MozAlertTypeError text:@"Network connection error." doText:nil doBlock:nil parentView:self.view];
         return;
@@ -68,7 +86,7 @@
     }
     
     if([CommonUtils IsEmpty:passwordTF.text]) {
-        [MozTopAlertView showWithType:MozAlertTypeError text:@"Email cannot be empty." doText:nil doBlock:nil parentView:self.view];
+        [MozTopAlertView showWithType:MozAlertTypeError text:@"Password cannot be empty." doText:nil doBlock:nil parentView:self.view];
         return;
     }
     
@@ -89,9 +107,6 @@
         [loginLoadingBar stopAnimating];
         [loginBtn setEnabled:true];
     }];
-    
-    [loginLoadingBar startAnimating];
-    [loginBtn setEnabled:false];
 }
 
 - (void) loginButton: (FBSDKLoginButton *)loginButton didCompleteWithResult: (FBSDKLoginManagerLoginResult *)result error: (NSError *)error{
@@ -100,19 +115,23 @@
         return;
     }
     
-    [self syncFBTokenWithServer:result.token.tokenString];
+    [self syncFbIdWithServer:result.token.userID];
 }
 
--(void) syncFBTokenWithServer: (NSString*) fbToken{
+-(void) syncFbIdWithServer: (NSString*) userId{
+    
+    if([CommonUtils IsEmpty:userId]){
+        return;
+    }
+    
     NSString *url = [NSString stringWithFormat:@"%@%@", baseUrl, @"SessionController/loginWithFB"];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject: fbToken forKey: @"fbId"];
+    [params setObject: userId forKey: @"fbId"];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self parseUser:operation.responseData];
-        
         [fbLoadingBar stopAnimating];
         [fbLoginBtn setEnabled:true];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -124,6 +143,17 @@
     [fbLoadingBar startAnimating];
     [fbLoginBtn setEnabled:false];
 
+}
+
+-(void) signupCompletedWithResponseData:(NSData *)resp withError:(NSString *)err{
+    if(![CommonUtils IsEmpty:err]){
+        [MozTopAlertView showWithType:MozAlertTypeError text:err doText:nil doBlock:nil parentView:self.view];
+        [signupPopView dismissWithCompletion:nil];
+        return;
+    }
+    
+    [self parseUser:resp];
+    [signupPopView dismissWithCompletion:nil];
 }
 
 -(void) parseUser: (NSData *) jsonData{
@@ -147,14 +177,13 @@
     }
 }
 
-- (void) loginButtonDidLogOut:(FBSDKLoginButton *)loginButton{
-}
+- (void) loginButtonDidLogOut:(FBSDKLoginButton *)loginButton{}
 
 -(void) storeUserInfo: (User *) user{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:user.accessToken forKey:@"access_token"];
     [defaults setBool:user.isActive forKey:@"is_active"];
-    [defaults setInteger:user.entityId forKey:@"entit_id"];
+    [defaults setInteger:user.entityId forKey:@"entity_id"];
     [defaults setObject:user.role forKey:@"role"];
     [defaults synchronize];
 }

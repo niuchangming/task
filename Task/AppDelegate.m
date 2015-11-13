@@ -9,6 +9,10 @@
 #import "AppDelegate.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "WXApi.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+#import <TwitterKit/TwitterKit.h>
 
 @interface AppDelegate ()
 
@@ -19,8 +23,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    [Fabric with:@[[Crashlytics class], [Twitter class]]];
+    
+    [WXApi registerApp:@"wxd930ea5d5a258f4f" withDescription:@"task"];
+    
     return [[FBSDKApplicationDelegate sharedInstance] application:application
-                                           didFinishLaunchingWithOptions:launchOptions];;
+                                           didFinishLaunchingWithOptions:launchOptions];
 }
 
 - (BOOL) application:(UIApplication *) application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{

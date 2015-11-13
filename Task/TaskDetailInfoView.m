@@ -7,6 +7,9 @@
 //
 
 #import "TaskDetailInfoView.h"
+#import <AFNetworking/AFHTTPRequestOperationManager.h>
+#import "ConstantValues.h"
+#import "MozTopAlertView.h"
 
 @implementation TaskDetailInfoView
 
@@ -16,6 +19,9 @@
 @synthesize contentSegment;
 @synthesize task;
 @synthesize infoWebView;
+@synthesize addLoadingBar;
+@synthesize delegate;
+@synthesize addJobBtn;
 
 -(id) init{
     self = [super self];
@@ -44,6 +50,10 @@
     }
     
     [infoWebView loadHTMLString:htmlStr baseURL:nil];
+}
+
+- (IBAction)addJobBtnClicked:(id)sender {
+    [delegate addJobBtnClicked];
 }
 
 -(void) webViewDidFinishLoad:(UIWebView *)webView{

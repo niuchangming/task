@@ -36,12 +36,18 @@
     [self.navigationController.navigationBar
     setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
+    self.navigationController.navigationBar.translucent = NO;
     [self loadTasks];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    if([[CommonUtils role] isEqualToString:@"MERCHANT"]){
+        [self setupQRCodeBtn];
+    }
+}
+
+-(void) setupQRCodeBtn{
     UIButton *qrcodeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     qrcodeBtn.bounds = CGRectMake(0, 0, 30, 30);
     [qrcodeBtn addTarget:self action:@selector(qrScanner) forControlEvents:UIControlEventTouchUpInside];
@@ -61,6 +67,7 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
         NSError *error;
         id object = [NSJSONSerialization JSONObjectWithData:operation.responseData options:kNilOptions error:&error];
         
@@ -163,9 +170,9 @@
             NSString *errMsg = [obj valueForKey:@"error"];
             if(![CommonUtils IsEmpty:errMsg]){
                 [MozTopAlertView showWithType:MozAlertTypeError text:errMsg doText:nil doBlock:nil parentView:self.view];
-                return;
+            }else{
+                [MozTopAlertView showWithType:MozAlertTypeSuccess text:@"Successfully Added !" doText:nil doBlock:nil parentView:self.view];
             }
-            [MozTopAlertView showWithType:MozAlertTypeError text:@"Successfully Added !" doText:nil doBlock:nil parentView:self.view];
         }else{
            [MozTopAlertView showWithType:MozAlertTypeError text:@"The format is incorrect for returned data." doText:nil doBlock:nil parentView:self.view];
         }
@@ -178,7 +185,7 @@
     if ([CommonUtils validateCamera]) {
         [self performSegueWithIdentifier:@"qrscan_fr_home" sender:nil];
     } else {
-        [[[UIAlertView alloc] initWithTitle:@"Warning" message:@"There is no camera available." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil] show];
+        [CommonUtils displayError:@"There is no camera available."];
     }
 }
 

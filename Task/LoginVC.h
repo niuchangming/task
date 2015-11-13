@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "InsetTextField.h"
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "SignupView.h"
+#import <JCAlertView/JCAlertView.h>
 
 @protocol LoginDelegate <NSObject>
 
@@ -17,7 +19,7 @@
 
 @end
 
-@interface LoginVC : UIViewController <FBSDKLoginButtonDelegate>
+@interface LoginVC : UIViewController <FBSDKLoginButtonDelegate, SignupViewDelegate>
 
 @property (weak, nonatomic) IBOutlet InsetTextField *accountTF;
 
@@ -31,7 +33,11 @@
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *fbLoadingBar;
 
+@property (strong, nonatomic) JCAlertView *signupPopView;
+
 @property (strong, nonatomic) id<LoginDelegate> delegate;
+- (IBAction)signupBtnClicked:(id)sender;
+- (IBAction)forgotBtnClicked:(id)sender;
 
 - (IBAction)loginBtnClicked:(id)sender;
 

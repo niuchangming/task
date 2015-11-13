@@ -29,7 +29,11 @@
 
 + (NSString*) accessToken;
 
++ (NSString*) role;
+
 + (CGRect)screenBounds;
+
++ (NSString*) convertDate2String: (NSDate*) date;
 
 + (AVCaptureVideoOrientation) videoOrientationFromCurrentDeviceOrientation;
 

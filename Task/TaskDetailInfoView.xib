@@ -12,7 +12,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LABEL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UGd-TS-HpV">
-                    <rect key="frame" x="8" y="8" width="304" height="32"/>
+                    <rect key="frame" x="8" y="8" width="246" height="32"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="32" id="Eop-z6-W7N"/>
                     </constraints>
@@ -28,9 +28,9 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QiL-nc-IOa">
-                    <rect key="frame" x="40" y="43" width="272" height="17"/>
+                    <rect key="frame" x="40" y="43" width="214" height="17"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="272" id="LxQ-06-oHJ"/>
+                        <constraint firstAttribute="width" constant="214" id="LxQ-06-oHJ"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="14"/>
                     <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -58,26 +58,55 @@
                         <constraint firstAttribute="height" constant="200" id="bnL-0Z-2at"/>
                     </constraints>
                 </webView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpg-Ue-v9A">
+                    <rect key="frame" x="264" y="18" width="48" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="48" id="VTB-17-sCx"/>
+                        <constraint firstAttribute="height" constant="48" id="d17-M2-JhU"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <inset key="titleEdgeInsets" minX="-32" minY="28" maxX="0.0" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="16"/>
+                    <state key="normal" title="Add job" image="briefcase.png">
+                        <color key="titleColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="addJobBtnClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="bLV-oQ-gXk"/>
+                    </connections>
+                </button>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="rTi-MP-6xt">
+                    <rect key="frame" x="278" y="32" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="gXU-s2-XpQ"/>
+                        <constraint firstAttribute="width" constant="20" id="yhv-yq-fH1"/>
+                    </constraints>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="jee-CR-OVu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="29V-UK-pBE"/>
                 <constraint firstItem="UGd-TS-HpV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="4xk-cq-kAK"/>
                 <constraint firstAttribute="trailing" secondItem="nBJ-0I-kBM" secondAttribute="trailing" id="5Pg-uu-FQ1"/>
-                <constraint firstAttribute="trailing" secondItem="QiL-nc-IOa" secondAttribute="trailing" constant="8" id="CXi-be-eXv"/>
+                <constraint firstAttribute="trailing" secondItem="QiL-nc-IOa" secondAttribute="trailing" constant="66" id="CXi-be-eXv"/>
+                <constraint firstAttribute="trailing" secondItem="hpg-Ue-v9A" secondAttribute="trailing" constant="8" id="EqG-fh-IP6"/>
                 <constraint firstItem="eSi-vj-ol2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="GeS-iM-LJ1"/>
                 <constraint firstItem="QiL-nc-IOa" firstAttribute="leading" secondItem="jee-CR-OVu" secondAttribute="trailing" constant="8" id="H1n-cR-qSP"/>
                 <constraint firstItem="nBJ-0I-kBM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="IRw-Ag-CoJ"/>
                 <constraint firstItem="QiL-nc-IOa" firstAttribute="top" secondItem="UGd-TS-HpV" secondAttribute="bottom" constant="3" id="KYU-46-vRR"/>
                 <constraint firstItem="jee-CR-OVu" firstAttribute="top" secondItem="UGd-TS-HpV" secondAttribute="bottom" id="MEn-NP-1a9"/>
                 <constraint firstItem="UGd-TS-HpV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="R6M-zP-wHD"/>
-                <constraint firstAttribute="trailing" secondItem="UGd-TS-HpV" secondAttribute="trailing" constant="8" id="U4W-iK-vgd"/>
+                <constraint firstAttribute="trailing" secondItem="UGd-TS-HpV" secondAttribute="trailing" constant="66" id="U4W-iK-vgd"/>
                 <constraint firstItem="nBJ-0I-kBM" firstAttribute="top" secondItem="eSi-vj-ol2" secondAttribute="bottom" constant="8" id="Vep-JU-Blp"/>
+                <constraint firstItem="hpg-Ue-v9A" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="18" id="WJF-eM-1b6"/>
+                <constraint firstAttribute="trailing" secondItem="rTi-MP-6xt" secondAttribute="trailing" constant="22" id="h3i-tm-ke4"/>
                 <constraint firstAttribute="trailing" secondItem="eSi-vj-ol2" secondAttribute="trailing" id="uyA-JM-But"/>
                 <constraint firstItem="eSi-vj-ol2" firstAttribute="top" secondItem="jee-CR-OVu" secondAttribute="bottom" constant="10" id="yPr-aU-H1M"/>
+                <constraint firstItem="rTi-MP-6xt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="32" id="yvK-wZ-cb5"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="addJobBtn" destination="hpg-Ue-v9A" id="TLv-gv-EJr"/>
+                <outlet property="addLoadingBar" destination="rTi-MP-6xt" id="i46-OJ-qMk"/>
                 <outlet property="companyLogo" destination="jee-CR-OVu" id="IkE-IU-QQf"/>
                 <outlet property="companyNameLbl" destination="QiL-nc-IOa" id="hA0-bI-Fch"/>
                 <outlet property="contentSegment" destination="eSi-vj-ol2" id="rN7-7x-dpQ"/>
@@ -88,6 +117,7 @@
         </view>
     </objects>
     <resources>
+        <image name="briefcase.png" width="32" height="32"/>
         <image name="mdl.png" width="423" height="408"/>
     </resources>
 </document>

@@ -66,6 +66,12 @@
     return accessToken;
 }
 
++ (NSString*) role{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString * role = [defaults objectForKey:@"role"];
+    return role;
+}
+
 + (BOOL)isValidEmail:(NSString *) emailStr{
     BOOL stricterFilter = NO;
     NSString *stricterFilterString = @"^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$";
@@ -92,6 +98,12 @@
     
     return screenRect;
     
+}
+
++(NSString*) convertDate2String: (NSDate*) date{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd-MMM-yyyy"];
+    return [dateFormatter stringFromDate:date];
 }
 
 + (AVCaptureVideoOrientation) videoOrientationFromCurrentDeviceOrientation {
