@@ -7,18 +7,20 @@
 //
 
 #import "JobCell.h"
+#import "MDRadialProgressTheme.h"
+#import "CommonUtils.h"
 
 @implementation JobCell
 
 @synthesize taskIV;
-@synthesize jobProgressBar;
 @synthesize taskNameLbl;
-@synthesize rewardLbl;
 @synthesize expiredLbl;
-@synthesize progressValue;
+@synthesize progressBar;
+@synthesize comissionValueLbl;
+@synthesize currencyLbl;
 
 - (void)awakeFromNib {
-
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

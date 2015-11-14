@@ -12,7 +12,7 @@
 
 @synthesize entityId;
 @synthesize takenDatetime;
-@synthesize jobToken;
+@synthesize token;
 @synthesize isDelete;
 @synthesize accessCount;
 @synthesize task;
@@ -23,10 +23,10 @@
     if(self){
         self.entityId = [[dic valueForKey:@"entityId"] intValue];
         self.takenDatetime = [NSDate dateWithTimeIntervalSince1970:[[dic valueForKey:@"takenDatetime"] intValue] / 1000];
-        self.jobToken = [dic valueForKey:@"jobToken"];
+        self.token = [dic valueForKey:@"token"];
         self.isDelete = [[dic valueForKey:@"isActive"] boolValue];
         self.accessCount = [[dic valueForKey:@"accessCount"] intValue];
-        self.task = [[Task alloc] initWithJson: [[dic valueForKey:@"task"] objectAtIndex:0]];
+        self.task = [[Task alloc] initWithJson: [dic valueForKey:@"task"]];
     }
     
     return self;

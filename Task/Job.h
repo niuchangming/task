@@ -13,7 +13,7 @@
 
 @property int entityId;
 @property (nonatomic, strong) NSDate *takenDatetime;
-@property (nonatomic, strong) NSString *jobToken;
+@property (nonatomic, strong) NSString *token;
 @property BOOL isDelete;
 @property int accessCount;
 @property (nonatomic, strong) Task *task;

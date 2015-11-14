@@ -12,8 +12,14 @@
 #import "CommonUtils.h"
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
 #import "SDWebImage/UIImageView+WebCache.h"
+#import <QuartzCore/QuartzCore.h>
 #import "MozTopAlertView.h"
 #import "Job.h"
+#import "Image.h"
+#import "MDRadialProgressView.h"
+#import "MDRadialProgressTheme.h"
+#import "CommonUtils.h"
+#import "Reward.h"
 
 @interface JobVC ()
 
@@ -28,6 +34,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if ([jobTb respondsToSelector:@selector(setLayoutMargins:)]) {
+        [jobTb setLayoutMargins:UIEdgeInsetsZero];
+    }
+    jobTb.allowsSelection = NO;
     [self loadMyJobs];
 }
 
@@ -51,8 +61,6 @@
             [MozTopAlertView showWithType:MozAlertTypeError text:@"Error" doText:nil doBlock:nil parentView:self.view];
             return;
         }
-        
-        NSLog(@"---> %@", operation.responseString);
         
         if ([object isKindOfClass:[NSDictionary class]] == YES){
             NSDictionary *obj = (NSDictionary *)object;
@@ -93,10 +101,43 @@
     }
     
     Job *job =[jobs objectAtIndex:indexPath.row];
-    [cell.taskIV sd_setImageWithURL:[NSURL URLWithString:[job.task.images objectAtIndex:0]]];
+    [cell.taskIV sd_setImageWithURL:[NSURL URLWithString:[[job.task.images objectAtIndex:0] thumbnailPath]]];
+    cell.taskIV.layer.cornerRadius = 2;
+    cell.taskIV.clipsToBounds = YES;
+    
     [cell.taskNameLbl setText:job.task.title];
+    cell.taskNameLbl.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.taskNameLbl.numberOfLines = 0;
+    
     [cell.expiredLbl setText:[CommonUtils convertDate2String:job.task.endDate]];
-    [cell.rewardLbl setText:job.task.reward.title];
+    
+    if([job.task.reward.rewardType isEqualToString:@"COMMISSION"]){
+        cell.progressBar.hidden = YES;
+        cell.comissionValueLbl.hidden = NO;
+        cell.currencyLbl.hidden = NO;
+        cell.comissionValueLbl.text = [NSString stringWithFormat:@"%i", (int)round(job.task.reward.value)];
+    }else{
+        cell.progressBar.hidden = NO;
+        cell.comissionValueLbl.hidden = YES;
+        cell.currencyLbl.hidden = YES;
+        
+        MDRadialProgressTheme *theme = [[MDRadialProgressTheme alloc] init];
+        theme.completedColor = [CommonUtils colorFromHexString:@"#4CD964"];
+        theme.incompletedColor = [CommonUtils colorFromHexString:@"#B9F6CA"];
+        theme.thickness = 10;
+        theme.centerColor = [UIColor clearColor];
+        theme.sliceDividerHidden = YES;
+        theme.labelColor = [CommonUtils colorFromHexString:@"#4A4A4A"];
+        
+        [cell.progressBar setTheme:theme];
+        cell.progressBar.progressTotal = job.task.reward.minShares;
+        cell.progressBar.progressCounter = job.accessCount;
+        [((UILabel*)cell.progressBar.label) setFont:[UIFont systemFontOfSize:14]];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
     
     return cell;
 }

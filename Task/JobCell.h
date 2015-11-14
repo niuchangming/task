@@ -7,14 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MDRadialProgressView.h"
 
 @interface JobCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *taskIV;
-@property (weak, nonatomic) IBOutlet UIProgressView *jobProgressBar;
 @property (weak, nonatomic) IBOutlet UILabel *taskNameLbl;
-@property (weak, nonatomic) IBOutlet UILabel *rewardLbl;
 @property (weak, nonatomic) IBOutlet UILabel *expiredLbl;
-@property (weak, nonatomic) IBOutlet UILabel *progressValue;
+@property (weak, nonatomic) IBOutlet MDRadialProgressView *progressBar;
+@property (weak, nonatomic) IBOutlet UILabel *comissionValueLbl;
+@property (weak, nonatomic) IBOutlet UILabel *currencyLbl;
 
 @end

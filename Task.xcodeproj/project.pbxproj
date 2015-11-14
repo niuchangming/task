@@ -99,6 +99,7 @@
 		70E9605E1BF494E9004A65E9 /* SignupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70E9605D1BF494E9004A65E9 /* SignupView.xib */; settings = {ASSET_TAGS = (); }; };
 		70E960611BF57165004A65E9 /* JobVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E960601BF57165004A65E9 /* JobVC.m */; settings = {ASSET_TAGS = (); }; };
 		70E960641BF5821E004A65E9 /* JobCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E960631BF5821E004A65E9 /* JobCell.m */; settings = {ASSET_TAGS = (); }; };
+		70EA187E1BF714F8001AB838 /* Deal.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EA187D1BF714F8001AB838 /* Deal.m */; settings = {ASSET_TAGS = (); }; };
 		70EAF2331BD9D11F00A25310 /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EAF2321BD9D11F00A25310 /* FXBlurView.m */; settings = {ASSET_TAGS = (); }; };
 		F106F7D326DBB7C63D1AF1BF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A62FBF10DB37A84852F06BD1 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -265,6 +266,8 @@
 		70E960601BF57165004A65E9 /* JobVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobVC.m; sourceTree = "<group>"; };
 		70E960621BF5821E004A65E9 /* JobCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobCell.h; sourceTree = "<group>"; };
 		70E960631BF5821E004A65E9 /* JobCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobCell.m; sourceTree = "<group>"; };
+		70EA187C1BF714F8001AB838 /* Deal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Deal.h; sourceTree = "<group>"; };
+		70EA187D1BF714F8001AB838 /* Deal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deal.m; sourceTree = "<group>"; };
 		70EAF2311BD9D11F00A25310 /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
 		70EAF2321BD9D11F00A25310 /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXBlurView.m; sourceTree = "<group>"; };
 		A62FBF10DB37A84852F06BD1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -401,6 +404,8 @@
 				70CF6DA61B8DC257008C9F51 /* User.m */,
 				70E552EA1BEC833200694D08 /* Job.h */,
 				70E552EB1BEC833200694D08 /* Job.m */,
+				70EA187C1BF714F8001AB838 /* Deal.h */,
+				70EA187D1BF714F8001AB838 /* Deal.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -899,6 +904,7 @@
 				709C09521B81FDF60001E321 /* CommonUtils.m in Sources */,
 				70D3923B1B87653A00EB7F37 /* UIView+WebCacheOperation.m in Sources */,
 				70D392391B87653A00EB7F37 /* UIImageView+HighlightedWebCache.m in Sources */,
+				70EA187E1BF714F8001AB838 /* Deal.m in Sources */,
 				7078BB941B8029C6002290E4 /* main.m in Sources */,
 				70E416A31BD77F2400758D18 /* QRView.m in Sources */,
 			);

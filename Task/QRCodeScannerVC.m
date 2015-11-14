@@ -7,6 +7,11 @@
 //
 
 #import "QRCodeScannerVC.h"
+#import "CommonUtils.h"
+#import "ConstantValues.h"
+#import "NSString+URLEncode.h"
+#import <AFNetworking/AFHTTPRequestOperationManager.h>
+#import "MozTopAlertView.h"
 
 @interface QRCodeScannerVC (){
     AVCaptureDevice * device;
@@ -84,6 +89,27 @@
         AVMetadataMachineReadableCodeObject * metadataObject = [metadataObjects objectAtIndex:0];
         stringValue = metadataObject.stringValue;
     }
+    
+    if([CommonUtils IsEmpty:stringValue]){
+        [self syncWithServer:stringValue];
+    }
+}
+
+-(void) syncWithServer:(NSString*) encryptStr{
+    NSString *url = [NSString stringWithFormat:@"%@%@", baseUrl, @"JobController/scanReciever"];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject: [CommonUtils accessToken] forKey: @"accessToken"];
+    [params setObject:[encryptStr URLEncode] forKey:@"qrcode"];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [MozTopAlertView showWithType:MozAlertTypeError text:[error localizedDescription] doText:nil doBlock:nil parentView:self.view];
+        
+    }];
 }
 
 -(QRView *)qrView {
