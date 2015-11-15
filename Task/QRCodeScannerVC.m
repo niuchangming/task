@@ -12,14 +12,17 @@
 #import "NSString+URLEncode.h"
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
 #import "MozTopAlertView.h"
+#import <HHAlertView/HHAlertView.h>
+#import "Deal.h"
 
-@interface QRCodeScannerVC (){
+@interface QRCodeScannerVC ()<HHAlertViewDelegate>{
     AVCaptureDevice * device;
     AVCaptureDeviceInput * input;
     AVCaptureMetadataOutput * output;
     AVCaptureSession * session;
     AVCaptureVideoPreviewLayer * preview;
     QRView *qrView;
+    NSString *stringValue;
 }
 
 @end
@@ -83,32 +86,79 @@
 
 #pragma mark AVCaptureMetadataOutputObjectsDelegate
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection{
-    NSString *stringValue;
-    if ([metadataObjects count] >0){
+    if ([metadataObjects count] > 0){
         [session stopRunning];
         AVMetadataMachineReadableCodeObject * metadataObject = [metadataObjects objectAtIndex:0];
         stringValue = metadataObject.stringValue;
+    }else{
+        [MozTopAlertView showWithType:MozAlertTypeError text:@"Scan error" doText:nil doBlock:nil parentView:self.view];
     }
     
-    if([CommonUtils IsEmpty:stringValue]){
-        [self syncWithServer:stringValue];
+    if(![CommonUtils IsEmpty:stringValue]){
+        HHAlertView *alertview = [[HHAlertView alloc] initWithTitle:@"Redeem" detailText:@"Please click 'Redeem' button to redeem." cancelButtonTitle:@"Cancel" otherButtonTitles:@[@"Redeem"]];
+        [alertview setEnterMode:HHAlertEnterModeFadeIn];
+        [alertview setLeaveMode:HHAlertLeaveModeFadeOut];
+        [alertview setMode:HHAlertViewModeWarning];
+        [alertview setDelegate:self];
+        [alertview show];
     }
 }
 
--(void) syncWithServer:(NSString*) encryptStr{
-    NSString *url = [NSString stringWithFormat:@"%@%@", baseUrl, @"JobController/scanReciever"];
-    
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject: [CommonUtils accessToken] forKey: @"accessToken"];
-    [params setObject:[encryptStr URLEncode] forKey:@"qrcode"];
+-(void) HHAlertView:(HHAlertView *)alertview didClickButtonAnIndex:(NSInteger)buttonIndex{
+    if(buttonIndex == 0){
+        [alertview hide];
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self syncWithServer:alertview];
+    }
+}
+
+-(void) syncWithServer:(HHAlertView*) alertview{
+    NSString *url = [NSString stringWithFormat:@"%@JobController/scanReciever?accessToken=%@&qrcode=%@", baseUrl, [[CommonUtils accessToken] URLEncode], [stringValue URLEncode]];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSError *error;
+        id object = [NSJSONSerialization JSONObjectWithData:operation.responseData options:kNilOptions error:&error];
         
+        if(error != nil){
+            [alertview setMode:HHAlertViewModeError];
+            [alertview setDetailText:[error localizedDescription]];
+            return;
+        }
         
+        if ([object isKindOfClass:[NSDictionary class]] == YES){
+            NSString *errMsg = [object valueForKey:@"error"];
+            if(![CommonUtils IsEmpty:errMsg]) {
+                [alertview setMode:HHAlertViewModeError];
+                [alertview setDetailText:errMsg];
+            }else{
+                [alertview setMode:HHAlertViewModeError];
+                [alertview setDetailText:@"The data format is incorrect."];
+            }
+        }else if ([object isKindOfClass:[NSArray class]] == YES){
+            NSArray *array = (NSArray*) object;
+            NSMutableArray *deals = [[NSMutableArray alloc] init];
+            for(NSDictionary *data in array){
+                Deal *deal = [[Deal alloc]initWithJson:data];
+                [deals addObject:deal];
+            }
+            
+            if([deals count] > 0){
+                [alertview setMode:HHAlertViewModeSuccess];
+                [alertview setDetailText:[NSString stringWithFormat:@"Your have redeemed this voucher successfully, and You have sold %lu deal from us.", (unsigned long)[deals count]]];
+            }else{
+                [alertview setMode:HHAlertViewModeError];
+                [alertview setDetailText:@"The parsing object is not Deal."];
+            }
+        }
+        [alertview setOtherButtonTitles:nil];
+        [alertview updateAlertView];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [MozTopAlertView showWithType:MozAlertTypeError text:[error localizedDescription] doText:nil doBlock:nil parentView:self.view];
-        
+        [alertview setMode:HHAlertViewModeError];
+        [alertview setDetailText:[error localizedDescription]];
+        [alertview setOtherButtonTitles:nil];
+        [alertview updateAlertView];
     }];
 }
 
@@ -117,7 +167,6 @@
         CGRect screenRect = [CommonUtils screenBounds];
         qrView = [[QRView alloc] initWithFrame:screenRect];
         qrView.transparentArea = CGSizeMake(280, 280);
-        
         qrView.backgroundColor = [UIColor clearColor];
     }
     return qrView;
@@ -134,3 +183,4 @@
 }
 
 @end
+
