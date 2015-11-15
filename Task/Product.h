@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Coupon.h"
 
 @interface Product : NSObject
 
@@ -15,6 +16,7 @@
 @property (nonatomic, strong) NSString *merchantLink;
 @property double price;
 @property (nonatomic, strong) NSString *productName;
+@property (nonatomic, strong) Coupon *coupon;
 
 -(id) initWithJson:(NSDictionary*) dic;
 

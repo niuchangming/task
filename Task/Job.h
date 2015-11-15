@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Task.h"
+#import "Deal.h"
 
 @interface Job : NSObject
 
@@ -17,6 +18,7 @@
 @property BOOL isDelete;
 @property int accessCount;
 @property (nonatomic, strong) Task *task;
+@property (nonatomic, strong) NSMutableArray *deals;
 
 -(id) initWithJson:(NSDictionary*) dic;
 

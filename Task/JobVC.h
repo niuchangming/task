@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JobCell.h"
 
-@interface JobVC : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface JobVC : UIViewController<UITableViewDataSource, UITableViewDelegate, JobCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *jobTb;
 

@@ -37,7 +37,10 @@
     if ([jobTb respondsToSelector:@selector(setLayoutMargins:)]) {
         [jobTb setLayoutMargins:UIEdgeInsetsZero];
     }
-    jobTb.allowsSelection = NO;
+    jobTb.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+}
+
+-(void) viewDidAppear:(BOOL)animated{
     [self loadMyJobs];
 }
 
@@ -101,6 +104,8 @@
     }
     
     Job *job =[jobs objectAtIndex:indexPath.row];
+    cell.delegate = self;
+    cell.job = job;
     [cell.taskIV sd_setImageWithURL:[NSURL URLWithString:[[job.task.images objectAtIndex:0] thumbnailPath]]];
     cell.taskIV.layer.cornerRadius = 2;
     cell.taskIV.clipsToBounds = YES;
@@ -112,15 +117,14 @@
     [cell.expiredLbl setText:[CommonUtils convertDate2String:job.task.endDate]];
     
     if([job.task.reward.rewardType isEqualToString:@"COMMISSION"]){
-        cell.progressBar.hidden = YES;
-        cell.comissionValueLbl.hidden = NO;
-        cell.currencyLbl.hidden = NO;
-        cell.comissionValueLbl.text = [NSString stringWithFormat:@"%i", (int)round(job.task.reward.value)];
+        int commission = (int)round((job.task.product.price - job.task.product.coupon.value) * job.task.reward.value);
+        cell.progressLbl.text = [NSString stringWithFormat:@"Earned %i SGD commission", commission];
+        if(commission == 0){
+            cell.getBtn.hidden = YES;
+        }else{
+            cell.getBtn.hidden = NO;
+        }
     }else{
-        cell.progressBar.hidden = NO;
-        cell.comissionValueLbl.hidden = YES;
-        cell.currencyLbl.hidden = YES;
-        
         MDRadialProgressTheme *theme = [[MDRadialProgressTheme alloc] init];
         theme.completedColor = [CommonUtils colorFromHexString:@"#4CD964"];
         theme.incompletedColor = [CommonUtils colorFromHexString:@"#B9F6CA"];
@@ -128,18 +132,38 @@
         theme.centerColor = [UIColor clearColor];
         theme.sliceDividerHidden = YES;
         theme.labelColor = [CommonUtils colorFromHexString:@"#4A4A4A"];
+        cell.progressLbl.text = [NSString stringWithFormat:@"Completed %.0f%%", 100 * (float) job.accessCount / (float)job.task.reward.minShares];
         
-        [cell.progressBar setTheme:theme];
-        cell.progressBar.progressTotal = job.task.reward.minShares;
-        cell.progressBar.progressCounter = job.accessCount;
-        [((UILabel*)cell.progressBar.label) setFont:[UIFont systemFontOfSize:14]];
+        if(((float)job.accessCount / (float)job.task.reward.minShares) >= 1){
+            cell.getBtn.hidden = NO;
+        }else{
+            cell.getBtn.hidden = YES;
+        }
     }
+    
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
     
     return cell;
+}
+
+-(void) getBtnClickedWithJob:(Job *)job{
+    
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+-(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewRowAction *deleteBtn = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Delete" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath){
+        
+    }];
+    deleteBtn.backgroundColor = [CommonUtils colorFromHexString:@"#FF4444"];
+    return @[deleteBtn];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -15,6 +15,7 @@
 @synthesize merchantLink;
 @synthesize price;
 @synthesize productName;
+@synthesize coupon;
 
 -(id) initWithJson:(NSDictionary*) dic{
     self = [super init];
@@ -25,6 +26,8 @@
         self.merchantLink = [dic valueForKey:@"merchantLink"];
         self.price = [[dic valueForKey: @"price"] doubleValue];
         self.productName = [dic valueForKey:@"productName"];
+        
+        self.coupon = [[Coupon alloc] initWithJson: [[dic valueForKey:@"coupons"] objectAtIndex:0]];
     }
     
     return self;

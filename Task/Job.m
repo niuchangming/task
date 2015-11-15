@@ -16,6 +16,7 @@
 @synthesize isDelete;
 @synthesize accessCount;
 @synthesize task;
+@synthesize deals;
 
 -(id) initWithJson:(NSDictionary*) dic{
     self = [super init];
@@ -27,6 +28,14 @@
         self.isDelete = [[dic valueForKey:@"isActive"] boolValue];
         self.accessCount = [[dic valueForKey:@"accessCount"] intValue];
         self.task = [[Task alloc] initWithJson: [dic valueForKey:@"task"]];
+        
+        NSArray *dealArray = [dic valueForKey:@"deals"];
+        if(![dealArray isKindOfClass:[NSNull class]] && dealArray.count > 0){
+            self.deals = [[NSMutableArray alloc] init];
+            for(NSDictionary *dealDic in dealArray) {
+                [self.deals addObject: [[Deal alloc] initWithJson:dealDic]];
+            }
+        }
     }
     
     return self;
