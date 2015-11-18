@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "Image.h"
+#import "Company.h"
+#import "Profile.h"
 
 @interface User : NSObject
 
@@ -17,6 +19,8 @@
 @property bool isActive;
 @property (nonatomic, strong) NSString *accessToken;
 @property (nonatomic, strong) NSString *role;
+@property (nonatomic, strong) Company *company;
+@property (nonatomic, strong) Profile *profile;
 
 -(id) initWithJson:(NSDictionary*) dic;
 

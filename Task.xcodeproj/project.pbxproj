@@ -102,6 +102,9 @@
 		70E960641BF5821E004A65E9 /* JobCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E960631BF5821E004A65E9 /* JobCell.m */; settings = {ASSET_TAGS = (); }; };
 		70EA187E1BF714F8001AB838 /* Deal.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EA187D1BF714F8001AB838 /* Deal.m */; settings = {ASSET_TAGS = (); }; };
 		70EAF2331BD9D11F00A25310 /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EAF2321BD9D11F00A25310 /* FXBlurView.m */; settings = {ASSET_TAGS = (); }; };
+		70EC2E3D1BF9DEB400B6E9E3 /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EC2E3C1BF9DEB400B6E9E3 /* Company.m */; settings = {ASSET_TAGS = (); }; };
+		70EC2E401BF9E19500B6E9E3 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EC2E3F1BF9E19500B6E9E3 /* Address.m */; settings = {ASSET_TAGS = (); }; };
+		70EC2E431BFA08B400B6E9E3 /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EC2E421BFA08B400B6E9E3 /* Profile.m */; settings = {ASSET_TAGS = (); }; };
 		F106F7D326DBB7C63D1AF1BF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A62FBF10DB37A84852F06BD1 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -273,6 +276,12 @@
 		70EA187D1BF714F8001AB838 /* Deal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deal.m; sourceTree = "<group>"; };
 		70EAF2311BD9D11F00A25310 /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
 		70EAF2321BD9D11F00A25310 /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXBlurView.m; sourceTree = "<group>"; };
+		70EC2E3B1BF9DEB400B6E9E3 /* Company.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Company.h; sourceTree = "<group>"; };
+		70EC2E3C1BF9DEB400B6E9E3 /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Company.m; sourceTree = "<group>"; };
+		70EC2E3E1BF9E19500B6E9E3 /* Address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Address.h; sourceTree = "<group>"; };
+		70EC2E3F1BF9E19500B6E9E3 /* Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Address.m; sourceTree = "<group>"; };
+		70EC2E411BFA08B400B6E9E3 /* Profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Profile.h; sourceTree = "<group>"; };
+		70EC2E421BFA08B400B6E9E3 /* Profile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Profile.m; sourceTree = "<group>"; };
 		A62FBF10DB37A84852F06BD1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D39FCAC5C4638FF782221BA5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FA330CF720664E9944C91E2D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -411,6 +420,12 @@
 				70EA187D1BF714F8001AB838 /* Deal.m */,
 				70E551781BF8DB2D004A3E1E /* Coupon.h */,
 				70E551791BF8DB2D004A3E1E /* Coupon.m */,
+				70EC2E3B1BF9DEB400B6E9E3 /* Company.h */,
+				70EC2E3C1BF9DEB400B6E9E3 /* Company.m */,
+				70EC2E3E1BF9E19500B6E9E3 /* Address.h */,
+				70EC2E3F1BF9E19500B6E9E3 /* Address.m */,
+				70EC2E411BFA08B400B6E9E3 /* Profile.h */,
+				70EC2E421BFA08B400B6E9E3 /* Profile.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -883,6 +898,7 @@
 				709C09531B81FDF60001E321 /* ConstantValues.m in Sources */,
 				70D391D81B86C87000EB7F37 /* Product.m in Sources */,
 				709C09341B81AFF70001E321 /* RAMFumeAnimation.swift in Sources */,
+				70EC2E431BFA08B400B6E9E3 /* Profile.m in Sources */,
 				70D391DB1B86C88600EB7F37 /* Reward.m in Sources */,
 				70D391EB1B86ECAB00EB7F37 /* FAImageView.m in Sources */,
 				70D391ED1B86ECAB00EB7F37 /* NSString+FontAwesome.m in Sources */,
@@ -903,12 +919,14 @@
 				7078BB9D1B8029C6002290E4 /* TaskController.m in Sources */,
 				70EAF2331BD9D11F00A25310 /* FXBlurView.m in Sources */,
 				709C09351B81AFF70001E321 /* RAMRotationAnimation.swift in Sources */,
+				70EC2E401BF9E19500B6E9E3 /* Address.m in Sources */,
 				70E416991BD7714200758D18 /* QRCodeScannerVC.m in Sources */,
 				70E9604E1BF32A95004A65E9 /* WXMediaMessage+messageConstruct.m in Sources */,
 				709C09331B81AFF70001E321 /* RAMFrameItemAnimation.swift in Sources */,
 				70E960641BF5821E004A65E9 /* JobCell.m in Sources */,
 				709C09521B81FDF60001E321 /* CommonUtils.m in Sources */,
 				70D3923B1B87653A00EB7F37 /* UIView+WebCacheOperation.m in Sources */,
+				70EC2E3D1BF9DEB400B6E9E3 /* Company.m in Sources */,
 				70D392391B87653A00EB7F37 /* UIImageView+HighlightedWebCache.m in Sources */,
 				70EA187E1BF714F8001AB838 /* Deal.m in Sources */,
 				7078BB941B8029C6002290E4 /* main.m in Sources */,

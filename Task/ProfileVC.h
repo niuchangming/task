@@ -8,10 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "LoginVC.h"
+#import "FXBlurView/FXBlurView.h"
 
 @interface ProfileVC : UIViewController <UINavigationControllerDelegate, LoginDelegate>
-@property (weak, nonatomic) IBOutlet UIButton *signBtn;
+@property (strong, nonatomic) UIButton *signBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *avatarBgView;
+@property (weak, nonatomic) IBOutlet UIImageView *roleIV;
+@property (weak, nonatomic) IBOutlet FXBlurView *avatarBlurView;
+@property (weak, nonatomic) IBOutlet UIImageView *avatarIV;
+@property (weak, nonatomic) IBOutlet UILabel *nameLbl;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingBar;
 
-- (IBAction)signBtnClicked:(id)sender;
+@property (strong, nonatomic) User *user;
+
 
 @end

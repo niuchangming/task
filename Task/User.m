@@ -7,6 +7,7 @@
 //
 
 #import "User.h"
+#import "CommonUtils.h"
 
 @implementation User
 
@@ -16,6 +17,8 @@
 @synthesize isActive;
 @synthesize accessToken;
 @synthesize role;
+@synthesize company;
+@synthesize profile;
 
 -(id) initWithJson:(NSDictionary*) dic{
     self = [super init];
@@ -26,11 +29,22 @@
         self.isActive = [[dic valueForKey:@"isActive"] boolValue];
         self.accessToken = [dic valueForKey:@"accessToken"];
         self.role = [dic valueForKey:@"role"];
-    }
-    
-    NSArray *imageArray = [dic valueForKey:@"avatars"];
-    if(![imageArray isKindOfClass:[NSNull class]] && imageArray.count > 0){
-        self.avatar = [[Image alloc] initWithJson:[imageArray objectAtIndex:(imageArray.count - 1)]];
+        
+        NSArray *companyDic = [dic valueForKey:@"companys"];
+        if(![CommonUtils IsEmpty:companyDic]) {
+            self.company = [[Company alloc] initWithJson: [companyDic objectAtIndex:0]];
+        }
+        
+        NSArray *profileDic = [dic valueForKey:@"profiles"];
+        if(![CommonUtils IsEmpty:profileDic]) {
+            self.profile = [[Profile alloc] initWithJson: [profileDic objectAtIndex:0]];
+        }
+        
+        NSArray *imageArray = [dic valueForKey:@"avatars"];
+        if(![imageArray isKindOfClass:[NSNull class]] && imageArray.count > 0){
+            self.avatar = [[Image alloc] initWithJson:[imageArray objectAtIndex:(imageArray.count - 1)]];
+        }
+        
     }
     
     return self;
