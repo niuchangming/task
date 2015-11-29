@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "LoginVC.h"
 #import "FXBlurView/FXBlurView.h"
+#import "UpdatePhoneVC.h"
+#import "UpdateUsernameVC.h"
 
-@interface ProfileVC : UIViewController <UINavigationControllerDelegate, LoginDelegate>
+@interface ProfileVC : UIViewController <UINavigationControllerDelegate, LoginDelegate, UpdatePhoneDelegate, UpdateUsernameDelegate>
 @property (strong, nonatomic) UIButton *signBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarBgView;
 @property (weak, nonatomic) IBOutlet UIImageView *roleIV;

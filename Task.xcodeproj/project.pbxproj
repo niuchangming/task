@@ -105,6 +105,8 @@
 		70EC2E3D1BF9DEB400B6E9E3 /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EC2E3C1BF9DEB400B6E9E3 /* Company.m */; settings = {ASSET_TAGS = (); }; };
 		70EC2E401BF9E19500B6E9E3 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EC2E3F1BF9E19500B6E9E3 /* Address.m */; settings = {ASSET_TAGS = (); }; };
 		70EC2E431BFA08B400B6E9E3 /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EC2E421BFA08B400B6E9E3 /* Profile.m */; settings = {ASSET_TAGS = (); }; };
+		70ECFFA51C089EAA00409D58 /* UpdatePhoneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFA41C089EAA00409D58 /* UpdatePhoneVC.m */; settings = {ASSET_TAGS = (); }; };
+		70ECFFA81C0ADD6400409D58 /* UpdateUsernameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFA71C0ADD6400409D58 /* UpdateUsernameVC.m */; settings = {ASSET_TAGS = (); }; };
 		F106F7D326DBB7C63D1AF1BF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A62FBF10DB37A84852F06BD1 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -282,6 +284,10 @@
 		70EC2E3F1BF9E19500B6E9E3 /* Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Address.m; sourceTree = "<group>"; };
 		70EC2E411BFA08B400B6E9E3 /* Profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Profile.h; sourceTree = "<group>"; };
 		70EC2E421BFA08B400B6E9E3 /* Profile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Profile.m; sourceTree = "<group>"; };
+		70ECFFA31C089EAA00409D58 /* UpdatePhoneVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePhoneVC.h; sourceTree = "<group>"; };
+		70ECFFA41C089EAA00409D58 /* UpdatePhoneVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePhoneVC.m; sourceTree = "<group>"; };
+		70ECFFA61C0ADD6400409D58 /* UpdateUsernameVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateUsernameVC.h; sourceTree = "<group>"; };
+		70ECFFA71C0ADD6400409D58 /* UpdateUsernameVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateUsernameVC.m; sourceTree = "<group>"; };
 		A62FBF10DB37A84852F06BD1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D39FCAC5C4638FF782221BA5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FA330CF720664E9944C91E2D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -366,6 +372,10 @@
 				70E416981BD7714200758D18 /* QRCodeScannerVC.m */,
 				70E9605F1BF57165004A65E9 /* JobVC.h */,
 				70E960601BF57165004A65E9 /* JobVC.m */,
+				70ECFFA31C089EAA00409D58 /* UpdatePhoneVC.h */,
+				70ECFFA41C089EAA00409D58 /* UpdatePhoneVC.m */,
+				70ECFFA61C0ADD6400409D58 /* UpdateUsernameVC.h */,
+				70ECFFA71C0ADD6400409D58 /* UpdateUsernameVC.m */,
 				7078BB9E1B8029C6002290E4 /* Main.storyboard */,
 				7078BBA11B8029C6002290E4 /* Images.xcassets */,
 				7078BBA31B8029C6002290E4 /* LaunchScreen.xib */,
@@ -874,6 +884,7 @@
 				70C6A9E71B90677400FE6061 /* TaskDetailVC.m in Sources */,
 				70D391EF1B86ECAB00EB7F37 /* MozTopAlertView.m in Sources */,
 				709C09371B81AFF70001E321 /* RAMAnimatedTabBarController.swift in Sources */,
+				70ECFFA81C0ADD6400409D58 /* UpdateUsernameVC.m in Sources */,
 				70E960421BF32A88004A65E9 /* WXApiManager.m in Sources */,
 				70E552EC1BEC833200694D08 /* Job.m in Sources */,
 				70D391EE1B86ECAB00EB7F37 /* UIFont+FontAwesome.m in Sources */,
@@ -916,6 +927,7 @@
 				70D3922D1B87653A00EB7F37 /* NSData+ImageContentType.m in Sources */,
 				70D391DE1B86CDAD00EB7F37 /* Image.m in Sources */,
 				70C96A4B1B92B53500BBDCD5 /* TaskDetailInfoView.m in Sources */,
+				70ECFFA51C089EAA00409D58 /* UpdatePhoneVC.m in Sources */,
 				7078BB9D1B8029C6002290E4 /* TaskController.m in Sources */,
 				70EAF2331BD9D11F00A25310 /* FXBlurView.m in Sources */,
 				709C09351B81AFF70001E321 /* RAMRotationAnimation.swift in Sources */,

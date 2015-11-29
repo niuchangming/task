@@ -116,7 +116,12 @@
     avatarIV.layer.masksToBounds = YES;
     
     CGRect emailFrame = CGRectMake(0, avatarBlurView.frame.origin.y + avatarBlurView.frame.size.height + 36, self.view.frame.size.width, 44);
-    emailLbl = [self getRowViewWithKey:@"Email" AndValue:@"" AndFrame: emailFrame AndSelector:@selector(emailRowClicked)];
+    
+    UIView *emailView = [self getRowViewWithKey:@"Email" AndValue:@"" AndFrame: emailFrame];
+    UITapGestureRecognizer *emailTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(emailRowClicked)];
+    emailTap.numberOfTapsRequired = 1;
+    [emailView addGestureRecognizer:emailTap];
+    emailLbl = (UILabel *) [emailView viewWithTag:1];
     
     NSLayoutConstraint *bottomSpaceConstraint = [NSLayoutConstraint constraintWithItem:[emailLbl superview]
                                                                              attribute:NSLayoutAttributeTop
@@ -129,15 +134,26 @@
     [scrollView addConstraint:bottomSpaceConstraint];
     
     
-    
     CGRect phoneFrame = CGRectMake(0, emailFrame.origin.y + emailFrame.size.height + 8, self.view.frame.size.width, 44);
-    phoneLbl = [self getRowViewWithKey:@"Phone" AndValue:@"" AndFrame:phoneFrame AndSelector:@selector(phoneRowClicked)];
+    UIView *phoneView = [self getRowViewWithKey:@"Phone" AndValue:@"" AndFrame:phoneFrame];
+    UITapGestureRecognizer *phoneTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(phoneRowClicked)];
+    phoneTap.numberOfTapsRequired = 1;
+    [phoneView addGestureRecognizer:phoneTap];
+    phoneLbl = (UILabel*)[phoneView viewWithTag:1];
     
     CGRect addressFrame = CGRectMake(0, phoneFrame.origin.y + phoneFrame.size.height + 8, self.view.frame.size.width, 44);
-    addressLbl = [self getRowViewWithKey:@"Address" AndValue:@"" AndFrame:addressFrame AndSelector:@selector(addressRowClicked)];
+    UIView *addressView = [self getRowViewWithKey:@"Address" AndValue:@"" AndFrame:addressFrame];
+    UITapGestureRecognizer *addressTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addressRowClicked)];
+    addressTap.numberOfTapsRequired = 1;
+    [addressView addGestureRecognizer:addressTap];
+    addressLbl = (UILabel*)[addressView viewWithTag:1];
     
     CGRect companyFrame = CGRectMake(0, addressFrame.origin.y + addressFrame.size.height + 8, self.view.frame.size.width, 44);
-    companyLbl = [self getRowViewWithKey:@"Company" AndValue:user.company.name AndFrame:companyFrame AndSelector:@selector(companyRowClicked)];
+    UIView *companyView = [self getRowViewWithKey:@"Company" AndValue:user.company.name AndFrame:companyFrame];
+    UITapGestureRecognizer *companyTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(companyRowClicked)];
+    companyTap.numberOfTapsRequired = 1;
+    [companyView addGestureRecognizer:companyTap];
+    companyLbl = (UILabel*)[companyView viewWithTag:1];
     
     signBtn.frame = CGRectMake(0, companyFrame.origin.y + companyFrame.size.height + 8, self.view.frame.size.width, 44);
 }
@@ -196,7 +212,11 @@
     if(![CommonUtils IsEmpty:user.company]){
         if(companyLbl == nil) {
             CGRect companyFrame = CGRectMake(0, [addressLbl superview].frame.origin.y + [addressLbl superview].frame.size.height + 8, self.view.frame.size.width, 44);
-            companyLbl = [self getRowViewWithKey:@"Company" AndValue:user.company.name AndFrame:companyFrame AndSelector:@selector(companyRowClicked)];
+            UIView *companyView = [self getRowViewWithKey:@"Company" AndValue:user.company.name AndFrame:companyFrame];
+            UITapGestureRecognizer *companyTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(companyRowClicked)];
+            companyTap.numberOfTapsRequired = 1;
+            [companyView addGestureRecognizer:companyTap];
+            companyLbl = (UILabel*)[companyView viewWithTag:1];
         }
         companyLbl.text = user.company.name;
         signBtn.frame = CGRectMake(0, [companyLbl superview].frame.origin.y + [companyLbl superview].frame.size.height + 8, self.view.frame.size.width, 44);
@@ -210,17 +230,20 @@
     
 }
 
--(UILabel *) getRowViewWithKey: (NSString *) key AndValue:(NSString*) value AndFrame: (CGRect)frame AndSelector:(SEL)action{
+-(UIView *) getRowViewWithKey: (NSString *) key AndValue:(NSString*) value AndFrame: (CGRect)frame{
     UIView *row = [[UIView alloc] initWithFrame:frame];
     [row setBackgroundColor:[UIColor whiteColor]];
+    
     UILabel *keyLbl = [[UILabel alloc]initWithFrame:CGRectMake(8, 12, 68, 20)];
     keyLbl.text = key;
+    [keyLbl setTag:0];
     keyLbl.textColor = [CommonUtils colorFromHexString:@"#4A4A4A"];
     keyLbl.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:16.0f];
     [row addSubview:keyLbl];
     
     UILabel *valueLbl = [[UILabel alloc]initWithFrame:CGRectMake(78, 12, self.view.frame.size.width - 106, 20)];
     valueLbl.text = value;
+    [valueLbl setTag:1];
     valueLbl.textColor = [CommonUtils colorFromHexString:@"#4A4A4A"];
     valueLbl.textAlignment = NSTextAlignmentRight;
     valueLbl.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:16.0f];
@@ -232,7 +255,7 @@
     
     [scrollView addSubview:row];
     
-    return valueLbl;
+    return row;
 }
 
 -(void) emailRowClicked{
@@ -240,7 +263,7 @@
 }
 
 -(void) phoneRowClicked{
-
+    [self performSegueWithIdentifier:@"updatephone_fr_userinfo" sender:self];
 }
 
 -(void) addressRowClicked{
@@ -252,7 +275,7 @@
 }
 
 -(void) editUsername{
-
+    [self performSegueWithIdentifier:@"updateusername_fr_userinfo" sender:self];
 }
 
 -(void) resetSignBtn{
@@ -307,7 +330,19 @@
     if ([[segue identifier] isEqualToString:@"login_fr_profile"]){
         LoginVC *vc = [segue destinationViewController];
         vc.delegate = self;
+    }else if ([[segue identifier] isEqualToString:@"updatephone_fr_userinfo"]){
+        UpdatePhoneVC * updatePhoneVC = [segue destinationViewController];
+        updatePhoneVC.delegate = self;
+        updatePhoneVC.user = user;
+    }else if([[segue identifier] isEqualToString:@"updateusername_fr_userinfo"]){
+        UpdateUsernameVC *updateNameVC = [segue destinationViewController];
+        updateNameVC.delegate = self;
+        updateNameVC.user = user;
     }
+}
+
+-(void) updatePhone:(NSString *)phone{
+    phoneLbl.text = phone;
 }
 
 -(void) clearStore{
