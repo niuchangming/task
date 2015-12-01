@@ -18,6 +18,7 @@
 #import "NSString+URLEncode.h"
 #import "User.h"
 #import <QuartzCore/QuartzCore.h>
+#import <AFURLSessionManager.h>
 
 @interface ProfileVC (){
     bool isLogin;
@@ -26,6 +27,7 @@
     UILabel *addressLbl;
     UILabel *companyLbl;
     UIButton *editNameBtn;
+    UIActionSheet *avatarOptSheet;
 }
 
 @end
@@ -114,13 +116,14 @@
 -(void) setupViews{
     avatarIV.layer.cornerRadius = 54;
     avatarIV.layer.masksToBounds = YES;
+    [avatarIV setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *avatarIvTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAvatarOptSheet:)];
+    avatarIvTap.numberOfTapsRequired = 1;
+    [avatarIV addGestureRecognizer:avatarIvTap];
     
     CGRect emailFrame = CGRectMake(0, avatarBlurView.frame.origin.y + avatarBlurView.frame.size.height + 36, self.view.frame.size.width, 44);
     
     UIView *emailView = [self getRowViewWithKey:@"Email" AndValue:@"" AndFrame: emailFrame];
-    UITapGestureRecognizer *emailTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(emailRowClicked)];
-    emailTap.numberOfTapsRequired = 1;
-    [emailView addGestureRecognizer:emailTap];
     emailLbl = (UILabel *) [emailView viewWithTag:1];
     
     NSLayoutConstraint *bottomSpaceConstraint = [NSLayoutConstraint constraintWithItem:[emailLbl superview]
@@ -258,8 +261,91 @@
     return row;
 }
 
--(void) emailRowClicked{
+- (void)showAvatarOptSheet:(id)sender {
+    if(avatarOptSheet == nil){
+        avatarOptSheet = [[UIActionSheet alloc] initWithTitle:@"Choose photo by"
+                                                     delegate:self
+                                            cancelButtonTitle:@"Cancel"
+                                       destructiveButtonTitle:nil
+                                            otherButtonTitles:@"Taking from camera", @"Picking from gallery",nil];
+    }
+    [avatarOptSheet showInView:self.view];
+}
+
+-(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    if(buttonIndex == 0){
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }else if(buttonIndex == 1){
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    UIImage *image = [info valueForKey: UIImagePickerControllerOriginalImage];
+    if(image != nil){
+        ImageCropViewController *controller = [[ImageCropViewController alloc] initWithImage:image];
+        controller.delegate = self;
+        controller.blurredBackground = NO;
+        [[self navigationController] pushViewController:controller animated:YES];
+    }
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)ImageCropViewController:(ImageCropViewController *)controller didFinishCroppingImage:(UIImage *)croppedImage{
+    avatarIV.image = croppedImage;
     
+    if (croppedImage != nil){
+        [self uploadAvatar:croppedImage];
+    }
+    
+    [[self navigationController] popViewControllerAnimated:YES];
+}
+
+- (void)ImageCropViewControllerDidCancel:(ImageCropViewController *)controller{
+    [[self navigationController] popViewControllerAnimated:YES];
+}
+
+-(void) uploadAvatar:(UIImage*) image{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    NSString *url = [NSString stringWithFormat:@"%@ProfileController/uploadAvatar", baseUrl];
+    [params setValue:[CommonUtils accessToken] forKey:@"accessToken"];
+
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    
+        [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 1.0f) name:@"image" fileName:[NSString stringWithFormat:@"avatar_%f", [[NSDate date] timeIntervalSince1970]*1000] mimeType:@"image/jpeg"];
+        
+    } error:nil];
+    
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    NSProgress *progress = nil;
+    
+    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithStreamedRequest:request progress:&progress completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        if (error) {
+            [MozTopAlertView showWithType:MozAlertTypeError text:[error localizedDescription] doText:nil doBlock:nil parentView:self.view];
+        } else {
+            if([responseObject isKindOfClass:[NSDictionary class]]){
+                NSDictionary *dic = (NSDictionary*) responseObject;
+                NSString *err = [dic valueForKey:@"error"];
+                if(![CommonUtils IsEmpty:err]) {
+                    [MozTopAlertView showWithType:MozAlertTypeError text:err doText:nil doBlock:nil parentView:self.view];
+                }else{
+                    user.avatar.entityId = [[dic valueForKey:@"entityId"] intValue];
+                    user.avatar.thumbnailPath = [dic valueForKey:@"thumbnailPath"];
+                    [avatarIV sd_setImageWithURL:[NSURL URLWithString:user.avatar.thumbnailPath]];
+                    [avatarBgView sd_setImageWithURL:[NSURL URLWithString:user.avatar.thumbnailPath]];
+                    [MozTopAlertView showWithType:MozAlertTypeSuccess text:@"Successfully changed." doText:nil doBlock:nil parentView:self.view];
+                }
+            }else{
+                [MozTopAlertView showWithType:MozAlertTypeError text:@"Unknown error." doText:nil doBlock:nil parentView:self.view];
+            }
+        }
+    }];
+    
+    [uploadTask resume];
 }
 
 -(void) phoneRowClicked{
@@ -275,7 +361,7 @@
 }
 
 -(void) editUsername{
-    [self performSegueWithIdentifier:@"updateusername_fr_userinfo" sender:self];
+    [self performSegueWithIdentifier:@"updatename_fr_userinfo" sender:self];
 }
 
 -(void) resetSignBtn{
@@ -334,7 +420,7 @@
         UpdatePhoneVC * updatePhoneVC = [segue destinationViewController];
         updatePhoneVC.delegate = self;
         updatePhoneVC.user = user;
-    }else if([[segue identifier] isEqualToString:@"updateusername_fr_userinfo"]){
+    }else if([[segue identifier] isEqualToString:@"updatename_fr_userinfo"]){
         UpdateUsernameVC *updateNameVC = [segue destinationViewController];
         updateNameVC.delegate = self;
         updateNameVC.user = user;
@@ -343,6 +429,18 @@
 
 -(void) updatePhone:(NSString *)phone{
     phoneLbl.text = phone;
+    user.profile.phone = phone;
+}
+
+-(void) updateFirstname:(NSString *)firstName andLastName:(NSString *)lastName{
+    nameLbl.text = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+    [nameLbl sizeToFit];
+    nameLbl.center = CGPointMake(self.view.frame.size.width / 2, nameLbl.center.y);
+    
+    editNameBtn.frame = CGRectMake(nameLbl.frame.origin.x + nameLbl.frame.size.width + 4, nameLbl.frame.origin.y + 2, 20, 20);
+    
+    user.profile.firstName = firstName;
+    user.profile.lastName = lastName;
 }
 
 -(void) clearStore{

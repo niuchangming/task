@@ -107,6 +107,7 @@
 		70EC2E431BFA08B400B6E9E3 /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EC2E421BFA08B400B6E9E3 /* Profile.m */; settings = {ASSET_TAGS = (); }; };
 		70ECFFA51C089EAA00409D58 /* UpdatePhoneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFA41C089EAA00409D58 /* UpdatePhoneVC.m */; settings = {ASSET_TAGS = (); }; };
 		70ECFFA81C0ADD6400409D58 /* UpdateUsernameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFA71C0ADD6400409D58 /* UpdateUsernameVC.m */; settings = {ASSET_TAGS = (); }; };
+		70ECFFAF1C0C146100409D58 /* ImageCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFAE1C0C146100409D58 /* ImageCropView.m */; settings = {ASSET_TAGS = (); }; };
 		F106F7D326DBB7C63D1AF1BF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A62FBF10DB37A84852F06BD1 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -288,6 +289,8 @@
 		70ECFFA41C089EAA00409D58 /* UpdatePhoneVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePhoneVC.m; sourceTree = "<group>"; };
 		70ECFFA61C0ADD6400409D58 /* UpdateUsernameVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateUsernameVC.h; sourceTree = "<group>"; };
 		70ECFFA71C0ADD6400409D58 /* UpdateUsernameVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateUsernameVC.m; sourceTree = "<group>"; };
+		70ECFFAD1C0C146100409D58 /* ImageCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCropView.h; sourceTree = "<group>"; };
+		70ECFFAE1C0C146100409D58 /* ImageCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCropView.m; sourceTree = "<group>"; };
 		A62FBF10DB37A84852F06BD1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D39FCAC5C4638FF782221BA5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FA330CF720664E9944C91E2D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -540,6 +543,7 @@
 		70D391DF1B86EC8400EB7F37 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				70ECFFAC1C0C144A00409D58 /* ImageCropView */,
 				70EAF2301BD9D11F00A25310 /* FXBlurView */,
 				70E4169A1BD77F2400758D18 /* QRView */,
 				70D3920A1B87653A00EB7F37 /* SDWebImage */,
@@ -686,6 +690,15 @@
 				70EAF2321BD9D11F00A25310 /* FXBlurView.m */,
 			);
 			path = FXBlurView;
+			sourceTree = "<group>";
+		};
+		70ECFFAC1C0C144A00409D58 /* ImageCropView */ = {
+			isa = PBXGroup;
+			children = (
+				70ECFFAD1C0C146100409D58 /* ImageCropView.h */,
+				70ECFFAE1C0C146100409D58 /* ImageCropView.m */,
+			);
+			name = ImageCropView;
 			sourceTree = "<group>";
 		};
 		F001B85B591474F25480F307 /* Frameworks */ = {
@@ -893,6 +906,7 @@
 				70E552E71BEC4EE500694D08 /* ShareView.m in Sources */,
 				70E960611BF57165004A65E9 /* JobVC.m in Sources */,
 				70D3922F1B87653A00EB7F37 /* SDWebImageCompat.m in Sources */,
+				70ECFFAF1C0C146100409D58 /* ImageCropView.m in Sources */,
 				70D3922E1B87653A00EB7F37 /* SDImageCache.m in Sources */,
 				70D392371B87653A00EB7F37 /* UIImage+MultiFormat.m in Sources */,
 				70E960431BF32A88004A65E9 /* WXApiRequestHandler.m in Sources */,

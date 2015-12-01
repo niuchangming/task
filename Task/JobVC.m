@@ -16,8 +16,6 @@
 #import "MozTopAlertView.h"
 #import "Job.h"
 #import "Image.h"
-#import "MDRadialProgressView.h"
-#import "MDRadialProgressTheme.h"
 #import "CommonUtils.h"
 #import "Reward.h"
 
@@ -125,13 +123,6 @@
             cell.getBtn.hidden = NO;
         }
     }else{
-        MDRadialProgressTheme *theme = [[MDRadialProgressTheme alloc] init];
-        theme.completedColor = [CommonUtils colorFromHexString:@"#4CD964"];
-        theme.incompletedColor = [CommonUtils colorFromHexString:@"#B9F6CA"];
-        theme.thickness = 10;
-        theme.centerColor = [UIColor clearColor];
-        theme.sliceDividerHidden = YES;
-        theme.labelColor = [CommonUtils colorFromHexString:@"#4A4A4A"];
         cell.progressLbl.text = [NSString stringWithFormat:@"Completed %.0f%%", 100 * (float) job.accessCount / (float)job.task.reward.minShares];
         
         if(((float)job.accessCount / (float)job.task.reward.minShares) >= 1){

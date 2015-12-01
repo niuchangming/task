@@ -67,21 +67,12 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSError *error;
-        id object = [NSJSONSerialization JSONObjectWithData:operation.responseData options:kNilOptions error:&error];
-        
-        if(error != nil){
-            [MozTopAlertView showWithType:MozAlertTypeError text:@"Error" doText:nil doBlock:nil parentView:self.view];
-            return;
-        }
-        
-        if ([object isKindOfClass:[NSDictionary class]] == YES){
-            NSDictionary *obj = (NSDictionary *)object;
+        if ([responseObject isKindOfClass:[NSDictionary class]] == YES){
+            NSDictionary *obj = (NSDictionary *)responseObject;
             NSString *errMsg = [obj valueForKey:@"error"];
             [MozTopAlertView showWithType:MozAlertTypeError text:errMsg doText:nil doBlock:nil parentView:self.view];
-        }else if ([object isKindOfClass:[NSArray class]] == YES){
-            NSArray *array = (NSArray*) object;
+        }else if ([responseObject isKindOfClass:[NSArray class]] == YES){
+            NSArray *array = (NSArray*) responseObject;
             tasks = [[NSMutableArray alloc] init];
             for(NSDictionary *data in array){
                 Task *task = [[Task alloc]initWithJson:data];
@@ -157,16 +148,8 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSError *error;
-        id object = [NSJSONSerialization JSONObjectWithData:operation.responseData options:kNilOptions error:&error];
-        
-        if(error != nil){
-            [MozTopAlertView showWithType:MozAlertTypeError text:@"Error" doText:nil doBlock:nil parentView:self.view];
-            return;
-        }
-        
-        if ([object isKindOfClass:[NSDictionary class]] == YES){
-            NSDictionary *obj = (NSDictionary *)object;
+        if ([responseObject isKindOfClass:[NSDictionary class]] == YES){
+            NSDictionary *obj = (NSDictionary *)responseObject;
             NSString *errMsg = [obj valueForKey:@"error"];
             if(![CommonUtils IsEmpty:errMsg]){
                 [MozTopAlertView showWithType:MozAlertTypeError text:errMsg doText:nil doBlock:nil parentView:self.view];

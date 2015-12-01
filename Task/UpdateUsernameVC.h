@@ -12,18 +12,20 @@
 @protocol UpdateUsernameDelegate <NSObject>
 
 @optional
--(void) updateUsername:(NSString*) firstName andLastName:(NSString *) lastName;
+-(void) updateFirstname:(NSString*) firstName andLastName:(NSString *) lastName;
 
 @end
 
 @interface UpdateUsernameVC : UIViewController
+
+@property (strong, nonatomic) User *user;
+@property (weak, nonatomic) id<UpdateUsernameDelegate> delegate;
+
 @property (weak, nonatomic) IBOutlet UITextField *firstNameTf;
 @property (weak, nonatomic) IBOutlet UITextField *lastNameTf;
 @property (weak, nonatomic) IBOutlet UIButton *saveBtn;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingBar;
 
 - (IBAction)saveBtnClicked:(id)sender;
-@property (strong, nonatomic) User *user;
-@property (weak, nonatomic) id<UpdateUsernameDelegate> delegate;
 
 @end

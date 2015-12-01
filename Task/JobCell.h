@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MDRadialProgressView.h"
 #import "Job.h"
 
 @protocol JobCellDelegate <NSObject>

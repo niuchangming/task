@@ -231,89 +231,6 @@
             </objects>
             <point key="canvasLocation" x="274" y="766"/>
         </scene>
-        <!--Update Name-->
-        <scene sceneID="Wff-qT-5rc">
-            <objects>
-                <viewController id="uuc-UD-M9i" customClass="UpdateUsernameVC" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="HbR-ep-oWu"/>
-                        <viewControllerLayoutGuide type="bottom" id="m8C-0W-fFk"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kDF-4D-UWe">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WFm-Ps-HRQ">
-                                <rect key="frame" x="20" y="84" width="280" height="42"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="280" id="KA4-4e-9t1"/>
-                                    <constraint firstAttribute="width" secondItem="WFm-Ps-HRQ" secondAttribute="height" multiplier="20:3" id="zgF-i6-rXV"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xUY-ro-6AO">
-                                <rect key="frame" x="20" y="141" width="280" height="42"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="280" id="fqa-1E-hRW"/>
-                                    <constraint firstAttribute="width" secondItem="xUY-ro-6AO" secondAttribute="height" multiplier="20:3" id="hZc-ww-plT"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D27-0q-gWa">
-                                <rect key="frame" x="20" y="198" width="280" height="42"/>
-                                <color key="backgroundColor" red="0.29803921570000003" green="0.85098039219999999" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="D27-0q-gWa" secondAttribute="height" multiplier="20:3" id="9Da-ao-ibk"/>
-                                    <constraint firstAttribute="width" constant="280" id="oXZ-Tb-C65"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
-                                <state key="normal" title="Save">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="loginBtnClicked:" destination="ESF-4M-nuO" eventType="touchUpInside" id="URD-xK-5Zq"/>
-                                    <action selector="saveBtnClicked:" destination="JP2-7D-69Q" eventType="touchUpInside" id="BfI-Py-OM7"/>
-                                    <action selector="saveBtnClicked:" destination="uuc-UD-M9i" eventType="touchUpInside" id="Ops-bZ-4kJ"/>
-                                </connections>
-                            </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="aT4-n7-XKs">
-                                <rect key="frame" x="268" y="209" width="20" height="20"/>
-                            </activityIndicatorView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="xUY-ro-6AO" secondAttribute="trailing" constant="20" id="7OY-AZ-u1E"/>
-                            <constraint firstItem="xUY-ro-6AO" firstAttribute="top" secondItem="WFm-Ps-HRQ" secondAttribute="bottom" constant="15" id="7RY-hv-y7Q"/>
-                            <constraint firstItem="aT4-n7-XKs" firstAttribute="leading" secondItem="D27-0q-gWa" secondAttribute="trailing" constant="-32" id="9PU-3k-cu0"/>
-                            <constraint firstAttribute="trailing" secondItem="D27-0q-gWa" secondAttribute="trailing" constant="20" id="G0G-JR-9HQ"/>
-                            <constraint firstItem="D27-0q-gWa" firstAttribute="top" secondItem="xUY-ro-6AO" secondAttribute="bottom" constant="15" id="Hvv-Pu-mVg"/>
-                            <constraint firstItem="aT4-n7-XKs" firstAttribute="centerY" secondItem="D27-0q-gWa" secondAttribute="centerY" id="Ug9-bX-TrY"/>
-                            <constraint firstItem="WFm-Ps-HRQ" firstAttribute="leading" secondItem="kDF-4D-UWe" secondAttribute="leading" constant="20" id="ZA8-UM-iEg"/>
-                            <constraint firstItem="xUY-ro-6AO" firstAttribute="leading" secondItem="kDF-4D-UWe" secondAttribute="leading" constant="20" id="a2P-UT-TAC"/>
-                            <constraint firstAttribute="trailing" secondItem="WFm-Ps-HRQ" secondAttribute="trailing" constant="20" id="aQA-Df-wWp"/>
-                            <constraint firstItem="WFm-Ps-HRQ" firstAttribute="top" secondItem="HbR-ep-oWu" secondAttribute="bottom" constant="20" id="ciA-J4-1L3"/>
-                            <constraint firstItem="D27-0q-gWa" firstAttribute="leading" secondItem="kDF-4D-UWe" secondAttribute="leading" constant="20" id="dAY-dC-Gc2"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Update Name" id="9EO-a8-t4F"/>
-                    <connections>
-                        <outlet property="firstNameTf" destination="WFm-Ps-HRQ" id="ebE-cH-sZ9"/>
-                        <outlet property="lastNameTf" destination="xUY-ro-6AO" id="8yA-iY-Qfs"/>
-                        <outlet property="loadingBar" destination="aT4-n7-XKs" id="O3m-vO-8Qf"/>
-                        <outlet property="saveBtn" destination="D27-0q-gWa" id="zay-Wc-WSC"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ofl-0E-glD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2" y="-1442"/>
-        </scene>
         <!--LoginVC-->
         <scene sceneID="cns-JN-QkA">
             <objects>
@@ -859,8 +776,8 @@
                                     <constraint firstAttribute="width" constant="280" id="LVE-Ss-rdT"/>
                                     <constraint firstAttribute="width" secondItem="jYa-gS-Bm3" secondAttribute="height" multiplier="20:3" id="rpd-RQ-VMg"/>
                                 </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oqR-84-KdG">
@@ -876,7 +793,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="loginBtnClicked:" destination="ESF-4M-nuO" eventType="touchUpInside" id="fcc-j4-qqH"/>
                                     <action selector="saveBtnClicked:" destination="JP2-7D-69Q" eventType="touchUpInside" id="H9G-Q6-e6S"/>
                                 </connections>
                             </button>
@@ -930,7 +846,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CBv-0F-5Cu" customClass="FXBlurView">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q39-Rt-UdB">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q39-Rt-UdB">
                                                 <rect key="frame" x="108" y="28" width="104" height="104"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="104" id="ciN-83-k1W"/>
@@ -1026,7 +942,7 @@
                         <outlet property="scrollView" destination="6fW-Ni-rVG" id="pIa-1v-PKN"/>
                         <segue destination="ESF-4M-nuO" kind="presentation" identifier="login_fr_profile" id="IaE-vz-rnJ"/>
                         <segue destination="JP2-7D-69Q" kind="show" identifier="updatephone_fr_userinfo" id="fG2-rW-u1I"/>
-                        <segue destination="uuc-UD-M9i" kind="show" identifier="updateusername_fr_userinfo" id="GdP-hM-Voo"/>
+                        <segue destination="SYv-2l-eDF" kind="show" identifier="updatename_fr_userinfo" id="Cke-gA-IoG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ylZ-RG-KvQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1044,7 +960,88 @@
                     </userDefinedRuntimeAttributes>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="-787" y="-1119"/>
+            <point key="canvasLocation" x="-793" y="-1086"/>
+        </scene>
+        <!--Update Name-->
+        <scene sceneID="aDu-83-Db7">
+            <objects>
+                <viewController id="SYv-2l-eDF" customClass="UpdateUsernameVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yLO-88-J0J"/>
+                        <viewControllerLayoutGuide type="bottom" id="208-hb-s7Y"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Y9c-ga-9Wi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o1x-5j-Nir">
+                                <rect key="frame" x="20" y="84" width="280" height="42"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="o1x-5j-Nir" secondAttribute="height" multiplier="20:3" id="84I-Wl-D1j"/>
+                                    <constraint firstAttribute="width" constant="280" id="KVo-Pa-XB1"/>
+                                </constraints>
+                                <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oDX-HB-yd0">
+                                <rect key="frame" x="20" y="141" width="280" height="42"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="oDX-HB-yd0" secondAttribute="height" multiplier="20:3" id="DVj-XI-VAa"/>
+                                    <constraint firstAttribute="width" constant="280" id="KwT-ZG-cIZ"/>
+                                </constraints>
+                                <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FqD-IK-P8P">
+                                <rect key="frame" x="20" y="198" width="280" height="42"/>
+                                <color key="backgroundColor" red="0.29803921570000003" green="0.85098039219999999" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="FqD-IK-P8P" secondAttribute="height" multiplier="20:3" id="UUS-dw-uKs"/>
+                                    <constraint firstAttribute="width" constant="280" id="ibv-KZ-CA2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveBtnClicked:" destination="SYv-2l-eDF" eventType="touchUpInside" id="PBR-PC-RPv"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="qVJ-CT-bCN">
+                                <rect key="frame" x="268" y="209" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="o1x-5j-Nir" firstAttribute="leading" secondItem="Y9c-ga-9Wi" secondAttribute="leading" constant="20" id="1GS-XB-Fw8"/>
+                            <constraint firstItem="qVJ-CT-bCN" firstAttribute="centerY" secondItem="FqD-IK-P8P" secondAttribute="centerY" id="GUJ-Xg-25C"/>
+                            <constraint firstAttribute="trailing" secondItem="o1x-5j-Nir" secondAttribute="trailing" constant="20" id="RIV-cg-stq"/>
+                            <constraint firstAttribute="trailing" secondItem="oDX-HB-yd0" secondAttribute="trailing" constant="20" id="RTE-ac-zh9"/>
+                            <constraint firstItem="FqD-IK-P8P" firstAttribute="top" secondItem="oDX-HB-yd0" secondAttribute="bottom" constant="15" id="SRU-Ha-Ccd"/>
+                            <constraint firstItem="o1x-5j-Nir" firstAttribute="top" secondItem="yLO-88-J0J" secondAttribute="bottom" constant="20" id="cA2-BP-dXI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qVJ-CT-bCN" secondAttribute="trailing" constant="16" id="dJX-tj-9UA"/>
+                            <constraint firstAttribute="trailing" secondItem="FqD-IK-P8P" secondAttribute="trailing" constant="20" id="ee5-eB-rTD"/>
+                            <constraint firstItem="FqD-IK-P8P" firstAttribute="leading" secondItem="Y9c-ga-9Wi" secondAttribute="leading" constant="20" id="g50-WU-axI"/>
+                            <constraint firstItem="oDX-HB-yd0" firstAttribute="leading" secondItem="Y9c-ga-9Wi" secondAttribute="leading" constant="20" id="hTn-Ts-2vm"/>
+                            <constraint firstItem="oDX-HB-yd0" firstAttribute="top" secondItem="o1x-5j-Nir" secondAttribute="bottom" constant="15" id="nbs-5T-DdA"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Update Name" id="dTt-hN-jyl"/>
+                    <connections>
+                        <outlet property="firstNameTf" destination="o1x-5j-Nir" id="0FG-4G-Zqv"/>
+                        <outlet property="lastNameTf" destination="oDX-HB-yd0" id="ooS-VJ-YBD"/>
+                        <outlet property="loadingBar" destination="qVJ-CT-bCN" id="ggs-Zr-mQN"/>
+                        <outlet property="saveBtn" destination="FqD-IK-P8P" id="1Wu-47-jlb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Fe-Zr-NGg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-309" y="-1406"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EqS-h0-KSH">

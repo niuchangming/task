@@ -7,7 +7,6 @@
 //
 
 #import "JobCell.h"
-#import "MDRadialProgressTheme.h"
 #import "CommonUtils.h"
 #import <QuartzCore/QuartzCore.h>
 
