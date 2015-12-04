@@ -78,17 +78,8 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSError *error;
-        id object = [NSJSONSerialization JSONObjectWithData:operation.responseData options:kNilOptions error:&error];
-        
-        if(error != nil){
-            [MozTopAlertView showWithType:MozAlertTypeError text:@"Error" doText:nil doBlock:nil parentView:self.view];
-            return;
-        }
-        
-        if ([object isKindOfClass:[NSDictionary class]] == YES){
-            NSDictionary *obj = (NSDictionary *)object;
+        if ([responseObject isKindOfClass:[NSDictionary class]] == YES){
+            NSDictionary *obj = (NSDictionary *)responseObject;
             NSString *errMsg = [obj valueForKey:@"error"];
             
             if(![CommonUtils IsEmpty:errMsg]) {
@@ -121,12 +112,15 @@
     avatarIvTap.numberOfTapsRequired = 1;
     [avatarIV addGestureRecognizer:avatarIvTap];
     
+    [avatarIV setImage:[UIImage imageNamed:@"default_avatar.jpg"]];
+    [avatarBgView setImage:[UIImage imageNamed:@"default_avatar.jpg"]];
+    
     CGRect emailFrame = CGRectMake(0, avatarBlurView.frame.origin.y + avatarBlurView.frame.size.height + 36, self.view.frame.size.width, 44);
     
     UIView *emailView = [self getRowViewWithKey:@"Email" AndValue:@"" AndFrame: emailFrame];
     emailLbl = (UILabel *) [emailView viewWithTag:1];
     
-    NSLayoutConstraint *bottomSpaceConstraint = [NSLayoutConstraint constraintWithItem:[emailLbl superview]
+    NSLayoutConstraint *bottomSpaceConstraint = [NSLayoutConstraint constraintWithItem:emailView
                                                                              attribute:NSLayoutAttributeTop
                                                                              relatedBy:NSLayoutRelationEqual
                                                                                 toItem:avatarBlurView
@@ -162,9 +156,8 @@
 }
 
 -(void) updateViews{
-    [avatarBgView sd_setImageWithURL:[NSURL URLWithString:user.avatar.thumbnailPath] placeholderImage: [UIImage imageNamed:@"avatar_placeholder"]];
-    
-    [avatarIV sd_setImageWithURL:[NSURL URLWithString:user.avatar.thumbnailPath] placeholderImage: [UIImage imageNamed:@"avatar_placeholder"]];
+    [avatarBgView sd_setImageWithURL:[NSURL URLWithString:user.avatar.thumbnailPath] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
+    [avatarIV sd_setImageWithURL:[NSURL URLWithString:user.avatar.thumbnailPath] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
     
     nameLbl.text = [NSString stringWithFormat:@"%@ %@", user.profile.firstName, user.profile.lastName];
     [nameLbl sizeToFit];
@@ -197,17 +190,17 @@
     emailLbl.text = user.email;
     phoneLbl.text = user.profile.phone;
     
-    NSString *addressStr = @"";
+    NSMutableString *addressStr = [NSMutableString string];
     if(user.profile.address.block != 0) {
-        [addressStr stringByAppendingString:[NSString stringWithFormat:@"Blk %i", user.profile.address.block]];
+        [addressStr appendString:[NSString stringWithFormat:@"Blk %i", user.profile.address.block]];
     }
     
     if(![CommonUtils IsEmpty:user.profile.address.street]){
-        [addressStr stringByAppendingFormat:@" %@", user.profile.address.street];
+        [addressStr appendString:[NSString stringWithFormat:@" %@", user.profile.address.street]];
     }
     
     if (![CommonUtils IsEmpty:user.profile.address.unit]) {
-        [addressStr stringByAppendingFormat:@" %@", user.profile.address.unit];
+        [addressStr appendString:[NSString stringWithFormat:@" %@", user.profile.address.unit]];
     }
     
     addressLbl.text = addressStr;
@@ -287,15 +280,27 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     UIImage *image = [info valueForKey: UIImagePickerControllerOriginalImage];
     if(image != nil){
-        ImageCropViewController *controller = [[ImageCropViewController alloc] initWithImage:image];
-        controller.delegate = self;
-        controller.blurredBackground = NO;
-        [[self navigationController] pushViewController:controller animated:YES];
+        UIImage *image = [info valueForKey: UIImagePickerControllerOriginalImage];
+        if(image != nil){
+            PECropViewController *controller = [[PECropViewController alloc] init];
+            controller.delegate = self;
+            controller.image = image;
+            controller.keepingCropAspectRatio = YES;
+            CGFloat width = image.size.width;
+            CGFloat height = image.size.height;
+            CGFloat length = MIN(width, height);
+            controller.imageCropRect = CGRectMake((width - length) / 2,
+                                                  (height - length) / 2,
+                                                  length,
+                                                  length);
+            
+            [[self navigationController] pushViewController:controller animated:YES];
+        }
     }
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)ImageCropViewController:(ImageCropViewController *)controller didFinishCroppingImage:(UIImage *)croppedImage{
+-(void) cropViewController:(PECropViewController *)controller didFinishCroppingImage:(UIImage *)croppedImage{
     avatarIV.image = croppedImage;
     
     if (croppedImage != nil){
@@ -305,7 +310,7 @@
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
-- (void)ImageCropViewControllerDidCancel:(ImageCropViewController *)controller{
+-(void) cropViewControllerDidCancel:(PECropViewController *)controller{
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
@@ -335,8 +340,9 @@
                 }else{
                     user.avatar.entityId = [[dic valueForKey:@"entityId"] intValue];
                     user.avatar.thumbnailPath = [dic valueForKey:@"thumbnailPath"];
-                    [avatarIV sd_setImageWithURL:[NSURL URLWithString:user.avatar.thumbnailPath]];
-                    [avatarBgView sd_setImageWithURL:[NSURL URLWithString:user.avatar.thumbnailPath]];
+                    
+                    [avatarIV sd_setImageWithURL:[NSURL URLWithString:user.avatar.thumbnailPath] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
+                    [avatarBgView sd_setImageWithURL:[NSURL URLWithString:user.avatar.thumbnailPath] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
                     [MozTopAlertView showWithType:MozAlertTypeSuccess text:@"Successfully changed." doText:nil doBlock:nil parentView:self.view];
                 }
             }else{
@@ -353,7 +359,7 @@
 }
 
 -(void) addressRowClicked{
-
+    [self performSegueWithIdentifier:@"updateaddress_fr_userinfo" sender:self];
 }
 
 -(void) companyRowClicked{
@@ -424,6 +430,10 @@
         UpdateUsernameVC *updateNameVC = [segue destinationViewController];
         updateNameVC.delegate = self;
         updateNameVC.user = user;
+    }else if([[segue identifier] isEqualToString:@"updateaddress_fr_userinfo"]){
+        UpdateAddressVC *updateAddressVC = [segue destinationViewController];
+        updateAddressVC.delegate = self;
+        updateAddressVC.user = user;
     }
 }
 
@@ -441,6 +451,13 @@
     
     user.profile.firstName = firstName;
     user.profile.lastName = lastName;
+}
+
+-(void) updateBlk:(int)blk andStreet:(NSString *)street andUnit:(NSString *)unit andPost:(int)post{
+    user.profile.address.block = blk;
+    user.profile.address.street = street;
+    user.profile.address.unit = unit;
+    user.profile.address.postCode = post;
 }
 
 -(void) clearStore{

@@ -11,9 +11,10 @@
 #import "FXBlurView/FXBlurView.h"
 #import "UpdatePhoneVC.h"
 #import "UpdateUsernameVC.h"
-#import "ImageCropView.h"
+#import "PECropViewController.h"
+#import "UpdateAddressVC.h"
 
-@interface ProfileVC : UIViewController <UINavigationControllerDelegate, LoginDelegate, UpdatePhoneDelegate, UpdateUsernameDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, ImageCropViewControllerDelegate>
+@interface ProfileVC : UIViewController <UINavigationControllerDelegate, LoginDelegate, UpdatePhoneDelegate, UpdateUsernameDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, PECropViewControllerDelegate, UpdateAddressDelegate>
 @property (strong, nonatomic) UIButton *signBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarBgView;
 @property (weak, nonatomic) IBOutlet UIImageView *roleIV;

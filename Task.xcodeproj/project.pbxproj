@@ -107,7 +107,12 @@
 		70EC2E431BFA08B400B6E9E3 /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 70EC2E421BFA08B400B6E9E3 /* Profile.m */; settings = {ASSET_TAGS = (); }; };
 		70ECFFA51C089EAA00409D58 /* UpdatePhoneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFA41C089EAA00409D58 /* UpdatePhoneVC.m */; settings = {ASSET_TAGS = (); }; };
 		70ECFFA81C0ADD6400409D58 /* UpdateUsernameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFA71C0ADD6400409D58 /* UpdateUsernameVC.m */; settings = {ASSET_TAGS = (); }; };
-		70ECFFAF1C0C146100409D58 /* ImageCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFAE1C0C146100409D58 /* ImageCropView.m */; settings = {ASSET_TAGS = (); }; };
+		70ECFFB71C0D83C300409D58 /* PECropRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFB21C0D83C300409D58 /* PECropRectView.m */; settings = {ASSET_TAGS = (); }; };
+		70ECFFB81C0D83C300409D58 /* PECropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFB41C0D83C300409D58 /* PECropView.m */; settings = {ASSET_TAGS = (); }; };
+		70ECFFB91C0D83C300409D58 /* PECropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFB61C0D83C300409D58 /* PECropViewController.m */; settings = {ASSET_TAGS = (); }; };
+		70ECFFBC1C0D840800409D58 /* PEResizeControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFBB1C0D840800409D58 /* PEResizeControl.m */; settings = {ASSET_TAGS = (); }; };
+		70ECFFBF1C0D841700409D58 /* UIImage+PECrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFBE1C0D841700409D58 /* UIImage+PECrop.m */; settings = {ASSET_TAGS = (); }; };
+		70ECFFC21C0D86AF00409D58 /* UpdateAddressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFC11C0D86AF00409D58 /* UpdateAddressVC.m */; settings = {ASSET_TAGS = (); }; };
 		F106F7D326DBB7C63D1AF1BF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A62FBF10DB37A84852F06BD1 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -289,8 +294,18 @@
 		70ECFFA41C089EAA00409D58 /* UpdatePhoneVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePhoneVC.m; sourceTree = "<group>"; };
 		70ECFFA61C0ADD6400409D58 /* UpdateUsernameVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateUsernameVC.h; sourceTree = "<group>"; };
 		70ECFFA71C0ADD6400409D58 /* UpdateUsernameVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateUsernameVC.m; sourceTree = "<group>"; };
-		70ECFFAD1C0C146100409D58 /* ImageCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCropView.h; sourceTree = "<group>"; };
-		70ECFFAE1C0C146100409D58 /* ImageCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCropView.m; sourceTree = "<group>"; };
+		70ECFFB11C0D83C300409D58 /* PECropRectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PECropRectView.h; sourceTree = "<group>"; };
+		70ECFFB21C0D83C300409D58 /* PECropRectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PECropRectView.m; sourceTree = "<group>"; };
+		70ECFFB31C0D83C300409D58 /* PECropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PECropView.h; sourceTree = "<group>"; };
+		70ECFFB41C0D83C300409D58 /* PECropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PECropView.m; sourceTree = "<group>"; };
+		70ECFFB51C0D83C300409D58 /* PECropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PECropViewController.h; sourceTree = "<group>"; };
+		70ECFFB61C0D83C300409D58 /* PECropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PECropViewController.m; sourceTree = "<group>"; };
+		70ECFFBA1C0D840800409D58 /* PEResizeControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEResizeControl.h; sourceTree = "<group>"; };
+		70ECFFBB1C0D840800409D58 /* PEResizeControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEResizeControl.m; sourceTree = "<group>"; };
+		70ECFFBD1C0D841700409D58 /* UIImage+PECrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PECrop.h"; sourceTree = "<group>"; };
+		70ECFFBE1C0D841700409D58 /* UIImage+PECrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PECrop.m"; sourceTree = "<group>"; };
+		70ECFFC01C0D86AF00409D58 /* UpdateAddressVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateAddressVC.h; sourceTree = "<group>"; };
+		70ECFFC11C0D86AF00409D58 /* UpdateAddressVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateAddressVC.m; sourceTree = "<group>"; };
 		A62FBF10DB37A84852F06BD1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D39FCAC5C4638FF782221BA5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FA330CF720664E9944C91E2D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -379,6 +394,8 @@
 				70ECFFA41C089EAA00409D58 /* UpdatePhoneVC.m */,
 				70ECFFA61C0ADD6400409D58 /* UpdateUsernameVC.h */,
 				70ECFFA71C0ADD6400409D58 /* UpdateUsernameVC.m */,
+				70ECFFC01C0D86AF00409D58 /* UpdateAddressVC.h */,
+				70ECFFC11C0D86AF00409D58 /* UpdateAddressVC.m */,
 				7078BB9E1B8029C6002290E4 /* Main.storyboard */,
 				7078BBA11B8029C6002290E4 /* Images.xcassets */,
 				7078BBA31B8029C6002290E4 /* LaunchScreen.xib */,
@@ -543,7 +560,7 @@
 		70D391DF1B86EC8400EB7F37 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				70ECFFAC1C0C144A00409D58 /* ImageCropView */,
+				70ECFFB01C0D83A000409D58 /* PECropView */,
 				70EAF2301BD9D11F00A25310 /* FXBlurView */,
 				70E4169A1BD77F2400758D18 /* QRView */,
 				70D3920A1B87653A00EB7F37 /* SDWebImage */,
@@ -692,13 +709,21 @@
 			path = FXBlurView;
 			sourceTree = "<group>";
 		};
-		70ECFFAC1C0C144A00409D58 /* ImageCropView */ = {
+		70ECFFB01C0D83A000409D58 /* PECropView */ = {
 			isa = PBXGroup;
 			children = (
-				70ECFFAD1C0C146100409D58 /* ImageCropView.h */,
-				70ECFFAE1C0C146100409D58 /* ImageCropView.m */,
+				70ECFFB11C0D83C300409D58 /* PECropRectView.h */,
+				70ECFFB21C0D83C300409D58 /* PECropRectView.m */,
+				70ECFFB31C0D83C300409D58 /* PECropView.h */,
+				70ECFFB41C0D83C300409D58 /* PECropView.m */,
+				70ECFFB51C0D83C300409D58 /* PECropViewController.h */,
+				70ECFFB61C0D83C300409D58 /* PECropViewController.m */,
+				70ECFFBA1C0D840800409D58 /* PEResizeControl.h */,
+				70ECFFBD1C0D841700409D58 /* UIImage+PECrop.h */,
+				70ECFFBE1C0D841700409D58 /* UIImage+PECrop.m */,
+				70ECFFBB1C0D840800409D58 /* PEResizeControl.m */,
 			);
-			name = ImageCropView;
+			name = PECropView;
 			sourceTree = "<group>";
 		};
 		F001B85B591474F25480F307 /* Frameworks */ = {
@@ -902,16 +927,17 @@
 				70E552EC1BEC833200694D08 /* Job.m in Sources */,
 				70D391EE1B86ECAB00EB7F37 /* UIFont+FontAwesome.m in Sources */,
 				709C09361B81AFF70001E321 /* RAMTransitionItemAnimation.swift in Sources */,
+				70ECFFBF1C0D841700409D58 /* UIImage+PECrop.m in Sources */,
 				70CF6DA71B8DC257008C9F51 /* User.m in Sources */,
 				70E552E71BEC4EE500694D08 /* ShareView.m in Sources */,
 				70E960611BF57165004A65E9 /* JobVC.m in Sources */,
 				70D3922F1B87653A00EB7F37 /* SDWebImageCompat.m in Sources */,
-				70ECFFAF1C0C146100409D58 /* ImageCropView.m in Sources */,
 				70D3922E1B87653A00EB7F37 /* SDImageCache.m in Sources */,
 				70D392371B87653A00EB7F37 /* UIImage+MultiFormat.m in Sources */,
 				70E960431BF32A88004A65E9 /* WXApiRequestHandler.m in Sources */,
 				70D392361B87653A00EB7F37 /* UIImage+GIF.m in Sources */,
 				70D392311B87653A00EB7F37 /* SDWebImageDownloader.m in Sources */,
+				70ECFFB91C0D83C300409D58 /* PECropViewController.m in Sources */,
 				709C094C1B81F33F0001E321 /* Task.m in Sources */,
 				70C7CFA01B8A006F003B5901 /* LoginVC.m in Sources */,
 				70E5517A1BF8DB2D004A3E1E /* Coupon.m in Sources */,
@@ -937,20 +963,24 @@
 				70D392341B87653A00EB7F37 /* SDWebImagePrefetcher.m in Sources */,
 				70D392381B87653A00EB7F37 /* UIImage+WebP.m in Sources */,
 				70D392331B87653A00EB7F37 /* SDWebImageManager.m in Sources */,
+				70ECFFC21C0D86AF00409D58 /* UpdateAddressVC.m in Sources */,
 				70D3923E1B8793C900EB7F37 /* TaskCell.m in Sources */,
 				70D3922D1B87653A00EB7F37 /* NSData+ImageContentType.m in Sources */,
 				70D391DE1B86CDAD00EB7F37 /* Image.m in Sources */,
+				70ECFFBC1C0D840800409D58 /* PEResizeControl.m in Sources */,
 				70C96A4B1B92B53500BBDCD5 /* TaskDetailInfoView.m in Sources */,
 				70ECFFA51C089EAA00409D58 /* UpdatePhoneVC.m in Sources */,
 				7078BB9D1B8029C6002290E4 /* TaskController.m in Sources */,
 				70EAF2331BD9D11F00A25310 /* FXBlurView.m in Sources */,
 				709C09351B81AFF70001E321 /* RAMRotationAnimation.swift in Sources */,
 				70EC2E401BF9E19500B6E9E3 /* Address.m in Sources */,
+				70ECFFB81C0D83C300409D58 /* PECropView.m in Sources */,
 				70E416991BD7714200758D18 /* QRCodeScannerVC.m in Sources */,
 				70E9604E1BF32A95004A65E9 /* WXMediaMessage+messageConstruct.m in Sources */,
 				709C09331B81AFF70001E321 /* RAMFrameItemAnimation.swift in Sources */,
 				70E960641BF5821E004A65E9 /* JobCell.m in Sources */,
 				709C09521B81FDF60001E321 /* CommonUtils.m in Sources */,
+				70ECFFB71C0D83C300409D58 /* PECropRectView.m in Sources */,
 				70D3923B1B87653A00EB7F37 /* UIView+WebCacheOperation.m in Sources */,
 				70EC2E3D1BF9DEB400B6E9E3 /* Company.m in Sources */,
 				70D392391B87653A00EB7F37 /* UIImageView+HighlightedWebCache.m in Sources */,

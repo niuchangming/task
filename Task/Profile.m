@@ -24,7 +24,7 @@
         self.firstName = [dic valueForKey:@"firstName"];
         self.lastName = [dic valueForKey:@"lastName"];
         self.phone = [dic valueForKey:@"phone"];
-        self.address = [[Address alloc] initWithJson: [[dic valueForKey:@"profiles"] objectAtIndex:0]];
+        self.address = [[Address alloc] initWithJson: [[dic valueForKey:@"addresses"] objectAtIndex:0]];
     }
     
     return self;

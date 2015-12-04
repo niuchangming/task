@@ -31,8 +31,8 @@
         self.verifyStatus = [dic valueForKey:@"verifyStatus"];
         
         NSArray *addressArray = [dic valueForKey:@"addresses"];
+        self.addresses = [[NSMutableArray alloc] init];
         if(![addressArray isKindOfClass:[NSNull class]] && addressArray.count > 0){
-            self.addresses = [[NSMutableArray alloc] init];
             for(NSDictionary *addrDic in addressArray) {
                 [self.addresses addObject: [[Address alloc] initWithJson:addrDic]];
             }

@@ -39,8 +39,8 @@
         self.value = [[dic valueForKey:@"value"] doubleValue];
         
         NSArray *imageArray = [dic valueForKey:@"images"];
+        self.images = [[NSMutableArray alloc] init];
         if(![imageArray isKindOfClass:[NSNull class]] && imageArray.count > 0){
-            self.images = [[NSMutableArray alloc] init];
             for(NSDictionary *imgDic in imageArray) {
                 [self.images addObject: [[Image alloc] initWithJson:imgDic]];
             }

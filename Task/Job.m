@@ -30,8 +30,8 @@
         self.task = [[Task alloc] initWithJson: [dic valueForKey:@"task"]];
         
         NSArray *dealArray = [dic valueForKey:@"deals"];
+        self.deals = [[NSMutableArray alloc] init];
         if(![dealArray isKindOfClass:[NSNull class]] && dealArray.count > 0){
-            self.deals = [[NSMutableArray alloc] init];
             for(NSDictionary *dealDic in dealArray) {
                 [self.deals addObject: [[Deal alloc] initWithJson:dealDic]];
             }
