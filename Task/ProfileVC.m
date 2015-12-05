@@ -170,7 +170,7 @@
     }else if([user.role isEqualToString:@"ADMIN"]){
         [roleIV setImage:[UIImage imageNamed:@"role_user"]];
     }
-    
+
     if(editNameBtn == nil) {
         editNameBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         editNameBtn.backgroundColor = [UIColor clearColor];
@@ -186,9 +186,14 @@
     }
     
     editNameBtn.frame = CGRectMake(nameLbl.frame.origin.x + nameLbl.frame.size.width + 4, nameLbl.frame.origin.y + 2, 20, 20);
+
+    if(![CommonUtils IsEmpty:user.email]){
+        emailLbl.text = user.email;
+    }
     
-    emailLbl.text = user.email;
-    phoneLbl.text = user.profile.phone;
+    if(![CommonUtils IsEmpty:user.profile.phone]){
+        phoneLbl.text = user.profile.phone;
+    }
     
     NSMutableString *addressStr = [NSMutableString string];
     if(user.profile.address.block != 0) {
@@ -205,7 +210,7 @@
     
     addressLbl.text = addressStr;
     
-    if(![CommonUtils IsEmpty:user.company]){
+    if([user.role isEqualToString:@"MERCHANT"]){
         if(companyLbl == nil) {
             CGRect companyFrame = CGRectMake(0, [addressLbl superview].frame.origin.y + [addressLbl superview].frame.size.height + 8, self.view.frame.size.width, 44);
             UIView *companyView = [self getRowViewWithKey:@"Company" AndValue:user.company.name AndFrame:companyFrame];
@@ -223,7 +228,6 @@
         companyRow = nil;
         signBtn.frame = CGRectMake(0, [addressLbl superview].frame.origin.y + [addressLbl superview].frame.size.height + 8, self.view.frame.size.width, 44);
     }
-    
 }
 
 -(UIView *) getRowViewWithKey: (NSString *) key AndValue:(NSString*) value AndFrame: (CGRect)frame{
@@ -302,6 +306,7 @@
 
 -(void) cropViewController:(PECropViewController *)controller didFinishCroppingImage:(UIImage *)croppedImage{
     avatarIV.image = croppedImage;
+    avatarBgView.image = croppedImage;
     
     if (croppedImage != nil){
         [self uploadAvatar:croppedImage];
@@ -340,9 +345,6 @@
                 }else{
                     user.avatar.entityId = [[dic valueForKey:@"entityId"] intValue];
                     user.avatar.thumbnailPath = [dic valueForKey:@"thumbnailPath"];
-                    
-                    [avatarIV sd_setImageWithURL:[NSURL URLWithString:user.avatar.thumbnailPath] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
-                    [avatarBgView sd_setImageWithURL:[NSURL URLWithString:user.avatar.thumbnailPath] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
                     [MozTopAlertView showWithType:MozAlertTypeSuccess text:@"Successfully changed." doText:nil doBlock:nil parentView:self.view];
                 }
             }else{
@@ -454,10 +456,28 @@
 }
 
 -(void) updateBlk:(int)blk andStreet:(NSString *)street andUnit:(NSString *)unit andPost:(int)post{
+    if(user.profile.address == nil){
+        user.profile.address = [[Address alloc] init];
+    }
     user.profile.address.block = blk;
     user.profile.address.street = street;
     user.profile.address.unit = unit;
     user.profile.address.postCode = post;
+    
+    NSMutableString *addressStr = [NSMutableString string];
+    if(user.profile.address.block != 0) {
+        [addressStr appendString:[NSString stringWithFormat:@"Blk %i", user.profile.address.block]];
+    }
+    
+    if(![CommonUtils IsEmpty:user.profile.address.street]){
+        [addressStr appendString:[NSString stringWithFormat:@" %@", user.profile.address.street]];
+    }
+    
+    if (![CommonUtils IsEmpty:user.profile.address.unit]) {
+        [addressStr appendString:[NSString stringWithFormat:@" %@", user.profile.address.unit]];
+    }
+    
+    addressLbl.text = addressStr;
 }
 
 -(void) clearStore{

@@ -79,7 +79,7 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [delegate signupCompletedWithResponseData:operation.responseData withError:nil];
+        [delegate signupCompletedWithResponseData:responseObject withError:nil];
         [loadingBar stopAnimating];
         [signupBtn setEnabled:true];
         [cancelBtn setEnabled:true];

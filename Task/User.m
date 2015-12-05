@@ -30,19 +30,25 @@
         self.accessToken = [dic valueForKey:@"accessToken"];
         self.role = [dic valueForKey:@"role"];
         
-        NSArray *companyDic = [dic valueForKey:@"companys"];
-        if(![CommonUtils IsEmpty:companyDic]) {
-            self.company = [[Company alloc] initWithJson: [companyDic objectAtIndex:0]];
+        NSArray *companyArr = [dic valueForKey:@"companys"];
+        if(companyArr != nil && companyArr.count > 0){
+            self.company = [[Company alloc] initWithJson: [companyArr objectAtIndex:0]];
+        }else{
+            self.company = [[Company alloc] init];
         }
-        
-        NSArray *profileDic = [dic valueForKey:@"profiles"];
-        if(![CommonUtils IsEmpty:profileDic]) {
-            self.profile = [[Profile alloc] initWithJson: [profileDic objectAtIndex:0]];
+
+        NSArray *profileArr = [dic valueForKey:@"profiles"];
+        if(profileArr != nil && profileArr.count > 0){
+            self.profile = [[Profile alloc] initWithJson: [profileArr objectAtIndex:0]];
+        }else{
+            self.profile = [[Profile alloc] init];
         }
         
         NSArray *imageArray = [dic valueForKey:@"avatars"];
         if(![imageArray isKindOfClass:[NSNull class]] && imageArray.count > 0){
-            self.avatar = [[Image alloc] initWithJson:[imageArray objectAtIndex:(imageArray.count - 1)]];
+            self.avatar = [[Image alloc] initWithJson:[imageArray objectAtIndex:0]];
+        }else{
+            self.avatar = [[Image alloc] init];
         }
         
     }

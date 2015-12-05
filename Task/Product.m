@@ -27,7 +27,12 @@
         self.price = [[dic valueForKey: @"price"] doubleValue];
         self.productName = [dic valueForKey:@"productName"];
         
-        self.coupon = [[Coupon alloc] initWithJson: [[dic valueForKey:@"coupons"] objectAtIndex:0]];
+        NSArray *couponArr = [dic valueForKey:@"coupons"];
+        if(couponArr != nil && [couponArr count] > 0){
+            self.coupon = [[Coupon alloc] initWithJson: [couponArr objectAtIndex:0]];
+        }else{
+            self.coupon = [[Coupon alloc] init];
+        }
     }
     
     return self;

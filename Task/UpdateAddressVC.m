@@ -55,20 +55,20 @@
     postTf.leftView = postPadding;
     postTf.leftViewMode = UITextFieldViewModeAlways;
     
-    if(user.profile != nil && user.profile.address != nil) {
-        if(user.profile.address.block == 0) {
-            blkTf.text = @"";
-        }else{
-            [blkTf setText:[NSString stringWithFormat:@"%d", user.profile.address.block]];
-        }
-        [streetTf setText:user.profile.address.street];
-        [unitTf setText:user.profile.address.unit];
-        if(user.profile.address.postCode == 0){
-            postTf.text = @"";
-        }else{
-            [postTf setText:[NSString stringWithFormat:@"%d", user.profile.address.postCode]];
-        }
+    
+    if(user.profile.address.block == 0) {
+        blkTf.text = @"";
+    }else{
+        [blkTf setText:[NSString stringWithFormat:@"%d", user.profile.address.block]];
     }
+    [streetTf setText:user.profile.address.street];
+    [unitTf setText:user.profile.address.unit];
+    if(user.profile.address.postCode == 0){
+        postTf.text = @"";
+    }else{
+        [postTf setText:[NSString stringWithFormat:@"%d", user.profile.address.postCode]];
+    }
+    
 }
 
 - (IBAction)saveBtnClicked:(id)sender {

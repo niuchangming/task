@@ -98,8 +98,7 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [self parseUser:operation.responseData];
-        
+        [self parseUser:responseObject];
         [loginLoadingBar stopAnimating];
         [loginBtn setEnabled:true];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -131,7 +130,7 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [self parseUser:operation.responseData];
+        [self parseUser:responseObject];
         [fbLoadingBar stopAnimating];
         [fbLoginBtn setEnabled:true];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -145,7 +144,7 @@
 
 }
 
--(void) signupCompletedWithResponseData:(NSData *)resp withError:(NSString *)err{
+-(void) signupCompletedWithResponseData:(id)resp withError:(NSString *)err{
     if(![CommonUtils IsEmpty:err]){
         [MozTopAlertView showWithType:MozAlertTypeError text:err doText:nil doBlock:nil parentView:self.view];
         [signupPopView dismissWithCompletion:nil];
@@ -156,24 +155,20 @@
     [signupPopView dismissWithCompletion:nil];
 }
 
--(void) parseUser: (NSData *) jsonData{
-    NSError *error;
-    id object = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
-    
-    if(error != nil){
-        [MozTopAlertView showWithType:MozAlertTypeError text:[error localizedDescription] doText:nil doBlock:nil parentView:self.view];
-        return;
-    }
-    
-    NSDictionary *obj = (NSDictionary *)object;
-    NSString *errMsg = [obj valueForKey:@"error"];
-    
-    if(![CommonUtils IsEmpty:errMsg]) {
-        [MozTopAlertView showWithType:MozAlertTypeError text:errMsg doText:nil doBlock:nil parentView:self.view];
+-(void) parseUser:(id) responseObject{
+    if([responseObject isKindOfClass:[NSDictionary class]]){
+        NSDictionary *obj = (NSDictionary *)responseObject;
+        NSString *errMsg = [obj valueForKey:@"error"];
+        
+        if(![CommonUtils IsEmpty:errMsg]) {
+            [MozTopAlertView showWithType:MozAlertTypeError text:errMsg doText:nil doBlock:nil parentView:self.view];
+        }else{
+            User *user = [[User alloc] initWithJson:obj];
+            [self storeUserInfo:user];
+            [self cancelbtnClicked:nil];
+        }
     }else{
-        User *user = [[User alloc] initWithJson:obj];
-        [self storeUserInfo:user];
-        [self cancelbtnClicked:nil];
+        [MozTopAlertView showWithType:MozAlertTypeError text:@"Unknown error." doText:nil doBlock:nil parentView:self.view];
     }
 }
 

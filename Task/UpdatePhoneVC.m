@@ -38,7 +38,9 @@
     phoneTf.leftView = paddingView;
     phoneTf.leftViewMode = UITextFieldViewModeAlways;
     
-    [phoneTf setText:user.profile.phone];
+    if(![CommonUtils IsEmpty:user.profile.phone]){
+        phoneTf.text = user.profile.phone;
+    }
 }
 
 - (IBAction)saveBtnClicked:(id)sender {

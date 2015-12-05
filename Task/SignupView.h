@@ -14,7 +14,7 @@
 @protocol SignupViewDelegate <NSObject>
 
 @required
--(void) signupCompletedWithResponseData:(NSData*)resp withError:(NSString*) err;
+-(void) signupCompletedWithResponseData:(id)resp withError:(NSString*) err;
 
 @end
 

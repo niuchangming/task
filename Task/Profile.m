@@ -7,6 +7,7 @@
 //
 
 #import "Profile.h"
+#import "CommonUtils.h"
 
 @implementation Profile
 
@@ -24,7 +25,13 @@
         self.firstName = [dic valueForKey:@"firstName"];
         self.lastName = [dic valueForKey:@"lastName"];
         self.phone = [dic valueForKey:@"phone"];
-        self.address = [[Address alloc] initWithJson: [[dic valueForKey:@"addresses"] objectAtIndex:0]];
+        
+        NSArray *addressArr = [dic valueForKey:@"addresses"];
+        if(![CommonUtils IsEmpty:addressArr] && addressArr.count > 0) {
+            self.address = [[Address alloc] initWithJson: [addressArr objectAtIndex:0]];
+        }else{
+            self.address = [[Address alloc] init];
+        }
     }
     
     return self;
