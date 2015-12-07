@@ -123,6 +123,7 @@
 		70ECFFDE1C1344A800409D58 /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFD41C1344A800409D58 /* split.c */; settings = {ASSET_TAGS = (); }; };
 		70ECFFDF1C1344A800409D58 /* UIImage+MDQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFD71C1344A800409D58 /* UIImage+MDQRCode.m */; settings = {ASSET_TAGS = (); }; };
 		70ECFFE21C13B54600409D58 /* Voucher.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFE11C13B54600409D58 /* Voucher.m */; settings = {ASSET_TAGS = (); }; };
+		70ED069A1C15DE1400EEF159 /* CollectRewardMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED06991C15DE1400EEF159 /* CollectRewardMapVC.m */; settings = {ASSET_TAGS = (); }; };
 		F106F7D326DBB7C63D1AF1BF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A62FBF10DB37A84852F06BD1 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -336,6 +337,8 @@
 		70ECFFD71C1344A800409D58 /* UIImage+MDQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MDQRCode.m"; sourceTree = "<group>"; };
 		70ECFFE01C13B54600409D58 /* Voucher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Voucher.h; sourceTree = "<group>"; };
 		70ECFFE11C13B54600409D58 /* Voucher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Voucher.m; sourceTree = "<group>"; };
+		70ED06981C15DE1400EEF159 /* CollectRewardMapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectRewardMapVC.h; sourceTree = "<group>"; };
+		70ED06991C15DE1400EEF159 /* CollectRewardMapVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectRewardMapVC.m; sourceTree = "<group>"; };
 		A62FBF10DB37A84852F06BD1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D39FCAC5C4638FF782221BA5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FA330CF720664E9944C91E2D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -428,6 +431,8 @@
 				70ECFFC11C0D86AF00409D58 /* UpdateAddressVC.m */,
 				70ECFFC31C1308D300409D58 /* RewardVC.h */,
 				70ECFFC41C1308D300409D58 /* RewardVC.m */,
+				70ED06981C15DE1400EEF159 /* CollectRewardMapVC.h */,
+				70ED06991C15DE1400EEF159 /* CollectRewardMapVC.m */,
 				7078BB9E1B8029C6002290E4 /* Main.storyboard */,
 				7078BBA11B8029C6002290E4 /* Images.xcassets */,
 				7078BBA31B8029C6002290E4 /* LaunchScreen.xib */,
@@ -1051,6 +1056,7 @@
 				70EC2E401BF9E19500B6E9E3 /* Address.m in Sources */,
 				70ECFFB81C0D83C300409D58 /* PECropView.m in Sources */,
 				70E416991BD7714200758D18 /* QRCodeScannerVC.m in Sources */,
+				70ED069A1C15DE1400EEF159 /* CollectRewardMapVC.m in Sources */,
 				70E9604E1BF32A95004A65E9 /* WXMediaMessage+messageConstruct.m in Sources */,
 				709C09331B81AFF70001E321 /* RAMFrameItemAnimation.swift in Sources */,
 				70E960641BF5821E004A65E9 /* JobCell.m in Sources */,

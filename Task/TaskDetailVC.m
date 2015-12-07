@@ -137,7 +137,7 @@ static CGFloat PageControlHeight = 20.0f;
     contentView.taskTitleLbl.text =  [task.title uppercaseString];
     contentView.companyNameLbl.text = @"Company name";
     contentView.task = task;
-    [contentView.infoWebView loadHTMLString:task.desc baseURL:nil];
+    [contentView.infoWebView loadHTMLString:[NSString stringWithFormat:@"<div style='text-align:justify;'>%@</div>", task.desc] baseURL:nil];
     [contentView.contentSegment setSelectedSegmentIndex:0];
     
     shareContainer = [[[NSBundle mainBundle] loadNibNamed:@"ShareView" owner:self options:nil] objectAtIndex:0];

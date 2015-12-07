@@ -11,5 +11,6 @@
 @implementation ConstantValues
 
 NSString * const baseUrl = @"http://payee.elasticbeanstalk.com/api/";
+NSString * const GOOGLE_MAP_KEY = @"AIzaSyADmZSkzyWB_bDQMc0yQgA7JUglC2vW4qc";
 
 @end

@@ -15,15 +15,19 @@
 #import "ConstantValues.h"
 #import "MozTopAlertView.h"
 #import "Image.h"
+#import <CircleProgressBar/CircleProgressBar.h>
+#import "CollectRewardMapVC.h"
 
 @interface RewardVC (){
     UIView *topViewBg;
     UIView *midViewBg;
     UILabel *valueLbl;
     UILabel *expLbl;
-    UILabel *titleLbl;
+    UILabel *processLbl;
+    UIButton *pinBtn;
     UIWebView *instructionWeb;
     NSMutableArray *imageViews;
+    CircleProgressBar *circleProgressbar;
 }
 
 @end
@@ -41,6 +45,7 @@
      setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
     imageViews = [[NSMutableArray alloc] init];
+    self.navigationItem.title = job.task.reward.title;
     
     [self loadVoucher];
 }
@@ -138,27 +143,43 @@
     expLbl.layer.borderWidth = 1.0;
     [topViewBg addSubview:expLbl];
     
-    midViewBg = [[UIView alloc] initWithFrame:CGRectMake(0, topViewBg.frame.size.height + 10, self.view.frame.size.width, 128)];
-    [topViewBg addSubview:midViewBg];
+    midViewBg = [[UIView alloc] initWithFrame:CGRectMake(0, topViewBg.frame.size.height + 10, self.view.frame.size.width, 144)];
+    [self.view addSubview:midViewBg];
     
-    UIImageView *QRImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 128, 128)];
+    UIImageView *QRImageView = [[UIImageView alloc] initWithFrame:CGRectMake(midViewBg.frame.size.width / 2 - 72, 0, 144, 144)];
     QRImageView.image = [UIImage mdQRCodeForString:job.token size:QRImageView.bounds.size.width fillColor:[UIColor blackColor]];
     [midViewBg addSubview:QRImageView];
     
-    titleLbl = [[UILabel alloc] initWithFrame:CGRectMake(QRImageView.frame.size.width, 0, midViewBg.frame.size.width - QRImageView.frame.size.width, QRImageView.frame.size.height / 4)];
-    titleLbl.text = [job.task.reward.title uppercaseString];
-    titleLbl.textColor = [CommonUtils colorFromHexString:@"#4A4A4A"];
-    titleLbl.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0];
-    titleLbl.textAlignment = NSTextAlignmentCenter;
-    [midViewBg addSubview:titleLbl];
+    // Circle Progress
+    circleProgressbar = [[CircleProgressBar alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 144) / 4 - 36, 36, 72, 72)];
+    [circleProgressbar setProgress:1.0f animated:NO];
+    [circleProgressbar setProgressBarWidth:2];
+    [circleProgressbar setProgressBarProgressColor:[CommonUtils colorFromHexString:@"#FF9500"]];
+    [circleProgressbar setProgressBarTrackColor:[CommonUtils colorFromHexString:@"#BDBEC2"]];
+    [circleProgressbar setHintViewBackgroundColor:[UIColor clearColor]];
+    [circleProgressbar setBackgroundColor:[UIColor clearColor]];
+    [midViewBg addSubview:circleProgressbar];
     
-    int y = midViewBg.frame.origin.y + midViewBg.frame.size.height;
+    processLbl = [[UILabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 144) / 4 - 18, 49, 36, 36)];
+    processLbl.text = @"73";
+    processLbl.textColor = [CommonUtils colorFromHexString:@"#FF9500"];
+    processLbl.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:32.0];
+    processLbl.textAlignment = NSTextAlignmentCenter;
+    [midViewBg addSubview:processLbl];
     
+    UILabel *unitLbl = [[UILabel alloc] initWithFrame:CGRectMake(processLbl.frame.origin.x, processLbl.frame.origin.y + processLbl.frame.size.height - 5, processLbl.frame.size.width, 12)];
+    unitLbl.text = @"Deals";
+    unitLbl.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:12.0];
+    unitLbl.textAlignment = NSTextAlignmentCenter;
+    unitLbl.textColor = [CommonUtils colorFromHexString:@"#4A4A4A"];
+    [midViewBg addSubview:unitLbl];
+    
+    
+    int y = midViewBg.frame.origin.y + midViewBg.frame.size.height + 10;
     // Reward images
-    
     if(job.task.reward.images.count > 0) {
         UILabel *rewardInfoLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, y, self.view.frame.size.width, 32)];
-        rewardInfoLbl.text = @"Reward Information";
+        rewardInfoLbl.text = @"Reward Image";
         rewardInfoLbl.textColor = [CommonUtils colorFromHexString:@"#4A4A4A"];
         rewardInfoLbl.textAlignment = NSTextAlignmentCenter;
         rewardInfoLbl.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18.0];
@@ -176,14 +197,26 @@
         }
     }
     
-    // Instruction WebView
+    pinBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - ((self.view.frame.size.width - 144) / 4 + 36), 36, 72, 72)];
+    [pinBtn setBackgroundColor:[CommonUtils colorFromHexString:@"#2196F3"]];
+    pinBtn.layer.cornerRadius = 36;
+    pinBtn.layer.masksToBounds = YES;
+    pinBtn.layer.shadowOffset = CGSizeMake(1, 1);
+    pinBtn.layer.shadowColor = [CommonUtils colorFromHexString:@"#4A4A4A"].CGColor;
+    pinBtn.layer.shadowRadius = 1;
+    pinBtn.layer.shadowOpacity = 1.0;
+    [pinBtn setImage:[UIImage imageNamed:@"pin.png"] forState:UIControlStateNormal];
+    [pinBtn setImageEdgeInsets:UIEdgeInsetsMake(18, 18, 18, 18)];
+    [pinBtn addTarget:self action:@selector(pinBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [midViewBg addSubview:pinBtn];
     
+    // Instruction WebView
     instructionWeb = [[UIWebView alloc] initWithFrame:CGRectMake(0, y, self.view.frame.size.width, 0)];
     instructionWeb.delegate = self;
     instructionWeb.scrollView.scrollEnabled = NO;
     instructionWeb.scrollView.bounces = NO;
     
-    NSString *htmlString = [NSString stringWithFormat:@"<div style='font-family: HelveticaNeue-Thin; color:#4A4A4A;'><p style='font-size: 18px; text-align: center;'><b>Terms & Conditions</b></p>%@</div>", job.task.reward.instruction];
+    NSString *htmlString = [NSString stringWithFormat:@"<div style='font-family: HelveticaNeue-Thin; color:#4A4A4A; text-align:justify;'><p style='font-size: 18px; text-align: center;'><b>Terms & Conditions</b></p>%@</div>", job.task.reward.instruction];
     [instructionWeb loadHTMLString:htmlString baseURL:nil];
     
     [self.view addSubview:instructionWeb];
@@ -198,6 +231,17 @@
     webView.frame = frame;
     
     [self updateViewHeight];
+}
+
+-(void) pinBtnClicked:(id) sender{
+    [self performSegueWithIdentifier:@"crm_fr_reward" sender:self];
+}
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([[segue identifier] isEqualToString:@"crm_fr_reward"]){
+        CollectRewardMapVC *vc = [segue destinationViewController];
+        vc.job = self.job;
+    }
 }
 
 -(void) updateViewHeight{

@@ -11,5 +11,6 @@
 @interface ConstantValues : NSObject
 
 extern NSString * const baseUrl;
+extern NSString * const GOOGLE_MAP_KEY;
 
 @end

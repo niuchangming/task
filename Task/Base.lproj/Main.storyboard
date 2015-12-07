@@ -257,11 +257,30 @@
                     <navigationItem key="navigationItem" title="Your Reward" id="GCM-gd-anE"/>
                     <connections>
                         <outlet property="loadingBar" destination="Eb9-Fr-aGc" id="8xF-We-LL2"/>
+                        <segue destination="LAu-d2-wV7" kind="show" identifier="crm_fr_reward" id="xLM-mi-pfo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Clx-dj-ZBQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="274" y="1426"/>
+        </scene>
+        <!--Collect Reward MapVC-->
+        <scene sceneID="Vxh-YV-bSk">
+            <objects>
+                <viewController id="LAu-d2-wV7" customClass="CollectRewardMapVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Dsz-s2-dvR"/>
+                        <viewControllerLayoutGuide type="bottom" id="gkd-L0-uHx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QVR-ui-YCB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2MU-dF-Qdu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="684" y="1426"/>
         </scene>
         <!--LoginVC-->
         <scene sceneID="cns-JN-QkA">

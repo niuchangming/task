@@ -13,6 +13,7 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import <TwitterKit/TwitterKit.h>
+@import GoogleMaps;
 
 @interface AppDelegate ()
 
@@ -23,6 +24,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    [GMSServices provideAPIKey:@"AIzaSyADmZSkzyWB_bDQMc0yQgA7JUglC2vW4qc"];
     
     [Fabric with:@[[Crashlytics class], [Twitter class]]];
     
