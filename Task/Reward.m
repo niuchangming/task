@@ -28,7 +28,7 @@
     
     if(self) {
         self.entityId = [[dic valueForKey:@"entityId"] intValue];
-        self.collectAddress = [dic valueForKey:@"description"];
+        self.collectAddress = [dic valueForKey:@"collectAddress"];
         self.collectPostCode = [dic valueForKey:@"collectPostCode"];
         self.collectUnit = [dic valueForKey:@"collectUnit"];
         self.expireDate = [NSDate dateWithTimeIntervalSince1970:[[dic valueForKey:@"expireDate"] intValue] / 1000];

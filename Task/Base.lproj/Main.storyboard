@@ -212,6 +212,7 @@
                     <connections>
                         <outlet property="jobTb" destination="DR0-Ff-rFI" id="E7Z-hf-a1s"/>
                         <outlet property="loadingJobBar" destination="AX1-p1-BL8" id="9oG-Tb-e1G"/>
+                        <segue destination="eJV-KT-qge" kind="show" identifier="reward_fr_job" id="khq-YJ-REJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HwQ-d4-yDR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -230,6 +231,37 @@
                 </customObject>
             </objects>
             <point key="canvasLocation" x="274" y="766"/>
+        </scene>
+        <!--Your Reward-->
+        <scene sceneID="cJe-re-aoG">
+            <objects>
+                <viewController id="eJV-KT-qge" customClass="RewardVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ieg-da-VTA"/>
+                        <viewControllerLayoutGuide type="bottom" id="aXa-WO-Ayn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hEU-VV-UZV" customClass="UIScrollView">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Eb9-Fr-aGc">
+                                <rect key="frame" x="150" y="230" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Eb9-Fr-aGc" firstAttribute="centerY" secondItem="hEU-VV-UZV" secondAttribute="centerY" id="4Qb-il-hXx"/>
+                            <constraint firstItem="Eb9-Fr-aGc" firstAttribute="centerX" secondItem="hEU-VV-UZV" secondAttribute="centerX" id="rqf-tH-bJF"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Your Reward" id="GCM-gd-anE"/>
+                    <connections>
+                        <outlet property="loadingBar" destination="Eb9-Fr-aGc" id="8xF-We-LL2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Clx-dj-ZBQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="274" y="1426"/>
         </scene>
         <!--LoginVC-->
         <scene sceneID="cns-JN-QkA">

@@ -113,6 +113,16 @@
 		70ECFFBC1C0D840800409D58 /* PEResizeControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFBB1C0D840800409D58 /* PEResizeControl.m */; settings = {ASSET_TAGS = (); }; };
 		70ECFFBF1C0D841700409D58 /* UIImage+PECrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFBE1C0D841700409D58 /* UIImage+PECrop.m */; settings = {ASSET_TAGS = (); }; };
 		70ECFFC21C0D86AF00409D58 /* UpdateAddressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFC11C0D86AF00409D58 /* UpdateAddressVC.m */; settings = {ASSET_TAGS = (); }; };
+		70ECFFC51C1308D300409D58 /* RewardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFC41C1308D300409D58 /* RewardVC.m */; settings = {ASSET_TAGS = (); }; };
+		70ECFFD81C1344A800409D58 /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFC81C1344A800409D58 /* bitstream.c */; settings = {ASSET_TAGS = (); }; };
+		70ECFFD91C1344A800409D58 /* mask.c in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFCA1C1344A800409D58 /* mask.c */; settings = {ASSET_TAGS = (); }; };
+		70ECFFDA1C1344A800409D58 /* qrencode.c in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFCC1C1344A800409D58 /* qrencode.c */; settings = {ASSET_TAGS = (); }; };
+		70ECFFDB1C1344A800409D58 /* qrinput.c in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFCE1C1344A800409D58 /* qrinput.c */; settings = {ASSET_TAGS = (); }; };
+		70ECFFDC1C1344A800409D58 /* qrspec.c in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFD01C1344A800409D58 /* qrspec.c */; settings = {ASSET_TAGS = (); }; };
+		70ECFFDD1C1344A800409D58 /* rscode.c in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFD21C1344A800409D58 /* rscode.c */; settings = {ASSET_TAGS = (); }; };
+		70ECFFDE1C1344A800409D58 /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFD41C1344A800409D58 /* split.c */; settings = {ASSET_TAGS = (); }; };
+		70ECFFDF1C1344A800409D58 /* UIImage+MDQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFD71C1344A800409D58 /* UIImage+MDQRCode.m */; settings = {ASSET_TAGS = (); }; };
+		70ECFFE21C13B54600409D58 /* Voucher.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFE11C13B54600409D58 /* Voucher.m */; settings = {ASSET_TAGS = (); }; };
 		F106F7D326DBB7C63D1AF1BF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A62FBF10DB37A84852F06BD1 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -306,6 +316,26 @@
 		70ECFFBE1C0D841700409D58 /* UIImage+PECrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PECrop.m"; sourceTree = "<group>"; };
 		70ECFFC01C0D86AF00409D58 /* UpdateAddressVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateAddressVC.h; sourceTree = "<group>"; };
 		70ECFFC11C0D86AF00409D58 /* UpdateAddressVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateAddressVC.m; sourceTree = "<group>"; };
+		70ECFFC31C1308D300409D58 /* RewardVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardVC.h; sourceTree = "<group>"; };
+		70ECFFC41C1308D300409D58 /* RewardVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RewardVC.m; sourceTree = "<group>"; };
+		70ECFFC81C1344A800409D58 /* bitstream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bitstream.c; sourceTree = "<group>"; };
+		70ECFFC91C1344A800409D58 /* bitstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bitstream.h; sourceTree = "<group>"; };
+		70ECFFCA1C1344A800409D58 /* mask.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mask.c; sourceTree = "<group>"; };
+		70ECFFCB1C1344A800409D58 /* mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mask.h; sourceTree = "<group>"; };
+		70ECFFCC1C1344A800409D58 /* qrencode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrencode.c; sourceTree = "<group>"; };
+		70ECFFCD1C1344A800409D58 /* qrencode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrencode.h; sourceTree = "<group>"; };
+		70ECFFCE1C1344A800409D58 /* qrinput.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrinput.c; sourceTree = "<group>"; };
+		70ECFFCF1C1344A800409D58 /* qrinput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrinput.h; sourceTree = "<group>"; };
+		70ECFFD01C1344A800409D58 /* qrspec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrspec.c; sourceTree = "<group>"; };
+		70ECFFD11C1344A800409D58 /* qrspec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrspec.h; sourceTree = "<group>"; };
+		70ECFFD21C1344A800409D58 /* rscode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rscode.c; sourceTree = "<group>"; };
+		70ECFFD31C1344A800409D58 /* rscode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rscode.h; sourceTree = "<group>"; };
+		70ECFFD41C1344A800409D58 /* split.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = split.c; sourceTree = "<group>"; };
+		70ECFFD51C1344A800409D58 /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
+		70ECFFD61C1344A800409D58 /* UIImage+MDQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MDQRCode.h"; sourceTree = "<group>"; };
+		70ECFFD71C1344A800409D58 /* UIImage+MDQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MDQRCode.m"; sourceTree = "<group>"; };
+		70ECFFE01C13B54600409D58 /* Voucher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Voucher.h; sourceTree = "<group>"; };
+		70ECFFE11C13B54600409D58 /* Voucher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Voucher.m; sourceTree = "<group>"; };
 		A62FBF10DB37A84852F06BD1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D39FCAC5C4638FF782221BA5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FA330CF720664E9944C91E2D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -396,6 +426,8 @@
 				70ECFFA71C0ADD6400409D58 /* UpdateUsernameVC.m */,
 				70ECFFC01C0D86AF00409D58 /* UpdateAddressVC.h */,
 				70ECFFC11C0D86AF00409D58 /* UpdateAddressVC.m */,
+				70ECFFC31C1308D300409D58 /* RewardVC.h */,
+				70ECFFC41C1308D300409D58 /* RewardVC.m */,
 				7078BB9E1B8029C6002290E4 /* Main.storyboard */,
 				7078BBA11B8029C6002290E4 /* Images.xcassets */,
 				7078BBA31B8029C6002290E4 /* LaunchScreen.xib */,
@@ -456,6 +488,8 @@
 				70EC2E3F1BF9E19500B6E9E3 /* Address.m */,
 				70EC2E411BFA08B400B6E9E3 /* Profile.h */,
 				70EC2E421BFA08B400B6E9E3 /* Profile.m */,
+				70ECFFE01C13B54600409D58 /* Voucher.h */,
+				70ECFFE11C13B54600409D58 /* Voucher.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -547,6 +581,7 @@
 		709C094D1B81FD1D0001E321 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				70ECFFC61C1344A800409D58 /* QR */,
 				709C094E1B81FDF60001E321 /* CommonUtils.h */,
 				709C094F1B81FDF60001E321 /* CommonUtils.m */,
 				709C09501B81FDF60001E321 /* ConstantValues.h */,
@@ -724,6 +759,37 @@
 				70ECFFBB1C0D840800409D58 /* PEResizeControl.m */,
 			);
 			name = PECropView;
+			sourceTree = "<group>";
+		};
+		70ECFFC61C1344A800409D58 /* QR */ = {
+			isa = PBXGroup;
+			children = (
+				70ECFFC71C1344A800409D58 /* libqrencode */,
+				70ECFFD61C1344A800409D58 /* UIImage+MDQRCode.h */,
+				70ECFFD71C1344A800409D58 /* UIImage+MDQRCode.m */,
+			);
+			path = QR;
+			sourceTree = "<group>";
+		};
+		70ECFFC71C1344A800409D58 /* libqrencode */ = {
+			isa = PBXGroup;
+			children = (
+				70ECFFC81C1344A800409D58 /* bitstream.c */,
+				70ECFFC91C1344A800409D58 /* bitstream.h */,
+				70ECFFCA1C1344A800409D58 /* mask.c */,
+				70ECFFCB1C1344A800409D58 /* mask.h */,
+				70ECFFCC1C1344A800409D58 /* qrencode.c */,
+				70ECFFCD1C1344A800409D58 /* qrencode.h */,
+				70ECFFCE1C1344A800409D58 /* qrinput.c */,
+				70ECFFCF1C1344A800409D58 /* qrinput.h */,
+				70ECFFD01C1344A800409D58 /* qrspec.c */,
+				70ECFFD11C1344A800409D58 /* qrspec.h */,
+				70ECFFD21C1344A800409D58 /* rscode.c */,
+				70ECFFD31C1344A800409D58 /* rscode.h */,
+				70ECFFD41C1344A800409D58 /* split.c */,
+				70ECFFD51C1344A800409D58 /* split.h */,
+			);
+			path = libqrencode;
 			sourceTree = "<group>";
 		};
 		F001B85B591474F25480F307 /* Frameworks */ = {
@@ -913,6 +979,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70ECFFDE1C1344A800409D58 /* split.c in Sources */,
 				70D392301B87653A00EB7F37 /* SDWebImageDecoder.m in Sources */,
 				709C09381B81AFF70001E321 /* RAMItemAnimationProtocol.swift in Sources */,
 				70D3922C1B87653A00EB7F37 /* MKAnnotationView+WebCache.m in Sources */,
@@ -926,6 +993,7 @@
 				70E960421BF32A88004A65E9 /* WXApiManager.m in Sources */,
 				70E552EC1BEC833200694D08 /* Job.m in Sources */,
 				70D391EE1B86ECAB00EB7F37 /* UIFont+FontAwesome.m in Sources */,
+				70ECFFDD1C1344A800409D58 /* rscode.c in Sources */,
 				709C09361B81AFF70001E321 /* RAMTransitionItemAnimation.swift in Sources */,
 				70ECFFBF1C0D841700409D58 /* UIImage+PECrop.m in Sources */,
 				70CF6DA71B8DC257008C9F51 /* User.m in Sources */,
@@ -936,6 +1004,7 @@
 				70D392371B87653A00EB7F37 /* UIImage+MultiFormat.m in Sources */,
 				70E960431BF32A88004A65E9 /* WXApiRequestHandler.m in Sources */,
 				70D392361B87653A00EB7F37 /* UIImage+GIF.m in Sources */,
+				70ECFFDC1C1344A800409D58 /* qrspec.c in Sources */,
 				70D392311B87653A00EB7F37 /* SDWebImageDownloader.m in Sources */,
 				70ECFFB91C0D83C300409D58 /* PECropViewController.m in Sources */,
 				709C094C1B81F33F0001E321 /* Task.m in Sources */,
@@ -943,8 +1012,10 @@
 				70E5517A1BF8DB2D004A3E1E /* Coupon.m in Sources */,
 				70CE17831B8A25FF00474233 /* InsetTextField.m in Sources */,
 				70D3923A1B87653A00EB7F37 /* UIImageView+WebCache.m in Sources */,
+				70ECFFDA1C1344A800409D58 /* qrencode.c in Sources */,
 				707811821B9C22CB00BB66DC /* SDSegmentedControl.m in Sources */,
 				70D392351B87653A00EB7F37 /* UIButton+WebCache.m in Sources */,
+				70ECFFD91C1344A800409D58 /* mask.c in Sources */,
 				70E416A11BD77F2400758D18 /* QRItem.m in Sources */,
 				709C09531B81FDF60001E321 /* ConstantValues.m in Sources */,
 				70D391D81B86C87000EB7F37 /* Product.m in Sources */,
@@ -952,6 +1023,7 @@
 				70EC2E431BFA08B400B6E9E3 /* Profile.m in Sources */,
 				70D391DB1B86C88600EB7F37 /* Reward.m in Sources */,
 				70D391EB1B86ECAB00EB7F37 /* FAImageView.m in Sources */,
+				70ECFFE21C13B54600409D58 /* Voucher.m in Sources */,
 				70D391ED1B86ECAB00EB7F37 /* NSString+FontAwesome.m in Sources */,
 				70D392321B87653A00EB7F37 /* SDWebImageDownloaderOperation.m in Sources */,
 				70E9605C1BF494D6004A65E9 /* SignupView.m in Sources */,
@@ -963,13 +1035,16 @@
 				70D392341B87653A00EB7F37 /* SDWebImagePrefetcher.m in Sources */,
 				70D392381B87653A00EB7F37 /* UIImage+WebP.m in Sources */,
 				70D392331B87653A00EB7F37 /* SDWebImageManager.m in Sources */,
+				70ECFFDB1C1344A800409D58 /* qrinput.c in Sources */,
 				70ECFFC21C0D86AF00409D58 /* UpdateAddressVC.m in Sources */,
+				70ECFFD81C1344A800409D58 /* bitstream.c in Sources */,
 				70D3923E1B8793C900EB7F37 /* TaskCell.m in Sources */,
 				70D3922D1B87653A00EB7F37 /* NSData+ImageContentType.m in Sources */,
 				70D391DE1B86CDAD00EB7F37 /* Image.m in Sources */,
 				70ECFFBC1C0D840800409D58 /* PEResizeControl.m in Sources */,
 				70C96A4B1B92B53500BBDCD5 /* TaskDetailInfoView.m in Sources */,
 				70ECFFA51C089EAA00409D58 /* UpdatePhoneVC.m in Sources */,
+				70ECFFC51C1308D300409D58 /* RewardVC.m in Sources */,
 				7078BB9D1B8029C6002290E4 /* TaskController.m in Sources */,
 				70EAF2331BD9D11F00A25310 /* FXBlurView.m in Sources */,
 				709C09351B81AFF70001E321 /* RAMRotationAnimation.swift in Sources */,
@@ -984,6 +1059,7 @@
 				70D3923B1B87653A00EB7F37 /* UIView+WebCacheOperation.m in Sources */,
 				70EC2E3D1BF9DEB400B6E9E3 /* Company.m in Sources */,
 				70D392391B87653A00EB7F37 /* UIImageView+HighlightedWebCache.m in Sources */,
+				70ECFFDF1C1344A800409D58 /* UIImage+MDQRCode.m in Sources */,
 				70EA187E1BF714F8001AB838 /* Deal.m in Sources */,
 				7078BB941B8029C6002290E4 /* main.m in Sources */,
 				70E416A31BD77F2400758D18 /* QRView.m in Sources */,

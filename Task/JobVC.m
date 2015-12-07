@@ -18,6 +18,7 @@
 #import "Image.h"
 #import "CommonUtils.h"
 #import "Reward.h"
+#import "RewardVC.h"
 
 @interface JobVC ()
 
@@ -109,19 +110,8 @@
     if([job.task.reward.rewardType isEqualToString:@"COMMISSION"]){
         int commission = (int)round((job.task.product.price - job.task.product.coupon.value) * job.task.reward.value) * (int)job.deals.count;
         cell.progressLbl.text = [NSString stringWithFormat:@"Earned %i SGD commission", commission];
-        if(commission == 0){
-            cell.getBtn.hidden = YES;
-        }else{
-            cell.getBtn.hidden = NO;
-        }
     }else{
         cell.progressLbl.text = [NSString stringWithFormat:@"Completed %.0f%%", 100 * (float) job.accessCount / (float)job.task.reward.minShares];
-        
-        if(((float)job.accessCount / (float)job.task.reward.minShares) >= 1){
-            cell.getBtn.hidden = NO;
-        }else{
-            cell.getBtn.hidden = YES;
-        }
     }
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -134,7 +124,21 @@
 }
 
 -(void) getBtnClickedWithJob:(Job *)job{
-    
+    [self performSegueWithIdentifier:@"reward_fr_job" sender:job];
+//    if([job.task.reward.rewardType isEqualToString:@"COMMISSION"]){
+//        int commission = (int)round((job.task.product.price - job.task.product.coupon.value) * job.task.reward.value) * (int)job.deals.count;
+//        if(commission == 0){
+//            [MozTopAlertView showWithType:MozAlertTypeError text:@"" doText:nil doBlock:nil parentView:self.view];
+//        }else{
+//            
+//        }
+//    }else{
+//        if(((float)job.accessCount / (float)job.task.reward.minShares) >= 1){
+//            
+//        }else{
+//            
+//        }
+//    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -147,6 +151,13 @@
     }];
     deleteBtn.backgroundColor = [CommonUtils colorFromHexString:@"#FF4444"];
     return @[deleteBtn];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([[segue identifier] isEqualToString:@"reward_fr_job"]){
+        RewardVC *rewardVc = [segue destinationViewController];
+        rewardVc.job = (Job*) sender;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
