@@ -18,6 +18,7 @@
 @synthesize name;
 @synthesize verifyStatus;
 @synthesize addresses;
+@synthesize logo;
 
 -(id) initWithJson:(NSDictionary*) dic{
     self = [super init];
@@ -36,6 +37,13 @@
             for(NSDictionary *addrDic in addressArray) {
                 [self.addresses addObject: [[Address alloc] initWithJson:addrDic]];
             }
+        }
+        
+        NSArray *logoArray = [dic valueForKey:@"logos"];
+        if(![logoArray isKindOfClass:[NSNull class]] && logoArray.count > 0){
+            self.logo = [[Image alloc] initWithJson:[logoArray objectAtIndex:0]];
+        }else{
+            self.logo = [[Image alloc] init];
         }
     }
     

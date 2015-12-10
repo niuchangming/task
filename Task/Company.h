@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Image.h"
 
 @interface Company : NSObject
 
@@ -17,6 +18,7 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *verifyStatus;
 @property (nonatomic, strong) NSMutableArray *addresses;
+@property (nonatomic, strong) Image *logo;
 
 -(id) initWithJson:(NSDictionary*) dic;
 

@@ -10,6 +10,7 @@
 #import "Product.h"
 #import "Reward.h"
 #import "CommonUtils.h"
+#import "Company.h"
 
 @interface Task : NSObject
 
@@ -22,6 +23,7 @@
 @property (nonatomic, strong) Product *product;
 @property (nonatomic, strong) Reward *reward;
 @property (nonatomic, strong) NSMutableArray *tags;
+@property (nonatomic, strong) Company *company;
 
 -(id) initWithJson:(NSDictionary*) dic;
 

@@ -106,6 +106,7 @@
     
     cell.avatarIV.layer.cornerRadius = 12;
     cell.avatarIV.clipsToBounds = YES;
+    [cell.avatarIV sd_setImageWithURL:[NSURL URLWithString:task.company.logo.thumbnailPath] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     
     [cell.taskIV sd_setImageWithURL:[NSURL URLWithString:[[[task images] objectAtIndex:0] thumbnailPath]]];
     

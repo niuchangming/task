@@ -69,7 +69,8 @@
 
 -(void) fitSize{    
     UIScrollView *rootView = (UIScrollView *)[[infoWebView superview] superview];
-    rootView.contentSize = CGSizeMake(rootView.frame.size.width, [infoWebView superview].frame.origin.y + infoWebView.frame.origin.y + infoWebView.frame.size.height);
+    
+    rootView.contentSize = CGSizeMake(self.frame.size.width, self.frame.origin.y + (self.frame.origin.y - infoWebView.frame.origin.y) + infoWebView.frame.size.height + 20.0f);
 }
 
 @end
