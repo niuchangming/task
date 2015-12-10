@@ -118,7 +118,6 @@
 }
 
 -(void) syncFbIdWithServer: (NSString*) userId{
-    
     if([CommonUtils IsEmpty:userId]){
         return;
     }

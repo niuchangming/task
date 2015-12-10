@@ -23,7 +23,7 @@
     
     if(self){
         self.entityId = [[dic valueForKey:@"entityId"] intValue];
-        self.takenDatetime = [NSDate dateWithTimeIntervalSince1970:[[dic valueForKey:@"takenDatetime"] intValue] / 1000];
+        self.takenDatetime = [NSDate dateWithTimeIntervalSince1970:[[dic valueForKey:@"takenDatetime"] longValue] / 1000];
         self.token = [dic valueForKey:@"token"];
         self.isDelete = [[dic valueForKey:@"isActive"] boolValue];
         self.accessCount = [[dic valueForKey:@"accessCount"] intValue];

@@ -20,7 +20,9 @@
 #import "LoginVC.h"
 #import "TaskDetailVC.h"
 
-@interface TaskController ()
+@interface TaskController (){
+    UIBarButtonItem *rightButton;
+}
 
 @end
 
@@ -44,17 +46,21 @@
     [super viewWillAppear:animated];
     if([[CommonUtils role] isEqualToString:@"MERCHANT"]){
         [self setupQRCodeBtn];
+    }else{
+        self.tabBarController.navigationItem.rightBarButtonItem = nil;
     }
 }
 
 -(void) setupQRCodeBtn{
-    UIButton *qrcodeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    qrcodeBtn.bounds = CGRectMake(0, 0, 30, 30);
-    [qrcodeBtn addTarget:self action:@selector(qrScanner) forControlEvents:UIControlEventTouchUpInside];
-    [qrcodeBtn setImage:[UIImage imageNamed:@"qrcode"] forState:UIControlStateNormal];
-    [qrcodeBtn setImage:[UIImage imageNamed:@"qrcode_fill"] forState:UIControlStateHighlighted];
-    
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:qrcodeBtn];
+    if(rightButton == nil){
+        UIButton *qrcodeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        qrcodeBtn.bounds = CGRectMake(0, 0, 30, 30);
+        [qrcodeBtn addTarget:self action:@selector(qrScanner) forControlEvents:UIControlEventTouchUpInside];
+        [qrcodeBtn setImage:[UIImage imageNamed:@"qrcode"] forState:UIControlStateNormal];
+        [qrcodeBtn setImage:[UIImage imageNamed:@"qrcode_fill"] forState:UIControlStateHighlighted];
+        
+        rightButton = [[UIBarButtonItem alloc] initWithCustomView:qrcodeBtn];
+    }
     self.tabBarController.navigationItem.rightBarButtonItem = rightButton;
 }
 

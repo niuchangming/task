@@ -19,6 +19,7 @@
 #import "User.h"
 #import <QuartzCore/QuartzCore.h>
 #import <AFURLSessionManager.h>
+#include "ConstantValues.h"
 
 @interface ProfileVC (){
     bool isLogin;
@@ -55,10 +56,14 @@
     [signBtn addTarget:self action:@selector(signBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:signBtn];
     [self setupViews];
+    [self updateContentHeight];
     [self getUserInfo];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
+    if(self.tabBarController.navigationItem.rightBarButtonItem != nil){
+        self.tabBarController.navigationItem.rightBarButtonItem = nil;
+    }
     isLogin = [CommonUtils IsEmpty:[CommonUtils accessToken]];
     [self resetSignBtn];
 }
@@ -115,21 +120,15 @@
     [avatarIV setImage:[UIImage imageNamed:@"default_avatar.jpg"]];
     [avatarBgView setImage:[UIImage imageNamed:@"default_avatar.jpg"]];
     
-    CGRect emailFrame = CGRectMake(0, avatarBlurView.frame.origin.y + avatarBlurView.frame.size.height + 36, self.view.frame.size.width, 44);
+    CGRect emailFrame;
+    if(IS_IPHONE_6_PLUS || IS_IPHONE_6){
+        emailFrame = CGRectMake(0, avatarBlurView.frame.origin.y + avatarBlurView.frame.size.height + 36, self.view.frame.size.width, 44);
+    }else{
+        emailFrame = CGRectMake(0, avatarBlurView.frame.origin.y + avatarBlurView.frame.size.height + 8, self.view.frame.size.width, 44);
+    }
     
     UIView *emailView = [self getRowViewWithKey:@"Email" AndValue:@"" AndFrame: emailFrame];
     emailLbl = (UILabel *) [emailView viewWithTag:1];
-    
-    NSLayoutConstraint *bottomSpaceConstraint = [NSLayoutConstraint constraintWithItem:emailView
-                                                                             attribute:NSLayoutAttributeTop
-                                                                             relatedBy:NSLayoutRelationEqual
-                                                                                toItem:avatarBlurView
-                                                                             attribute:NSLayoutAttributeTop
-                                                                            multiplier:1.0
-                                                                              constant:8.0];
-    
-    [scrollView addConstraint:bottomSpaceConstraint];
-    
     
     CGRect phoneFrame = CGRectMake(0, emailFrame.origin.y + emailFrame.size.height + 8, self.view.frame.size.width, 44);
     UIView *phoneView = [self getRowViewWithKey:@"Phone" AndValue:@"" AndFrame:phoneFrame];
@@ -228,6 +227,14 @@
         companyRow = nil;
         signBtn.frame = CGRectMake(0, [addressLbl superview].frame.origin.y + [addressLbl superview].frame.size.height + 8, self.view.frame.size.width, 44);
     }
+    
+    [self updateContentHeight];
+}
+
+-(void) updateContentHeight{
+    int contentHeight = MAX(signBtn.frame.origin.y + signBtn.frame.size.height, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height);
+
+    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, contentHeight);
 }
 
 -(UIView *) getRowViewWithKey: (NSString *) key AndValue:(NSString*) value AndFrame: (CGRect)frame{

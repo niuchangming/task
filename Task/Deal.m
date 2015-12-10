@@ -21,7 +21,7 @@
     
     if(self){
         self.entityId = [[dic valueForKey:@"entityId"] intValue];
-        self.receivedDatetime = [NSDate dateWithTimeIntervalSince1970:[[dic valueForKey:@"receivedDatetime"] intValue] / 1000];
+        self.receivedDatetime = [NSDate dateWithTimeIntervalSince1970:[[dic valueForKey:@"receivedDatetime"] longValue] / 1000];
         self.qrcode = [dic valueForKey:@"qrcode"];
         self.ip = [dic valueForKey:@"ip"];
     }

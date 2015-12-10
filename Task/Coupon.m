@@ -23,7 +23,7 @@
         self.entityId = [[dic valueForKey:@"entityId"] intValue];
         
         if(![CommonUtils IsEmpty:[dic valueForKey:@"expireDate"]]) {
-            self.expireDate = [NSDate dateWithTimeIntervalSince1970:[[dic valueForKey:@"expireDate"] intValue] / 1000];
+            self.expireDate = [NSDate dateWithTimeIntervalSince1970:[[dic valueForKey:@"expireDate"] longValue] / 1000];
         }
 
         self.instruction = [dic valueForKey:@"instruction"];

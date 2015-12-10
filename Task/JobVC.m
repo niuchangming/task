@@ -39,7 +39,10 @@
     jobTb.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
--(void) viewDidAppear:(BOOL)animated{
+-(void) viewWillAppear:(BOOL)animated{
+    if(self.tabBarController.navigationItem.rightBarButtonItem != nil){
+        self.tabBarController.navigationItem.rightBarButtonItem = nil;
+    }
     [self loadMyJobs];
 }
 
@@ -102,8 +105,6 @@
     cell.taskIV.clipsToBounds = YES;
     
     [cell.taskNameLbl setText:job.task.title];
-    cell.taskNameLbl.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.taskNameLbl.numberOfLines = 0;
     
     [cell.expiredLbl setText:[CommonUtils convertDate2String:job.task.endDate]];
     
@@ -125,20 +126,6 @@
 
 -(void) getBtnClickedWithJob:(Job *)job{
     [self performSegueWithIdentifier:@"reward_fr_job" sender:job];
-//    if([job.task.reward.rewardType isEqualToString:@"COMMISSION"]){
-//        int commission = (int)round((job.task.product.price - job.task.product.coupon.value) * job.task.reward.value) * (int)job.deals.count;
-//        if(commission == 0){
-//            [MozTopAlertView showWithType:MozAlertTypeError text:@"" doText:nil doBlock:nil parentView:self.view];
-//        }else{
-//            
-//        }
-//    }else{
-//        if(((float)job.accessCount / (float)job.task.reward.minShares) >= 1){
-//            
-//        }else{
-//            
-//        }
-//    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

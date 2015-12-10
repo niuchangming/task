@@ -10,7 +10,8 @@
 
 @implementation ConstantValues
 
-NSString * const baseUrl = @"http://payee.elasticbeanstalk.com/api/";
+//NSString * const baseUrl = @"http://payee.elasticbeanstalk.com/api/";
+NSString * const baseUrl = @"http://192.168.0.110:9000/api/";
 NSString * const GOOGLE_MAP_KEY = @"AIzaSyADmZSkzyWB_bDQMc0yQgA7JUglC2vW4qc";
 
 @end

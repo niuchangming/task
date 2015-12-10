@@ -29,8 +29,8 @@
     if(self) {
         self.entityId = [[dic valueForKey:@"entityId"] intValue];
         self.desc = [dic valueForKey:@"description"];
-        self.endDate = [NSDate dateWithTimeIntervalSince1970:[[dic valueForKey:@"endDate"] intValue] / 1000];
-        self.startDate = [NSDate dateWithTimeIntervalSince1970:[[dic valueForKey:@"startDate"] intValue] / 1000];
+        self.endDate = [NSDate dateWithTimeIntervalSince1970:[[dic valueForKey:@"endDate"] longValue] / 1000];
+        self.startDate = [NSDate dateWithTimeIntervalSince1970:[[dic valueForKey:@"startDate"] longValue] / 1000];
         self.title = [dic valueForKey:@"title"];
         
         self.product = [[Product alloc] initWithJson: [[dic valueForKey:@"products"] objectAtIndex:0]];

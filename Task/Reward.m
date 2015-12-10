@@ -31,7 +31,7 @@
         self.collectAddress = [dic valueForKey:@"collectAddress"];
         self.collectPostCode = [dic valueForKey:@"collectPostCode"];
         self.collectUnit = [dic valueForKey:@"collectUnit"];
-        self.expireDate = [NSDate dateWithTimeIntervalSince1970:[[dic valueForKey:@"expireDate"] intValue] / 1000];
+        self.expireDate = [NSDate dateWithTimeIntervalSince1970:[[dic valueForKey:@"expireDate"] longValue] / 1000];
         self.instruction = [dic valueForKey:@"instruction"];
         self.minShares = [[dic valueForKey:@"minShares"] intValue];
         self.rewardType = [dic valueForKey:@"rewardType"];

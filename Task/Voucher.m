@@ -24,9 +24,9 @@
     if(self) {
         self.entityId = [[dic valueForKey:@"entityId"] intValue];
         if(![CommonUtils IsEmpty:[dic valueForKey:@"exchangedDatetime"]]){
-            self.exchangedDatetime = [NSDate dateWithTimeIntervalSince1970:[[dic valueForKey:@"exchangedDatetime"] intValue] / 1000];
+            self.exchangedDatetime = [NSDate dateWithTimeIntervalSince1970:[[dic valueForKey:@"exchangedDatetime"] longValue] / 1000];
         }
-        self.generateDatetime = [NSDate dateWithTimeIntervalSince1970:[[dic valueForKey:@"generateDatetime"] intValue] / 1000];
+        self.generateDatetime = [NSDate dateWithTimeIntervalSince1970:[[dic valueForKey:@"generateDatetime"] longValue] / 1000];
         self.isValid = [[dic valueForKey:@"isValid"] boolValue];
         self.value = [[dic valueForKey:@"value"] doubleValue];
         self.reward = [[Reward alloc] initWithJson: [dic valueForKey:@"reward"]];

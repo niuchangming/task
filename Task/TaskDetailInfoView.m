@@ -57,13 +57,19 @@
 }
 
 -(void) webViewDidFinishLoad:(UIWebView *)webView{
+    CGRect frame = webView.frame;
+    frame.size.height = 1;
+    webView.frame = frame;
+    CGSize fittingSize = [webView sizeThatFits:CGSizeZero];
+    frame.size = fittingSize;
+    webView.frame = frame;
+    
     [self fitSize];
 }
 
--(void) fitSize{
-    CGRect frame = infoWebView.frame;
-    frame.size.height = infoWebView.scrollView.contentSize.height;
-    infoWebView.frame = frame;
+-(void) fitSize{    
+    UIScrollView *rootView = (UIScrollView *)[[infoWebView superview] superview];
+    rootView.contentSize = CGSizeMake(rootView.frame.size.width, [infoWebView superview].frame.origin.y + infoWebView.frame.origin.y + infoWebView.frame.size.height);
 }
 
 @end

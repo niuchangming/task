@@ -21,9 +21,10 @@
 @interface RewardVC (){
     UIView *topViewBg;
     UIView *midViewBg;
+    UILabel *validLbl;
     UILabel *valueLbl;
     UILabel *expLbl;
-    UILabel *processLbl;
+    UILabel *progressLbl;
     UIButton *pinBtn;
     UIWebView *instructionWeb;
     NSMutableArray *imageViews;
@@ -91,6 +92,16 @@
     [topViewBg setBackgroundColor: [CommonUtils colorFromHexString:@"#FF4444"]];
     [self.view addSubview:topViewBg];
     
+    // Promoted Message
+    validLbl = [[UILabel alloc] initWithFrame:CGRectMake(15, 15, 80, 20)];
+    [validLbl setBackgroundColor:[UIColor whiteColor]];
+    [validLbl setFont:[UIFont systemFontOfSize:12]];
+    validLbl.textAlignment = NSTextAlignmentCenter;
+    validLbl.clipsToBounds = YES;
+    validLbl.layer.cornerRadius = 4.0;
+    validLbl.textColor = [CommonUtils colorFromHexString:@"#FF4444"];
+    [topViewBg addSubview:validLbl];
+    
     // Value Label
     valueLbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
     valueLbl.center = CGPointMake(topViewBg.frame.size.width / 2, topViewBg.frame.size.height / 2);
@@ -101,21 +112,48 @@
     valueLbl.layer.shadowColor = [[CommonUtils colorFromHexString:@"#4A4A4A"] CGColor];
     valueLbl.layer.shadowOffset = CGSizeMake(1.0, 1.0);
     
-    UIFont *arialFont = [UIFont fontWithName:@"Chalkboard SE" size:32.0];
-    NSDictionary *arialDict = [NSDictionary dictionaryWithObject: arialFont forKey:NSFontAttributeName];
-    NSMutableAttributedString *aAttrString = [[NSMutableAttributedString alloc] initWithString:@"S$" attributes: arialDict];
+    UIFont *chalkboardFont32 = [UIFont fontWithName:@"Chalkboard SE" size:32.0];
+    NSDictionary *chalkboardDict32 = [NSDictionary dictionaryWithObject: chalkboardFont32 forKey:NSFontAttributeName];
+    NSString *symbol = @"% Discount";
+    if([voucher.reward.rewardType isEqualToString:@"COMMISSION"]){
+        symbol = @"S$";
+        validLbl.text = voucher.isValid ? @"Valid" : @"Invalid";
+    }else{
+        if(job.accessCount >= voucher.reward.minShares){
+            validLbl.text = voucher.isValid ? @"Valid" : @"Invalid";
+        }else{
+            validLbl.text = @"Incompleted";
+        }
+    }
+    NSMutableAttributedString *symbolString = [[NSMutableAttributedString alloc] initWithString:symbol attributes: chalkboardDict32];
     
-    UIFont *VerdanaFont = [UIFont fontWithName:@"Chalkboard SE" size:64.0];
-    NSDictionary *verdanaDict = [NSDictionary dictionaryWithObject:VerdanaFont forKey:NSFontAttributeName];
-    NSMutableAttributedString *vAttrString = [[NSMutableAttributedString alloc]initWithString:@"917" attributes:verdanaDict];
+    NSString *value = @"";
+    if([voucher.reward.rewardType isEqualToString:@"COMMISSION"]){
+        float commission = (float)round((job.task.product.price - job.task.product.coupon.value) * job.task.reward.value) * (float)job.deals.count;
+        value = [NSString stringWithFormat:@"%.0f", commission];
+    }else if([voucher.reward.rewardType isEqualToString:@"DISCOUNT"]){
+        value = [NSString stringWithFormat:@"%.0f", (float)voucher.reward.value * 100];
+    }else{
+        value = @"Free Gift";
+    }
     
-    [aAttrString appendAttributedString:vAttrString];
+    UIFont *chalkboardFont64 = [UIFont fontWithName:@"Chalkboard SE" size:64.0];
+    NSDictionary *chalkboardDict64 = [NSDictionary dictionaryWithObject:chalkboardFont64 forKey:NSFontAttributeName];
+    NSMutableAttributedString *valString = [[NSMutableAttributedString alloc]initWithString:value attributes:chalkboardDict64];
+    if([voucher.reward.rewardType isEqualToString:@"COMMISSION"]){
+        [symbolString appendAttributedString:valString];
+        valueLbl.attributedText = symbolString;
+    }else if([voucher.reward.rewardType isEqualToString:@"DISCOUNT"]){
+        [valString appendAttributedString:symbolString];
+        valueLbl.attributedText = valString;
+    }else{
+        valueLbl.attributedText = valString;
+    }
     
-    valueLbl.attributedText = aAttrString;
     [topViewBg addSubview:valueLbl];
     
     // Expired date label
-    UILabel *expTitleLbl = [[UILabel alloc]initWithFrame:CGRectMake(15, topViewBg.frame.origin.y + topViewBg.frame.size.height - 28, 32, 20)];
+    UILabel *expTitleLbl = [[UILabel alloc]initWithFrame:CGRectMake(15, topViewBg.frame.origin.y + topViewBg.frame.size.height - 35, 32, 20)];
     [expTitleLbl setBackgroundColor:[UIColor whiteColor]];
     [expTitleLbl setFont:[UIFont systemFontOfSize:12]];
     expTitleLbl.textAlignment = NSTextAlignmentCenter;
@@ -133,9 +171,9 @@
     [topViewBg addSubview:expTitleLbl];
     
     // Expired date value label
-    expLbl = [[UILabel alloc]initWithFrame:CGRectMake(expTitleLbl.frame.origin.x + expTitleLbl.frame.size.width - 4, topViewBg.frame.origin.y + topViewBg.frame.size.height - 28, 96, 20)];
+    expLbl = [[UILabel alloc]initWithFrame:CGRectMake(expTitleLbl.frame.origin.x + expTitleLbl.frame.size.width - 4, topViewBg.frame.origin.y + topViewBg.frame.size.height - 35, 96, 20)];
     [expLbl setFont:[UIFont systemFontOfSize:12]];
-    expLbl.text = @"09-Dec-2015";
+    expLbl.text = [CommonUtils convertDate2String:voucher.reward.expireDate];
     expLbl.textColor = [UIColor whiteColor];
     expLbl.textAlignment = NSTextAlignmentCenter;
     expLbl.layer.cornerRadius = 4;
@@ -147,12 +185,13 @@
     [self.view addSubview:midViewBg];
     
     UIImageView *QRImageView = [[UIImageView alloc] initWithFrame:CGRectMake(midViewBg.frame.size.width / 2 - 72, 0, 144, 144)];
-    QRImageView.image = [UIImage mdQRCodeForString:job.token size:QRImageView.bounds.size.width fillColor:[UIColor blackColor]];
+    QRImageView.image = [UIImage mdQRCodeForString:[NSString stringWithFormat:@"%@|voucher", job.token] size:QRImageView.bounds.size.width fillColor:[UIColor blackColor]];
     [midViewBg addSubview:QRImageView];
     
     // Circle Progress
+    float progress = ((float)job.accessCount / (float)job.task.reward.minShares);
     circleProgressbar = [[CircleProgressBar alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 144) / 4 - 36, 36, 72, 72)];
-    [circleProgressbar setProgress:1.0f animated:NO];
+    [circleProgressbar setProgress:progress animated:NO];
     [circleProgressbar setProgressBarWidth:2];
     [circleProgressbar setProgressBarProgressColor:[CommonUtils colorFromHexString:@"#FF9500"]];
     [circleProgressbar setProgressBarTrackColor:[CommonUtils colorFromHexString:@"#BDBEC2"]];
@@ -160,20 +199,26 @@
     [circleProgressbar setBackgroundColor:[UIColor clearColor]];
     [midViewBg addSubview:circleProgressbar];
     
-    processLbl = [[UILabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 144) / 4 - 18, 49, 36, 36)];
-    processLbl.text = @"73";
-    processLbl.textColor = [CommonUtils colorFromHexString:@"#FF9500"];
-    processLbl.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:32.0];
-    processLbl.textAlignment = NSTextAlignmentCenter;
-    [midViewBg addSubview:processLbl];
+    progressLbl = [[UILabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 144) / 4 - 24, 43, 48, 48)];
+    UILabel *unitLbl = [[UILabel alloc] initWithFrame:CGRectMake(progressLbl.frame.origin.x, progressLbl.frame.origin.y + progressLbl.frame.size.height - 12, progressLbl.frame.size.width, 16)];
     
-    UILabel *unitLbl = [[UILabel alloc] initWithFrame:CGRectMake(processLbl.frame.origin.x, processLbl.frame.origin.y + processLbl.frame.size.height - 5, processLbl.frame.size.width, 12)];
-    unitLbl.text = @"Deals";
+    if([voucher.reward.rewardType isEqualToString:@"COMMISSION"]){
+        progressLbl.text = [NSString stringWithFormat:@"%lu", (unsigned long)job.deals.count];
+        progressLbl.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:32.0];
+        unitLbl.text = @"Deals";
+    }else{
+        progressLbl.text = [NSString stringWithFormat:@"%d/%d", job.accessCount, voucher.reward.minShares];
+        progressLbl.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:18.0];
+        unitLbl.text = @"Hittings";
+    }
+    progressLbl.textColor = [CommonUtils colorFromHexString:@"#FF9500"];
+    progressLbl.textAlignment = NSTextAlignmentCenter;
+    [midViewBg addSubview:progressLbl];
+    
     unitLbl.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:12.0];
     unitLbl.textAlignment = NSTextAlignmentCenter;
     unitLbl.textColor = [CommonUtils colorFromHexString:@"#4A4A4A"];
     [midViewBg addSubview:unitLbl];
-    
     
     int y = midViewBg.frame.origin.y + midViewBg.frame.size.height + 10;
     // Reward images

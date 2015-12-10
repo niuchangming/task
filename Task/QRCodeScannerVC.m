@@ -23,6 +23,7 @@
     AVCaptureVideoPreviewLayer * preview;
     QRView *qrView;
     NSString *stringValue;
+    NSString *urlStr;
 }
 
 @end
@@ -95,12 +96,34 @@
     }
     
     if(![CommonUtils IsEmpty:stringValue]){
-        HHAlertView *alertview = [[HHAlertView alloc] initWithTitle:@"Redeem" detailText:@"Please click 'Redeem' button to redeem." cancelButtonTitle:@"Cancel" otherButtonTitles:@[@"Redeem"]];
-        [alertview setEnterMode:HHAlertEnterModeFadeIn];
-        [alertview setLeaveMode:HHAlertLeaveModeFadeOut];
-        [alertview setMode:HHAlertViewModeWarning];
-        [alertview setDelegate:self];
-        [alertview show];
+        NSArray* strArray = [stringValue componentsSeparatedByString: @"|"];
+        
+        NSString *lastStr = [strArray objectAtIndex:(strArray.count - 1)];
+        
+        HHAlertView *alertview;
+        if([lastStr isEqualToString:@"coupon"]){
+            stringValue = [stringValue stringByReplacingOccurrencesOfString:@"|coupon" withString:@""];
+            
+            urlStr = [NSString stringWithFormat:@"%@JobController/dealScan?accessToken=%@&qrcode=%@", baseUrl, [[CommonUtils accessToken] URLEncode], [stringValue URLEncode]];
+            
+            alertview = [[HHAlertView alloc] initWithTitle:@"Redeem" detailText:@"Please click 'Redeem' button to redeem." cancelButtonTitle:@"Cancel" otherButtonTitles:@[@"Redeem"]];
+        }else if([lastStr isEqualToString:@"voucher"]){
+            stringValue = [stringValue stringByReplacingOccurrencesOfString:@"|voucher" withString:@""];
+            urlStr = [NSString stringWithFormat:@"%@JobController/voucherScan?accessToken=%@&jobToken=%@", baseUrl, [[CommonUtils accessToken] URLEncode], [stringValue URLEncode]];
+            
+            alertview = [[HHAlertView alloc] initWithTitle:@"Redeem" detailText:@"Please click 'Redeem' button to redeem." cancelButtonTitle:@"Cancel" otherButtonTitles:@[@"Redeem"]];
+        }else if([lastStr isEqualToString:@"cashier"]){
+            stringValue = [stringValue stringByReplacingOccurrencesOfString:@"|cashier" withString:@""];
+            alertview = [[HHAlertView alloc] initWithTitle:@"Add Cashier" detailText:@"Please click 'Add' button to add this cashier." cancelButtonTitle:@"Cancel" otherButtonTitles:@[@"Add"]];
+        }
+        
+        if(alertview != nil){
+            [alertview setEnterMode:HHAlertEnterModeFadeIn];
+            [alertview setLeaveMode:HHAlertLeaveModeFadeOut];
+            [alertview setMode:HHAlertViewModeWarning];
+            [alertview setDelegate:self];
+            [alertview show];
+        }
     }
 }
 
@@ -114,30 +137,23 @@
 }
 
 -(void) syncWithServer:(HHAlertView*) alertview{
-    NSString *url = [NSString stringWithFormat:@"%@JobController/scanReciever?accessToken=%@&qrcode=%@", baseUrl, [[CommonUtils accessToken] URLEncode], [stringValue URLEncode]];
-    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSError *error;
-        id object = [NSJSONSerialization JSONObjectWithData:operation.responseData options:kNilOptions error:&error];
-        
-        if(error != nil){
-            [alertview setMode:HHAlertViewModeError];
-            [alertview setDetailText:[error localizedDescription]];
-            return;
-        }
-        
-        if ([object isKindOfClass:[NSDictionary class]] == YES){
-            NSString *errMsg = [object valueForKey:@"error"];
+    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]] == YES){
+            NSString *errMsg = [responseObject valueForKey:@"error"];
+            NSString *successMsg = [responseObject valueForKey:@"success"];
             if(![CommonUtils IsEmpty:errMsg]) {
                 [alertview setMode:HHAlertViewModeError];
                 [alertview setDetailText:errMsg];
+            }else if(![CommonUtils IsEmpty:successMsg]){
+                [alertview setMode:HHAlertViewModeError];
+                [alertview setDetailText:successMsg];
             }else{
                 [alertview setMode:HHAlertViewModeError];
                 [alertview setDetailText:@"The data format is incorrect."];
             }
-        }else if ([object isKindOfClass:[NSArray class]] == YES){
-            NSArray *array = (NSArray*) object;
+        }else if ([responseObject isKindOfClass:[NSArray class]] == YES){
+            NSArray *array = (NSArray*) responseObject;
             NSMutableArray *deals = [[NSMutableArray alloc] init];
             for(NSDictionary *data in array){
                 Deal *deal = [[Deal alloc]initWithJson:data];
