@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSString *role;
 @property (nonatomic, strong) Company *company;
 @property (nonatomic, strong) Profile *profile;
+@property (nonatomic, strong) NSMutableArray *cashiers;
 
 -(id) initWithJson:(NSDictionary*) dic;
 

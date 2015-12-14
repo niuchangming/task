@@ -20,13 +20,16 @@
 #import <QuartzCore/QuartzCore.h>
 #import <AFURLSessionManager.h>
 #include "ConstantValues.h"
+#import "UserQRCodeVC.h"
 
 @interface ProfileVC (){
     bool isLogin;
+    UILabel *qrcodeLbl;
     UILabel *emailLbl;
     UILabel *phoneLbl;
     UILabel *addressLbl;
     UILabel *companyLbl;
+    UILabel *cashierLbl;
     UIButton *editNameBtn;
     UIActionSheet *avatarOptSheet;
 }
@@ -79,14 +82,14 @@
     NSString *url = [NSString stringWithFormat:@"%@ProfileController/userInfo", baseUrl];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject: accessToken forKey: @"accessToken"];
+    [params setObject:accessToken forKey: @"accessToken"];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]] == YES){
             NSDictionary *obj = (NSDictionary *)responseObject;
-            NSString *errMsg = [obj valueForKey:@"error"];
             
+            NSString *errMsg = [obj valueForKey:@"error"];
             if(![CommonUtils IsEmpty:errMsg]) {
                 [MozTopAlertView showWithType:MozAlertTypeError text:errMsg doText:nil doBlock:nil parentView:self.view];
             }else{
@@ -120,15 +123,25 @@
     [avatarIV setImage:[UIImage imageNamed:@"default_avatar.jpg"]];
     [avatarBgView setImage:[UIImage imageNamed:@"default_avatar.jpg"]];
     
-    CGRect emailFrame;
-    if(IS_IPHONE_6_PLUS || IS_IPHONE_6){
-        emailFrame = CGRectMake(0, avatarBlurView.frame.origin.y + avatarBlurView.frame.size.height + 36, self.view.frame.size.width, 44);
+    CGRect qrcodeFrame;
+    if(IS_IPHONE_6){
+        qrcodeFrame = CGRectMake(0, avatarBlurView.frame.origin.y + avatarBlurView.frame.size.height + 36, self.view.frame.size.width, 44);
+    }else if(IS_IPHONE_6_PLUS){
+        qrcodeFrame = CGRectMake(0, avatarBlurView.frame.origin.y + avatarBlurView.frame.size.height + 54, self.view.frame.size.width, 44);
     }else{
-        emailFrame = CGRectMake(0, avatarBlurView.frame.origin.y + avatarBlurView.frame.size.height + 8, self.view.frame.size.width, 44);
+        qrcodeFrame = CGRectMake(0, avatarBlurView.frame.origin.y + avatarBlurView.frame.size.height + 8, self.view.frame.size.width, 44);
     }
     
-    UIView *emailView = [self getRowViewWithKey:@"Email" AndValue:@"" AndFrame: emailFrame];
-    emailLbl = (UILabel *) [emailView viewWithTag:1];
+    UIView *qrcodeView = [self getRowViewWithKey:@"QR Code" AndValue:@"qrcode" AndFrame: qrcodeFrame];
+    qrcodeLbl = (UILabel *) [qrcodeView viewWithTag:1];
+    UITapGestureRecognizer *qrcodeTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(qrcodeRowClicked)];
+    qrcodeTap.numberOfTapsRequired = 1;
+    [qrcodeView addGestureRecognizer:qrcodeTap];
+    
+    
+    CGRect emailFrame = CGRectMake(0, qrcodeFrame.origin.y + qrcodeFrame.size.height + 8, self.view.frame.size.width, 44);
+    UIView *emailView = [self getRowViewWithKey:@"Email" AndValue:@"" AndFrame:emailFrame];
+    emailLbl = (UILabel*)[emailView viewWithTag:1];
     
     CGRect phoneFrame = CGRectMake(0, emailFrame.origin.y + emailFrame.size.height + 8, self.view.frame.size.width, 44);
     UIView *phoneView = [self getRowViewWithKey:@"Phone" AndValue:@"" AndFrame:phoneFrame];
@@ -151,7 +164,14 @@
     [companyView addGestureRecognizer:companyTap];
     companyLbl = (UILabel*)[companyView viewWithTag:1];
     
-    signBtn.frame = CGRectMake(0, companyFrame.origin.y + companyFrame.size.height + 8, self.view.frame.size.width, 44);
+    CGRect cashierFrame = CGRectMake(0, companyFrame.origin.y + companyFrame.size.height + 8, self.view.frame.size.width, 44);
+    UIView *cashierView = [self getRowViewWithKey:@"Cashiers" AndValue:[NSString stringWithFormat:@"%lu", (unsigned long)user.cashiers.count] AndFrame:cashierFrame];
+    UITapGestureRecognizer *cashierTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cashierRowClicked)];
+    cashierTap.numberOfTapsRequired = 1;
+    [cashierView addGestureRecognizer:cashierTap];
+    cashierLbl = (UILabel*)[cashierView viewWithTag:1];
+    
+    signBtn.frame = CGRectMake(0, cashierFrame.origin.y + cashierFrame.size.height + 8, self.view.frame.size.width, 44);
 }
 
 -(void) updateViews{
@@ -211,20 +231,35 @@
     
     if([user.role isEqualToString:@"MERCHANT"]){
         if(companyLbl == nil) {
-            CGRect companyFrame = CGRectMake(0, [addressLbl superview].frame.origin.y + [addressLbl superview].frame.size.height + 8, self.view.frame.size.width, 44);
-            UIView *companyView = [self getRowViewWithKey:@"Company" AndValue:user.company.name AndFrame:companyFrame];
+            UIView *companyView = [self getRowViewWithKey:@"Company" AndValue:user.company.name AndFrame:CGRectMake(0, [addressLbl superview].frame.origin.y + [addressLbl superview].frame.size.height + 8, self.view.frame.size.width, 44)];
             UITapGestureRecognizer *companyTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(companyRowClicked)];
             companyTap.numberOfTapsRequired = 1;
             [companyView addGestureRecognizer:companyTap];
             companyLbl = (UILabel*)[companyView viewWithTag:1];
         }
+        
+        if(cashierLbl == nil) {
+            UIView *cashierView = [self getRowViewWithKey:@"Cashiers" AndValue:[NSString stringWithFormat:@"%lu", (unsigned long)user.cashiers.count] AndFrame:CGRectMake(0, [companyLbl superview].frame.origin.y + [companyLbl superview].frame.size.height + 8, self.view.frame.size.width, 44)];
+            UITapGestureRecognizer *cashierTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cashierRowClicked)];
+            cashierTap.numberOfTapsRequired = 1;
+            [cashierView addGestureRecognizer:cashierTap];
+            cashierLbl = (UILabel*)[cashierView viewWithTag:1];
+        }
+        
         companyLbl.text = user.company.name;
-        signBtn.frame = CGRectMake(0, [companyLbl superview].frame.origin.y + [companyLbl superview].frame.size.height + 8, self.view.frame.size.width, 44);
+        [cashierLbl setText:[NSString stringWithFormat:@"%lu", (unsigned long)user.cashiers.count]];
+        signBtn.frame = CGRectMake(0, [cashierLbl superview].frame.origin.y + [cashierLbl superview].frame.size.height + 8, self.view.frame.size.width, 44);
     }else{
         UIView *companyRow = [companyLbl superview];
         companyLbl = nil;
         [companyRow removeFromSuperview];
         companyRow = nil;
+        
+        UIView *cashierRow = [cashierLbl superview];
+        cashierLbl = nil;
+        [cashierRow removeFromSuperview];
+        cashierRow = nil;
+        
         signBtn.frame = CGRectMake(0, [addressLbl superview].frame.origin.y + [addressLbl superview].frame.size.height + 8, self.view.frame.size.width, 44);
     }
     
@@ -248,17 +283,27 @@
     keyLbl.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:16.0f];
     [row addSubview:keyLbl];
     
-    UILabel *valueLbl = [[UILabel alloc]initWithFrame:CGRectMake(78, 12, self.view.frame.size.width - 106, 20)];
-    valueLbl.text = value;
-    [valueLbl setTag:1];
-    valueLbl.textColor = [CommonUtils colorFromHexString:@"#4A4A4A"];
-    valueLbl.textAlignment = NSTextAlignmentRight;
-    valueLbl.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:16.0f];
-    [row addSubview:valueLbl];
-    
-    UIImageView *arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"forward.png"]];
-    arrow.frame = CGRectMake(valueLbl.frame.origin.x + valueLbl.frame.size.width + 4, 14, 16, 16);
-    [row addSubview:arrow];
+    if([value isEqualToString:@"qrcode"]){
+        UIImageView *qrcodeIcon = [[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 48, 14, 16, 16)];
+        [qrcodeIcon setImage:[UIImage imageNamed:@"qrode_black.png"]];
+        [row addSubview:qrcodeIcon];
+        
+        UIImageView *arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"forward.png"]];
+        arrow.frame = CGRectMake(self.view.frame.size.width - 24, 14, 16, 16);
+        [row addSubview:arrow];
+    }else{
+        UILabel *valueLbl = [[UILabel alloc]initWithFrame:CGRectMake(78, 12, self.view.frame.size.width - 106, 20)];
+        valueLbl.text = value;
+        [valueLbl setTag:1];
+        valueLbl.textColor = [CommonUtils colorFromHexString:@"#4A4A4A"];
+        valueLbl.textAlignment = NSTextAlignmentRight;
+        valueLbl.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:16.0f];
+        [row addSubview:valueLbl];
+        
+        UIImageView *arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"forward.png"]];
+        arrow.frame = CGRectMake(valueLbl.frame.origin.x + valueLbl.frame.size.width + 4, 14, 16, 16);
+        [row addSubview:arrow];
+    }
     
     [scrollView addSubview:row];
     
@@ -363,6 +408,10 @@
     [uploadTask resume];
 }
 
+-(void) qrcodeRowClicked{
+    [self performSegueWithIdentifier:@"userqr_fr_userinfo" sender:self];
+}
+
 -(void) phoneRowClicked{
     [self performSegueWithIdentifier:@"updatephone_fr_userinfo" sender:self];
 }
@@ -373,6 +422,10 @@
 
 -(void) companyRowClicked{
 
+}
+
+-(void) cashierRowClicked{
+    [self performSegueWithIdentifier:@"allcashiers_fr_userinfo" sender:self];
 }
 
 -(void) editUsername{
@@ -443,6 +496,12 @@
         UpdateAddressVC *updateAddressVC = [segue destinationViewController];
         updateAddressVC.delegate = self;
         updateAddressVC.user = user;
+    }else if([[segue identifier] isEqualToString:@"userqr_fr_userinfo"]){
+        UserQRCodeVC *userQRCodeVC = [segue destinationViewController];
+        userQRCodeVC.user = user;
+    }else if ([[segue identifier] isEqualToString:@"allcashiers_fr_userinfo"]){
+        CashierListVC *cashierVc = [segue destinationViewController];
+        cashierVc.delegate = self;
     }
 }
 
@@ -485,6 +544,15 @@
     }
     
     addressLbl.text = addressStr;
+}
+
+-(void) updateCashiers:(User *)cashier{
+    for (User *c in user.cashiers) {
+        if(c.entityId == cashier.entityId){
+            [user.cashiers removeObject:c];
+        }
+    }
+    [cashierLbl setText:[NSString stringWithFormat:@"%lu", (unsigned long)user.cashiers.count]];
 }
 
 -(void) clearStore{

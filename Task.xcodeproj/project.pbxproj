@@ -124,6 +124,8 @@
 		70ECFFDF1C1344A800409D58 /* UIImage+MDQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFD71C1344A800409D58 /* UIImage+MDQRCode.m */; settings = {ASSET_TAGS = (); }; };
 		70ECFFE21C13B54600409D58 /* Voucher.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ECFFE11C13B54600409D58 /* Voucher.m */; settings = {ASSET_TAGS = (); }; };
 		70ED069A1C15DE1400EEF159 /* CollectRewardMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 70ED06991C15DE1400EEF159 /* CollectRewardMapVC.m */; settings = {ASSET_TAGS = (); }; };
+		70F2FC341C1A6D8B00FA998D /* UserQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F2FC331C1A6D8B00FA998D /* UserQRCodeVC.m */; settings = {ASSET_TAGS = (); }; };
+		70F2FC3A1C1E637300FA998D /* CashierListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F2FC391C1E637300FA998D /* CashierListVC.m */; settings = {ASSET_TAGS = (); }; };
 		F106F7D326DBB7C63D1AF1BF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A62FBF10DB37A84852F06BD1 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -339,6 +341,10 @@
 		70ECFFE11C13B54600409D58 /* Voucher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Voucher.m; sourceTree = "<group>"; };
 		70ED06981C15DE1400EEF159 /* CollectRewardMapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectRewardMapVC.h; sourceTree = "<group>"; };
 		70ED06991C15DE1400EEF159 /* CollectRewardMapVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectRewardMapVC.m; sourceTree = "<group>"; };
+		70F2FC321C1A6D8B00FA998D /* UserQRCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserQRCodeVC.h; sourceTree = "<group>"; };
+		70F2FC331C1A6D8B00FA998D /* UserQRCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserQRCodeVC.m; sourceTree = "<group>"; };
+		70F2FC381C1E637300FA998D /* CashierListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashierListVC.h; sourceTree = "<group>"; };
+		70F2FC391C1E637300FA998D /* CashierListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashierListVC.m; sourceTree = "<group>"; };
 		A62FBF10DB37A84852F06BD1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D39FCAC5C4638FF782221BA5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FA330CF720664E9944C91E2D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -433,6 +439,10 @@
 				70ECFFC41C1308D300409D58 /* RewardVC.m */,
 				70ED06981C15DE1400EEF159 /* CollectRewardMapVC.h */,
 				70ED06991C15DE1400EEF159 /* CollectRewardMapVC.m */,
+				70F2FC321C1A6D8B00FA998D /* UserQRCodeVC.h */,
+				70F2FC331C1A6D8B00FA998D /* UserQRCodeVC.m */,
+				70F2FC381C1E637300FA998D /* CashierListVC.h */,
+				70F2FC391C1E637300FA998D /* CashierListVC.m */,
 				7078BB9E1B8029C6002290E4 /* Main.storyboard */,
 				7078BBA11B8029C6002290E4 /* Images.xcassets */,
 				7078BBA31B8029C6002290E4 /* LaunchScreen.xib */,
@@ -997,10 +1007,12 @@
 				70ECFFA81C0ADD6400409D58 /* UpdateUsernameVC.m in Sources */,
 				70E960421BF32A88004A65E9 /* WXApiManager.m in Sources */,
 				70E552EC1BEC833200694D08 /* Job.m in Sources */,
+				70F2FC3A1C1E637300FA998D /* CashierListVC.m in Sources */,
 				70D391EE1B86ECAB00EB7F37 /* UIFont+FontAwesome.m in Sources */,
 				70ECFFDD1C1344A800409D58 /* rscode.c in Sources */,
 				709C09361B81AFF70001E321 /* RAMTransitionItemAnimation.swift in Sources */,
 				70ECFFBF1C0D841700409D58 /* UIImage+PECrop.m in Sources */,
+				70F2FC341C1A6D8B00FA998D /* UserQRCodeVC.m in Sources */,
 				70CF6DA71B8DC257008C9F51 /* User.m in Sources */,
 				70E552E71BEC4EE500694D08 /* ShareView.m in Sources */,
 				70E960611BF57165004A65E9 /* JobVC.m in Sources */,

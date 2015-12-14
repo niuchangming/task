@@ -13,8 +13,9 @@
 #import "UpdateUsernameVC.h"
 #import "PECropViewController.h"
 #import "UpdateAddressVC.h"
+#import "CashierListVC.h"
 
-@interface ProfileVC : UIViewController <UINavigationControllerDelegate, LoginDelegate, UpdatePhoneDelegate, UpdateUsernameDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, PECropViewControllerDelegate, UpdateAddressDelegate>
+@interface ProfileVC : UIViewController <UINavigationControllerDelegate, LoginDelegate, UpdatePhoneDelegate, UpdateUsernameDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, PECropViewControllerDelegate, UpdateAddressDelegate, CashierListDelegate>
 @property (strong, nonatomic) UIButton *signBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarBgView;
 @property (weak, nonatomic) IBOutlet UIImageView *roleIV;

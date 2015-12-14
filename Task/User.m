@@ -19,6 +19,7 @@
 @synthesize role;
 @synthesize company;
 @synthesize profile;
+@synthesize cashiers;
 
 -(id) initWithJson:(NSDictionary*) dic{
     self = [super init];
@@ -49,6 +50,14 @@
             self.avatar = [[Image alloc] initWithJson:[imageArray objectAtIndex:0]];
         }else{
             self.avatar = [[Image alloc] init];
+        }
+        
+        NSArray *cashierArray = [dic valueForKey:@"cashiers"];
+        self.cashiers = [[NSMutableArray alloc] init];
+        if(![cashierArray isKindOfClass:[NSNull class]] && cashierArray.count > 0){
+            for(NSDictionary *cashierDic in cashierArray) {
+                [self.cashiers addObject: [[User alloc] initWithJson:cashierDic]];
+            }
         }
         
     }

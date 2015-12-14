@@ -114,6 +114,7 @@
             alertview = [[HHAlertView alloc] initWithTitle:@"Redeem" detailText:@"Please click 'Redeem' button to redeem." cancelButtonTitle:@"Cancel" otherButtonTitles:@[@"Redeem"]];
         }else if([lastStr isEqualToString:@"cashier"]){
             stringValue = [stringValue stringByReplacingOccurrencesOfString:@"|cashier" withString:@""];
+            urlStr = [NSString stringWithFormat:@"%@ProfileController/addCashier?accessToken=%@&cashierAccessToken=%@", baseUrl, [[CommonUtils accessToken] URLEncode], [stringValue URLEncode]];
             alertview = [[HHAlertView alloc] initWithTitle:@"Add Cashier" detailText:@"Please click 'Add' button to add this cashier." cancelButtonTitle:@"Cancel" otherButtonTitles:@[@"Add"]];
         }
         
@@ -146,7 +147,7 @@
                 [alertview setMode:HHAlertViewModeError];
                 [alertview setDetailText:errMsg];
             }else if(![CommonUtils IsEmpty:successMsg]){
-                [alertview setMode:HHAlertViewModeError];
+                [alertview setMode:HHAlertViewModeSuccess];
                 [alertview setDetailText:successMsg];
             }else{
                 [alertview setMode:HHAlertViewModeError];
