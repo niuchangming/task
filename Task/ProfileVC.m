@@ -547,9 +547,9 @@
 }
 
 -(void) updateCashiers:(User *)cashier{
-    for (User *c in user.cashiers) {
-        if(c.entityId == cashier.entityId){
-            [user.cashiers removeObject:c];
+    for (int i = 0; i < user.cashiers.count; i++) {
+        if([[user.cashiers objectAtIndex:i] entityId] == cashier.entityId){
+            [user.cashiers removeObjectAtIndex:i];
         }
     }
     [cashierLbl setText:[NSString stringWithFormat:@"%lu", (unsigned long)user.cashiers.count]];

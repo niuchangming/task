@@ -44,7 +44,7 @@
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if([[CommonUtils role] isEqualToString:@"MERCHANT"]){
+    if([[CommonUtils role] isEqualToString:@"MERCHANT"] || [[CommonUtils role] isEqualToString:@"CASHIER"]){
         [self setupQRCodeBtn];
     }else{
         self.tabBarController.navigationItem.rightBarButtonItem = nil;

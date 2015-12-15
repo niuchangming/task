@@ -935,7 +935,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p0R-zm-ec7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1199" y="-432"/>
+            <point key="canvasLocation" x="-793" y="-468"/>
         </scene>
         <!--My QR Code-->
         <scene sceneID="XsR-BM-2cO">
@@ -1084,7 +1084,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-1375" y="-1053"/>
+            <point key="canvasLocation" x="-1272" y="-1086"/>
         </scene>
         <!--Me-->
         <scene sceneID="a6R-ps-XN4">
