@@ -12,7 +12,7 @@
 
 @property int entityId;
 @property int block;
-@property int postCode;
+@property (nonatomic, strong) NSString *postCode;
 @property (nonatomic, strong) NSString *street;
 @property (nonatomic, strong) NSString *unit;
 

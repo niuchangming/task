@@ -14,5 +14,7 @@
 
 @property (nonatomic, strong) GMSMapView *mapView;
 @property (nonatomic, strong) Job *job;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingBar;
+@property (strong, nonatomic) NSMutableArray *addresses;
 
 @end

@@ -22,7 +22,7 @@
     if(self){
         self.entityId = [[dic valueForKey:@"entityId"] intValue];
         self.block = [[dic valueForKey:@"block"] intValue];
-        self.postCode = [[dic valueForKey:@"postCode"] intValue];
+        self.postCode = [dic valueForKey:@"postCode"];
         self.street = [dic valueForKey:@"street"];
         self.unit = [dic valueForKey:@"unit"];
     }

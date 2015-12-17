@@ -62,6 +62,7 @@
         if ([responseObject isKindOfClass:[NSDictionary class]] == YES){
             NSDictionary *obj = (NSDictionary *)responseObject;
             NSString *errMsg = [obj valueForKey:@"error"];
+
             if(![CommonUtils IsEmpty:errMsg]){
                 [MozTopAlertView showWithType:MozAlertTypeError text:errMsg doText:nil doBlock:nil parentView:self.view];
             }

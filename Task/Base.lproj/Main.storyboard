@@ -229,8 +229,16 @@
                     <view key="view" contentMode="scaleToFill" id="QVR-ui-YCB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Xsw-t8-68t">
+                                <rect key="frame" x="150" y="230" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="loadingBar" destination="Xsw-t8-68t" id="qhW-DD-UKs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2MU-dF-Qdu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1016,7 +1024,6 @@
         <!--My Cashiers-->
         <scene sceneID="5nH-TX-Msy">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cFA-A2-72w" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="W6i-9d-572" customClass="CashierListVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Vv4-M8-ahu"/>
@@ -1083,6 +1090,7 @@
                         <outlet property="loadingBar" destination="Tsm-JB-ZwT" id="3uq-2g-Cbp"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cFA-A2-72w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1272" y="-1086"/>
         </scene>

@@ -12,7 +12,7 @@
 @protocol UpdateAddressDelegate <NSObject>
 
 @optional
--(void) updateBlk:(int)blk andStreet:(NSString *) street andUnit:(NSString*) unit andPost:(int) post;
+-(void) updateBlk:(int)blk andStreet:(NSString *) street andUnit:(NSString*) unit andPost:(NSString*) post;
 
 @end
 

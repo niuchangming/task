@@ -521,7 +521,7 @@
     user.profile.lastName = lastName;
 }
 
--(void) updateBlk:(int)blk andStreet:(NSString *)street andUnit:(NSString *)unit andPost:(int)post{
+-(void) updateBlk:(int)blk andStreet:(NSString *)street andUnit:(NSString *)unit andPost:(NSString*)post{
     if(user.profile.address == nil){
         user.profile.address = [[Address alloc] init];
     }

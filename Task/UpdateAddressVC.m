@@ -66,7 +66,7 @@
     if(user.profile.address.postCode == 0){
         postTf.text = @"";
     }else{
-        [postTf setText:[NSString stringWithFormat:@"%d", user.profile.address.postCode]];
+        [postTf setText:user.profile.address.postCode];
     }
     
 }
@@ -112,7 +112,7 @@
             NSDictionary *result = (NSDictionary*)responseObject;
             int blkNo = [[result valueForKey:@"block"] intValue];
             NSString *unit = [result valueForKey:@"unit"];
-            int postCode = [[result valueForKey:@"postCode"] intValue];
+            NSString *postCode = [result valueForKey:@"postCode"];
             NSString *street = [result valueForKey:@"street"];
             if(delegate != nil && [delegate respondsToSelector:@selector(updateBlk:andStreet:andUnit:andPost:)]) {
                 [delegate updateBlk:blkNo andStreet:street andUnit:unit andPost:postCode];
