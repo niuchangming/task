@@ -47,7 +47,7 @@
     [self submit];
 }
 
--(void) submit{
+-(void) submit {
     if([CommonUtils IsEmpty:[CommonUtils accessToken]]) {
         [MozTopAlertView showWithType:MozAlertTypeError text:@"Login first." doText:nil doBlock:nil parentView:self.view];
         return;

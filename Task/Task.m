@@ -36,7 +36,7 @@
         
         self.product = [[Product alloc] initWithJson: [[dic valueForKey:@"products"] objectAtIndex:0]];
         self.reward = [[Reward alloc] initWithJson: [[dic valueForKey:@"rewards"] objectAtIndex:0]];
-        self.company = [[Company alloc] initWithJson:[[[dic valueForKey:@"user"] valueForKey:@"companys"] objectAtIndex:0]];
+        self.company = [[Company alloc] initWithJson:[dic valueForKey:@"company"]];
         
         NSArray *imageArray = [dic valueForKey:@"images"];
         self.images = [[NSMutableArray alloc] init];

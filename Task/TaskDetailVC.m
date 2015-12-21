@@ -69,16 +69,8 @@ static CGFloat PageControlHeight = 20.0f;
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSError *error;
-        id object = [NSJSONSerialization JSONObjectWithData:operation.responseData options:kNilOptions error:&error];
-        
-        if(error != nil){
-            [MozTopAlertView showWithType:MozAlertTypeError text:@"Error" doText:nil doBlock:nil parentView:self.view];
-            return;
-        }
-        
-        if ([object isKindOfClass:[NSDictionary class]] == YES){
-            NSDictionary *obj = (NSDictionary *)object;
+        if ([responseObject isKindOfClass:[NSDictionary class]] == YES){
+            NSDictionary *obj = (NSDictionary *)responseObject;
             NSString *errMsg = [obj valueForKey:@"error"];
             if(![CommonUtils IsEmpty:errMsg]){
                 [self hideShareBtn];
@@ -351,12 +343,15 @@ static CGFloat PageControlHeight = 20.0f;
 
     NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[[task.images objectAtIndex:0] thumbnailPath]]];
     
+    NSString *desc = [[[NSAttributedString alloc] initWithData:[task.product.desc dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: [NSNumber numberWithInt:NSUTF8StringEncoding]} documentAttributes:nil error:nil] string];
+    
     [WXApiRequestHandler sendLinkURL:url
                              TagName:@"WECHAT_TAG_JUMP_SHOWRANK"
-                               Title:task.product.productName
-                         Description:task.product.desc
+                               Title:[NSString stringWithFormat:@"%@【%@】", task.product.productName, task.company.name]
+                         Description:desc
                           ThumbImage:[UIImage imageWithData:imageData]
                              InScene:WXSceneTimeline];
+    
     [self shareBtnClicked:nil];
 }
 
@@ -369,7 +364,7 @@ static CGFloat PageControlHeight = 20.0f;
     
     [WXApiRequestHandler sendLinkURL:url
                              TagName:@"WECHAT_TAG_JUMP_SHOWRANK"
-                               Title:task.product.productName
+                               Title:[NSString stringWithFormat:@"%@【%@】", task.product.productName, task.company.name]
                          Description:desc
                           ThumbImage:[UIImage imageWithData:imageData]
                              InScene:WXSceneSession];
@@ -437,6 +432,7 @@ static CGFloat PageControlHeight = 20.0f;
 
 -(void) onResp:(BaseResp *)resp{
    // Wechat share callback method, but don't know never being called.
+    NSLog(@"------> %@", resp);
 }
 
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
