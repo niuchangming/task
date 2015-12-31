@@ -18,7 +18,8 @@
 #import "Task.h"
 #import "CommonUtils.h"
 #import "LoginVC.h"
-#import "TaskDetailVC.h"
+#import "TaskDetailVC.h"   
+#import "Tag.h"
 
 @interface TaskController (){
     UIBarButtonItem *rightButton;
@@ -30,6 +31,10 @@
 
 @synthesize tasks;
 @synthesize taskTV;
+@synthesize tags;
+@synthesize selectedTagLbl;
+@synthesize menuView;
+@synthesize loadingBar;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,14 +42,37 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar
     setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
-    
     self.navigationController.navigationBar.translucent = NO;
     
     if ([taskTV respondsToSelector:@selector(setLayoutMargins:)]) {
         [taskTV setLayoutMargins:UIEdgeInsetsZero];
     }
     taskTV.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    [self loadTasks];
+    
+    
+    tags = [[NSMutableArray alloc] init];
+    Tag *tag = [[Tag alloc] init];
+    tag.name = @"All";
+    tag.entityId = 0;
+    [tags addObject:tag];
+    
+    [self initNavigationBar];
+    [self getAllTags];
+    [self loadTasksByTag:tag];
+}
+
+-(void) initNavigationBar{
+    self.selectedTagLbl.text = [tags.firstObject name];
+    
+    menuView = [[PFNavigationDropdownMenu alloc] initWithFrame:CGRectMake(0, 0, 300, 44) title:[tags.firstObject name] items:tags containerView:self.view];
+    
+    menuView.cellHeight = 44;
+    menuView.cellBackgroundColor = self.navigationController.navigationBar.barTintColor;
+    menuView.cellSelectionColor = [CommonUtils colorFromHexString:@"#03A9F4"];
+    menuView.cellTextLabelColor = [UIColor whiteColor];
+    menuView.arrowPadding = 15;
+    menuView.animationDuration = 0.5f;
+    menuView.delegate = self;
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -53,6 +81,10 @@
         [self setupQRCodeBtn];
     }else{
         self.tabBarController.navigationItem.rightBarButtonItem = nil;
+    }
+    
+    if(self.tabBarController.navigationItem.titleView == nil){
+        self.tabBarController.navigationItem.titleView = menuView;
     }
 }
 
@@ -69,12 +101,36 @@
     self.tabBarController.navigationItem.rightBarButtonItem = rightButton;
 }
 
--(void) loadTasks {
-    NSString *url = [NSString stringWithFormat:@"%@%@", baseUrl, @"TaskController/tasks"];
+-(void) getAllTags{
+    NSString *url = [NSString stringWithFormat:@"%@%@", baseUrl, @"TaskController/getAllTags"];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSArray class]] == YES){
+            NSArray *array = (NSArray*) responseObject;
+            for(NSDictionary *data in array){
+                Tag *tag = [[Tag alloc] initWithJson:data];
+                [tags addObject:tag];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [MozTopAlertView showWithType:MozAlertTypeError text:[error localizedDescription] doText:nil doBlock:nil parentView:self.view];
+    }];
+}
+
+-(void) loadTasksByTag:(Tag*) tag{
+    [tasks removeAllObjects];
+    [taskTV reloadData];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject: [NSNumber numberWithInt:0] forKey: @"from"];
+    [params setObject: [NSNumber numberWithInt:(tasks == nil ? 0 : (int)[tasks count])] forKey: @"from"];
     [params setObject: [NSNumber numberWithInt:20] forKey: @"max"];
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@", baseUrl, @"TaskController/tasks"];
+    if(tag.entityId > 0){
+        url = [NSString stringWithFormat:@"%@%@", baseUrl, @"TaskController/tasksByTag"];
+        [params setObject:[NSNumber numberWithInt:tag.entityId] forKey:@"tagId"];
+    }
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -91,9 +147,13 @@
             }
             [taskTV reloadData];
         }
+        [loadingBar stopAnimating];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [MozTopAlertView showWithType:MozAlertTypeError text:[error localizedDescription] doText:nil doBlock:nil parentView:self.view];
+        [loadingBar stopAnimating];
     }];
+    
+    [loadingBar startAnimating];
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -163,6 +223,11 @@
         TaskDetailVC *detailVc = [segue destinationViewController];
         detailVc.task = (Task*)sender;
     }
+}
+
+-(void) didDropdownMenuSelected:(NSUInteger)index{
+    self.selectedTagLbl.text = [self.tags[index] name];
+    [self loadTasksByTag:self.tags[index]];
 }
 
 - (void)didReceiveMemoryWarning {

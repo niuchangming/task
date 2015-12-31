@@ -8,12 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "TaskCell.h"
+#import "PFNavigationDropdownMenu.h"
 
-@interface TaskController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface TaskController : UIViewController<UITableViewDataSource, UITableViewDelegate, PFNavigationDropdownMenuDelegate>
 
 @property (nonatomic, strong) NSMutableArray *tasks;
 
+@property (nonatomic, strong) NSMutableArray *tags;
+
 @property (weak, nonatomic) IBOutlet UITableView *taskTV;
+@property (weak, nonatomic) IBOutlet UILabel *selectedTagLbl;
+@property (strong, nonatomic) PFNavigationDropdownMenu *menuView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingBar;
 
 
 @end

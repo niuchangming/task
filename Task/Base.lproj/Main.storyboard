@@ -533,6 +533,12 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="umE-eP-vhd">
+                                <rect key="frame" x="139" y="198" width="42" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="264" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YIA-zX-bX5">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -551,9 +557,9 @@
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pQu-9b-aHJ">
                                                             <rect key="frame" x="8" y="8" width="288" height="185"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="185" id="HxW-7W-DBh"/>
+                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="185" id="HxW-7W-DBh"/>
                                                                 <constraint firstAttribute="width" secondItem="pQu-9b-aHJ" secondAttribute="height" multiplier="288:185" id="Kwn-m4-3Uz"/>
-                                                                <constraint firstAttribute="width" constant="288" id="td1-DV-MMx"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="288" id="td1-DV-MMx"/>
                                                             </constraints>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nCO-zs-hO5">
@@ -629,12 +635,17 @@
                                     <outlet property="delegate" destination="lB8-SH-sbh" id="NrH-2F-AqV"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Thr-Ms-7cy">
+                                <rect key="frame" x="150" y="198" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="YIA-zX-bX5" firstAttribute="top" secondItem="Mpz-XQ-mFK" secondAttribute="bottom" id="7fs-lZ-dhp"/>
                             <constraint firstAttribute="trailing" secondItem="YIA-zX-bX5" secondAttribute="trailing" id="8NS-5i-bvB"/>
+                            <constraint firstItem="Thr-Ms-7cy" firstAttribute="centerX" secondItem="395-uG-2YA" secondAttribute="centerX" id="Zda-Cx-aDN"/>
                             <constraint firstItem="ztt-Md-XRL" firstAttribute="top" secondItem="YIA-zX-bX5" secondAttribute="bottom" id="gfF-Aw-JK5"/>
                             <constraint firstItem="YIA-zX-bX5" firstAttribute="leading" secondItem="395-uG-2YA" secondAttribute="leading" id="jqm-BX-0Kz"/>
+                            <constraint firstItem="Thr-Ms-7cy" firstAttribute="centerY" secondItem="395-uG-2YA" secondAttribute="centerY" id="uNA-Ca-avM"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
@@ -650,6 +661,8 @@
                         </connections>
                     </tabBarItem>
                     <connections>
+                        <outlet property="loadingBar" destination="Thr-Ms-7cy" id="TVQ-sa-IeY"/>
+                        <outlet property="selectedTagLbl" destination="umE-eP-vhd" id="wPp-5a-6no"/>
                         <outlet property="taskTV" destination="YIA-zX-bX5" id="eka-q2-hRS"/>
                         <segue destination="ESF-4M-nuO" kind="presentation" identifier="login_fr_home" id="M2C-z0-l2h"/>
                         <segue destination="fXA-Cc-olh" kind="show" identifier="taskdetail_fr_home" id="Cj1-Kc-yMV"/>

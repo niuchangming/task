@@ -67,6 +67,10 @@
     if(self.tabBarController.navigationItem.rightBarButtonItem != nil){
         self.tabBarController.navigationItem.rightBarButtonItem = nil;
     }
+    
+    if(self.tabBarController.navigationItem.titleView != nil){
+        self.tabBarController.navigationItem.titleView = nil;
+    }
     isLogin = [CommonUtils IsEmpty:[CommonUtils accessToken]];
     [self resetSignBtn];
 }
