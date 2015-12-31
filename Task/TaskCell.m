@@ -10,18 +10,11 @@
 
 @implementation TaskCell
 
-@synthesize delegate;
 @synthesize task;
 
 - (void)awakeFromNib{
     [super awakeFromNib];
     
-    self.contentView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    self.contentView.translatesAutoresizingMaskIntoConstraints = YES;
-}
-
-- (IBAction)addBtnClicked:(id)sender {
-    [delegate addJobBtnClicked:task];
 }
 
 @end

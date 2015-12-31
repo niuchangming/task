@@ -29,7 +29,7 @@
 @implementation TaskController
 
 @synthesize tasks;
-@synthesize taskCV;
+@synthesize taskTV;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,6 +39,11 @@
     setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
     self.navigationController.navigationBar.translucent = NO;
+    
+    if ([taskTV respondsToSelector:@selector(setLayoutMargins:)]) {
+        [taskTV setLayoutMargins:UIEdgeInsetsZero];
+    }
+    taskTV.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self loadTasks];
 }
 
@@ -84,91 +89,65 @@
                 Task *task = [[Task alloc]initWithJson:data];
                 [tasks addObject:task];
             }
-            [taskCV reloadData];
+            [taskTV reloadData];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [MozTopAlertView showWithType:MozAlertTypeError text:[error localizedDescription] doText:nil doBlock:nil parentView:self.view];
     }];
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return tasks.count;
+-(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [tasks count];
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *identifier = @"task_cell";
+-(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *identifier = @"TaskCell";
     
-    TaskCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    TaskCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (cell == nil) {
+        cell = [[TaskCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
     
     Task *task = [tasks objectAtIndex:indexPath.row];
     cell.task = task;
-    cell.delegate = self;
     
-    cell.avatarIV.layer.cornerRadius = 12;
-    cell.avatarIV.clipsToBounds = YES;
-    [cell.avatarIV sd_setImageWithURL:[NSURL URLWithString:task.company.logo.thumbnailPath] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    cell.bgView.layer.cornerRadius = 2;
+    cell.bgView.clipsToBounds = YES;
     
-    [cell.taskIV sd_setImageWithURL:[NSURL URLWithString:[[[task images] objectAtIndex:0] thumbnailPath]]];
+    [cell.taskIV sd_setImageWithURL:[NSURL URLWithString:[[task.images objectAtIndex:0] thumbnailPath]]];
+    cell.taskIV.layer.cornerRadius = 2;
+    cell.taskIV.clipsToBounds = YES;
+    
+    [cell.companyLogoIV sd_setImageWithURL:[NSURL URLWithString:[task.company.logo thumbnailPath]] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
+    cell.companyLogoIV.layer.cornerRadius = 12;
+    cell.companyLogoIV.clipsToBounds = YES;
+    
+    cell.companyNameLbl.text = task.company.name;
     
     cell.taskNameLbl.text = task.title;
-    cell.rewardLbl.text = task.reward.title;
+    
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+
+    cell.bgView.layer.masksToBounds = NO;
+    cell.bgView.layer.shadowOffset = CGSizeMake(0, 0.5);
+    cell.bgView.layer.shadowRadius = 0.5;
+    cell.bgView.layer.shadowOpacity = 0.6;
     
     return cell;
 }
 
--(void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    TaskCell *cell = (TaskCell*)[collectionView cellForItemAtIndexPath:indexPath];
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    TaskCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [self performSegueWithIdentifier:@"taskdetail_fr_home" sender:cell.task];
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionView.collectionViewLayout;
-    
-    CGSize size = flowLayout.itemSize;
-    
-    size.width = self.view.frame.size.width / 2 - 12;
-    size.height = size.width * 214 / 148;
-    
-    return size;
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-    return 8;
-}
-
--(void) addJobBtnClicked:(Task *)task{
-    if([CommonUtils IsEmpty:[CommonUtils accessToken]]) {
-        [self performSegueWithIdentifier:@"login_fr_home" sender:self];
-        return;
-    }
-    
-    [self addJobByTaskId:task.entityId];
-}
-
-- (void) addJobByTaskId:(int) taskId{
-    NSString *url = [NSString stringWithFormat:@"%@%@", baseUrl, @"JobController/addJob"];
-    
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject: [NSNumber numberWithInt:taskId] forKey: @"taskId"];
-    [params setObject: [CommonUtils accessToken] forKey: @"accessToken"];
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if ([responseObject isKindOfClass:[NSDictionary class]] == YES){
-            NSDictionary *obj = (NSDictionary *)responseObject;
-            NSString *errMsg = [obj valueForKey:@"error"];
-            if(![CommonUtils IsEmpty:errMsg]){
-                [MozTopAlertView showWithType:MozAlertTypeError text:errMsg doText:nil doBlock:nil parentView:self.view];
-            }else{
-                [MozTopAlertView showWithType:MozAlertTypeSuccess text:@"Successfully Added !" doText:nil doBlock:nil parentView:self.view];
-            }
-        }else{
-           [MozTopAlertView showWithType:MozAlertTypeError text:@"The format is incorrect for returned data." doText:nil doBlock:nil parentView:self.view];
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [MozTopAlertView showWithType:MozAlertTypeError text:[error localizedDescription] doText:nil doBlock:nil parentView:self.view];
-    }];
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat aspectRatio = 264.0f/320;
+    return aspectRatio * [UIScreen mainScreen].bounds.size.width;
 }
 
 -(void) qrScanner{

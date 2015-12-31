@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "TaskCell.h"
 
-@interface TaskController : UIViewController<UICollectionViewDataSource, UICollectionViewDelegate, TaskCellDelegate>
+@interface TaskController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *tasks;
 
-@property (weak, nonatomic) IBOutlet UICollectionView *taskCV;
+@property (weak, nonatomic) IBOutlet UITableView *taskTV;
 
 
 @end

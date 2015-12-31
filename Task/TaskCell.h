@@ -9,27 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "Task.h"
 
-@protocol TaskCellDelegate <NSObject>
 
-@required
-- (void) addJobBtnClicked:(Task *) task;
+@interface TaskCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIView *bgView;
 
-@end
-
-@interface TaskCell : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *avatarIV;
+@property (weak, nonatomic) IBOutlet UIImageView *companyLogoIV;
 @property (weak, nonatomic) IBOutlet UILabel *taskNameLbl;
 @property (weak, nonatomic) IBOutlet UIImageView *taskIV;
 
-@property (weak, nonatomic) IBOutlet UILabel *rewardLbl;
-
-@property (weak, nonatomic) IBOutlet UIButton *addBtn;
-
-@property (strong, nonatomic) id<TaskCellDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UILabel *companyNameLbl;
 
 @property (strong, nonatomic) Task *task;
-
-- (IBAction)addBtnClicked:(id)sender;
-
 
 @end
