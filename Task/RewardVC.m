@@ -209,7 +209,7 @@
     }else{
         progressLbl.text = [NSString stringWithFormat:@"%d/%d", job.accessCount, voucher.reward.minShares];
         progressLbl.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:18.0];
-        unitLbl.text = @"Hittings";
+        unitLbl.text = @"Hits";
     }
     progressLbl.textColor = [CommonUtils colorFromHexString:@"#FF9500"];
     progressLbl.textAlignment = NSTextAlignmentCenter;

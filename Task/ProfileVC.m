@@ -30,6 +30,7 @@
     UILabel *addressLbl;
     UILabel *companyLbl;
     UILabel *cashierLbl;
+    UILabel *taskLbl;
     UIButton *editNameBtn;
     UIActionSheet *avatarOptSheet;
 }
@@ -175,7 +176,14 @@
     [cashierView addGestureRecognizer:cashierTap];
     cashierLbl = (UILabel*)[cashierView viewWithTag:1];
     
-    signBtn.frame = CGRectMake(0, cashierFrame.origin.y + cashierFrame.size.height + 8, self.view.frame.size.width, 44);
+    CGRect taskFrame = CGRectMake(0, cashierFrame.origin.y + cashierFrame.size.height + 8, self.view.frame.size.width, 44);
+    UIView *taskView = [self getRowViewWithKey:@"Tasks" AndValue:@"" AndFrame:taskFrame];
+    UITapGestureRecognizer *taskTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(taskRowClicked)];
+    taskTap.numberOfTapsRequired = 1;
+    [taskView addGestureRecognizer:taskTap];
+    taskLbl = (UILabel*)[taskView viewWithTag:1];
+    
+    signBtn.frame = CGRectMake(0, taskFrame.origin.y + taskFrame.size.height + 8, self.view.frame.size.width, 44);
 }
 
 -(void) updateViews{
@@ -250,9 +258,17 @@
             cashierLbl = (UILabel*)[cashierView viewWithTag:1];
         }
         
+        if(taskLbl == nil){
+            UIView *taskView = [self getRowViewWithKey:@"Tasks" AndValue:@"" AndFrame:CGRectMake(0, [cashierLbl superview].frame.origin.y + [cashierLbl superview].frame.size.height + 8, self.view.frame.size.width, 44)];
+            UITapGestureRecognizer *taskTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(taskRowClicked)];
+            taskTap.numberOfTapsRequired = 1;
+            [taskView addGestureRecognizer:taskTap];
+            taskLbl = (UILabel*)[taskView viewWithTag:1];
+        }
+        
         companyLbl.text = user.company.name;
         [cashierLbl setText:[NSString stringWithFormat:@"%lu", (unsigned long)user.cashiers.count]];
-        signBtn.frame = CGRectMake(0, [cashierLbl superview].frame.origin.y + [cashierLbl superview].frame.size.height + 8, self.view.frame.size.width, 44);
+        signBtn.frame = CGRectMake(0, [taskLbl superview].frame.origin.y + [taskLbl superview].frame.size.height + 8, self.view.frame.size.width, 44);
     }else{
         UIView *companyRow = [companyLbl superview];
         companyLbl = nil;
@@ -263,6 +279,11 @@
         cashierLbl = nil;
         [cashierRow removeFromSuperview];
         cashierRow = nil;
+        
+        UIView *taskRow = [taskLbl superview];
+        taskLbl = nil;
+        [taskRow removeFromSuperview];
+        taskRow = nil;
         
         signBtn.frame = CGRectMake(0, [addressLbl superview].frame.origin.y + [addressLbl superview].frame.size.height + 8, self.view.frame.size.width, 44);
     }
@@ -425,11 +446,15 @@
 }
 
 -(void) companyRowClicked{
-
+    [self performSegueWithIdentifier:@"company_fr_userinfo" sender:self];
 }
 
 -(void) cashierRowClicked{
     [self performSegueWithIdentifier:@"allcashiers_fr_userinfo" sender:self];
+}
+
+-(void) taskRowClicked{
+    [self performSegueWithIdentifier:@"tasks_fr_userinfo" sender:self];
 }
 
 -(void) editUsername{

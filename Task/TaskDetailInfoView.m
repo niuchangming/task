@@ -39,10 +39,10 @@
             htmlStr = task.desc;
             break;
         case 1:
-            htmlStr = task.reward.instruction;
+            htmlStr = [NSString stringWithFormat:@"<p style='text-align:center; color:#FF9500; font-size:20px; font-weight: 600;'>%@</p><p style='text-align:center; color:#FF4444;'>Expire on: %@</p>%@", task.reward.title, [CommonUtils convertDate2String:task.reward.expireDate], task.reward.instruction];
             break;
         case 2:
-            htmlStr = task.product.desc;
+            htmlStr = [NSString stringWithFormat:@"<p style='text-align:center; color:#FF9500; font-size:20px; font-weight: 600;'>%@</p><p style='text-align:center; color:#FF4444;'>Price: %.0f SGD</p>%@", task.product.productName, task.product.price, task.product.desc];
             break;
         default:
             htmlStr = task.desc;

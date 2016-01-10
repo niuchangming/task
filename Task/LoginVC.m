@@ -186,7 +186,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void) viewWillDisappear:(BOOL)animated{
+-(void) viewWillDisappear:(BOOL)animated {
     if (delegate != nil && [delegate respondsToSelector:@selector(loginCompleted)]) {
         [delegate loginCompleted];
     }

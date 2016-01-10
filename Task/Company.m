@@ -26,7 +26,7 @@
     if(self){
         self.entityId = [[dic valueForKey:@"entityId"] intValue];
         self.contactNo = [dic valueForKey:@"contactNo"];
-        self.descrption = [dic valueForKey:@"descrption"];
+        self.descrption = [dic valueForKey:@"description"];
         self.fax = [dic valueForKey:@"fax"];
         self.name = [dic valueForKey:@"name"];
         self.verifyStatus = [dic valueForKey:@"verifyStatus"];
