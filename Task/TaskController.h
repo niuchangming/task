@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "TaskCell.h"
 #import "PFNavigationDropdownMenu.h"
+#import "DJRefresh.h"
 
-@interface TaskController : UIViewController<UITableViewDataSource, UITableViewDelegate, PFNavigationDropdownMenuDelegate>
+@interface TaskController : UIViewController<UITableViewDataSource, UITableViewDelegate, PFNavigationDropdownMenuDelegate, DJRefreshDelegate>
 
 @property (nonatomic, strong) NSMutableArray *tasks;
 
@@ -20,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *selectedTagLbl;
 @property (strong, nonatomic) PFNavigationDropdownMenu *menuView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingBar;
+@property (strong, nonatomic) DJRefresh *refresh;
 
 
 @end

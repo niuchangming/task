@@ -23,6 +23,7 @@
 
 @interface TaskController (){
     UIBarButtonItem *rightButton;
+    Tag *selectedTag;
 }
 
 @end
@@ -35,6 +36,7 @@
 @synthesize selectedTagLbl;
 @synthesize menuView;
 @synthesize loadingBar;
+@synthesize refresh;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -49,12 +51,18 @@
     }
     taskTV.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
+    tasks = [[NSMutableArray alloc] init];
     
     tags = [[NSMutableArray alloc] init];
     Tag *tag = [[Tag alloc] init];
     tag.name = @"All";
     tag.entityId = 0;
+    selectedTag = tag;
     [tags addObject:tag];
+    
+    refresh=[[DJRefresh alloc] initWithScrollView:taskTV delegate:self];
+    refresh.topEnabled=FALSE;
+    refresh.bottomEnabled=YES;
     
     [self initNavigationBar];
     [self getAllTags];
@@ -119,9 +127,6 @@
 }
 
 -(void) loadTasksByTag:(Tag*) tag{
-    [tasks removeAllObjects];
-    [taskTV reloadData];
-    
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject: [NSNumber numberWithInt:(tasks == nil ? 0 : (int)[tasks count])] forKey: @"from"];
     [params setObject: [NSNumber numberWithInt:20] forKey: @"max"];
@@ -140,16 +145,17 @@
             [MozTopAlertView showWithType:MozAlertTypeError text:errMsg doText:nil doBlock:nil parentView:self.view];
         }else if ([responseObject isKindOfClass:[NSArray class]] == YES){
             NSArray *array = (NSArray*) responseObject;
-            tasks = [[NSMutableArray alloc] init];
             for(NSDictionary *data in array){
                 Task *task = [[Task alloc]initWithJson:data];
                 [tasks addObject:task];
             }
             [taskTV reloadData];
         }
+        [refresh finishRefreshingDirection:DJRefreshDirectionBottom animation:YES];
         [loadingBar stopAnimating];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [MozTopAlertView showWithType:MozAlertTypeError text:[error localizedDescription] doText:nil doBlock:nil parentView:self.view];
+        [refresh finishRefreshingDirection:DJRefreshDirectionBottom animation:YES];
         [loadingBar stopAnimating];
     }];
     
@@ -210,6 +216,12 @@
     return aspectRatio * [UIScreen mainScreen].bounds.size.width;
 }
 
+- (void)refresh:(DJRefresh *)refresh didEngageRefreshDirection:(DJRefreshDirection) direction{
+    if(DJRefreshDirectionBottom){
+        [self loadTasksByTag:selectedTag];
+    }
+}
+
 -(void) qrScanner{
     if ([CommonUtils validateCamera]) {
         [self performSegueWithIdentifier:@"qrscan_fr_home" sender:nil];
@@ -227,6 +239,11 @@
 
 -(void) didDropdownMenuSelected:(NSUInteger)index{
     self.selectedTagLbl.text = [self.tags[index] name];
+    selectedTag = self.tags[index];
+    
+    [tasks removeAllObjects];
+    [taskTV reloadData];
+    
     [self loadTasksByTag:self.tags[index]];
 }
 
