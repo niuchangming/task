@@ -11,6 +11,7 @@
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "UIImage+MDQRCode.h"
 #import "CommonUtils.h"
+#import "ConstantValues.h"
 
 @interface UserQRCodeVC ()
 
@@ -38,7 +39,7 @@
         userNameLbl.text = [NSString stringWithFormat:@"%@ %@", user.profile.firstName, user.profile.lastName];
     }
     
-    [avatarIv sd_setImageWithURL:[NSURL URLWithString:user.avatar.thumbnailPath] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
+    [avatarIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@ProfileController/showAvatarById?id=%i",[baseUrl stringByReplacingOccurrencesOfString:@"api/" withString:@""], user.avatar.entityId]] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
     
     qrcodeIv.image = [UIImage mdQRCodeForString:[NSString stringWithFormat:@"%@|cashier", [CommonUtils accessToken]] size:qrcodeIv.bounds.size.width fillColor:[UIColor blackColor]];
     

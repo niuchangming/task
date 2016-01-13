@@ -65,7 +65,8 @@
 
 -(void) setupViews{
     if(companys != nil && [companys count] > 0){
-        [logoIv sd_setImageWithURL:[NSURL URLWithString:[[companys objectAtIndex:0] logo].thumbnailPath] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
+        [logoIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@ProfileController/showLogoById?id=%i",[baseUrl stringByReplacingOccurrencesOfString:@"api/" withString:@""], [[[companys objectAtIndex:0] logo] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
+        
         
         companyName.text = [[companys objectAtIndex:0] name];
         companyIntrTv.text = [[companys objectAtIndex:0] descrption];

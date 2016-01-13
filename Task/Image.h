@@ -11,7 +11,7 @@
 @interface Image : NSObject
 
 @property int entityId;
-@property (nonatomic, strong) NSString *thumbnailPath;
+@property (nonatomic, strong) NSString *caption;
 
 -(id) initWithJson:(NSDictionary*) dic;
 

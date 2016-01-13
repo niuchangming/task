@@ -96,7 +96,10 @@
     UIImageView *avatarIv = (UIImageView *)[cell viewWithTag:1];
     avatarIv.layer.cornerRadius = 32;
     avatarIv.layer.masksToBounds = YES;
-    [avatarIv sd_setImageWithURL:[NSURL URLWithString:cashier.avatar.thumbnailPath] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
+    [avatarIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@ProfileController/showAvatarById?id=%i",[baseUrl stringByReplacingOccurrencesOfString:@"api/" withString:@""], cashier.avatar.entityId]] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
+    
+    
+    
     
     UILabel *nameLbl = (UILabel *)[cell viewWithTag:2];
     if([CommonUtils IsEmpty:cashier.profile.lastName] && [CommonUtils IsEmpty:cashier.profile.firstName]){

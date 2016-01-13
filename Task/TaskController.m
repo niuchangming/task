@@ -180,11 +180,11 @@
     cell.bgView.layer.cornerRadius = 2;
     cell.bgView.clipsToBounds = YES;
     
-    [cell.taskIV sd_setImageWithURL:[NSURL URLWithString:[[task.images objectAtIndex:0] thumbnailPath]]];
+    [cell.taskIV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@TaskController/showTaskImageThumbnail?id=%i", [baseUrl stringByReplacingOccurrencesOfString:@"api/" withString:@""], [[task.images objectAtIndex:0] entityId]]]];
     cell.taskIV.layer.cornerRadius = 2;
     cell.taskIV.clipsToBounds = YES;
     
-    [cell.companyLogoIV sd_setImageWithURL:[NSURL URLWithString:[task.company.logo thumbnailPath]] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
+    [cell.companyLogoIV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@ProfileController/showLogoById?id=%i",[baseUrl stringByReplacingOccurrencesOfString:@"api/" withString:@""], task.company.logo.entityId]] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
     cell.companyLogoIV.layer.cornerRadius = 12;
     cell.companyLogoIV.clipsToBounds = YES;
     

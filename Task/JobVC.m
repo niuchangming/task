@@ -105,7 +105,8 @@
     Job *job =[jobs objectAtIndex:indexPath.row];
     cell.delegate = self;
     cell.job = job;
-    [cell.taskIV sd_setImageWithURL:[NSURL URLWithString:[[job.task.images objectAtIndex:0] thumbnailPath]]];
+    [cell.taskIV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@TaskController/showTaskImageThumbnail?id=%i",[baseUrl stringByReplacingOccurrencesOfString:@"api/" withString:@""], [[job.task.images objectAtIndex:0] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
+    
     cell.taskIV.layer.cornerRadius = 2;
     cell.taskIV.clipsToBounds = YES;
     

@@ -11,14 +11,14 @@
 @implementation Image
 
 @synthesize entityId;
-@synthesize thumbnailPath;
+@synthesize caption;
 
 -(id) initWithJson:(NSDictionary*) dic{
     self = [super init];
     
     if(self){
         self.entityId = [[dic valueForKey:@"entityId"] intValue];
-        self.thumbnailPath = [dic valueForKey:@"thumbnailPath"];
+        self.caption = [dic valueForKey:@"caption"];
     }
     
     return self;

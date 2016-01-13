@@ -128,7 +128,8 @@ static CGFloat PageControlHeight = 20.0f;
     contentView.frame = contentScrollView.frame;
     contentView.taskTitleLbl.text =  [task.title uppercaseString];
     contentView.companyNameLbl.text = task.company.name;
-    [contentView.companyLogo sd_setImageWithURL:[NSURL URLWithString:task.company.logo.thumbnailPath] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    [contentView.companyLogo sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@ProfileController/showLogoById?id=%i",[baseUrl stringByReplacingOccurrencesOfString:@"api/" withString:@""], [task.company.logo entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
+    
     contentView.companyLogo.layer.cornerRadius = 12;
     contentView.companyLogo.clipsToBounds = YES;
     contentView.task = task;
@@ -153,7 +154,8 @@ static CGFloat PageControlHeight = 20.0f;
 
 - (void)addImage:(Image*)image atIndex:(int)index{
     UIImageView *imageView  = [[UIImageView alloc] init];
-    [imageView sd_setImageWithURL:[NSURL URLWithString:[image.thumbnailPath stringByReplacingOccurrencesOfString:@"thumbnails" withString:@"attachments"]]];
+    [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@TaskController/getImage?imageId=%i",[baseUrl stringByReplacingOccurrencesOfString:@"api/" withString:@""], [image entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
+    
     [imageView setContentMode:UIViewContentModeScaleAspectFill];
     [imageView setClipsToBounds:YES];
     [imageScroller addSubview:imageView];
@@ -326,7 +328,8 @@ static CGFloat PageControlHeight = 20.0f;
     content.contentTitle=task.product.productName;
     content.contentURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@JobController/viewProduct?jobToken=%@", baseUrl, [job.token URLEncode]]];
     content.contentDescription = desc;
-    content.imageURL = [NSURL URLWithString:[[task.images objectAtIndex:0] thumbnailPath]];
+    content.imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@TaskController/showTaskImageThumbnail?id=%i",[baseUrl stringByReplacingOccurrencesOfString:@"api/" withString:@""], [[task.images objectAtIndex:0] entityId]]];
+    
     
     FBSDKShareDialog* dialog = [[FBSDKShareDialog alloc] init];
     dialog.mode = FBSDKShareDialogModeFeedWeb;
@@ -341,7 +344,9 @@ static CGFloat PageControlHeight = 20.0f;
 -(void) wechatMomentShare{
     NSString *url = [NSString stringWithFormat:@"%@JobController/viewProduct?jobToken=%@", baseUrl, [job.token URLEncode]];
 
-    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[[task.images objectAtIndex:0] thumbnailPath]]];
+    NSURL *imageUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@TaskController/showTaskImageThumbnail?id=%i",[baseUrl stringByReplacingOccurrencesOfString:@"api/" withString:@""], [[task.images objectAtIndex:0] entityId]]];
+    
+    NSData *imageData = [NSData dataWithContentsOfURL:imageUrl];
     
     NSString *desc = [[[NSAttributedString alloc] initWithData:[task.product.desc dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: [NSNumber numberWithInt:NSUTF8StringEncoding]} documentAttributes:nil error:nil] string];
     
@@ -358,7 +363,9 @@ static CGFloat PageControlHeight = 20.0f;
 -(void) wechatFriendShare{
     NSString *url = [NSString stringWithFormat:@"%@JobController/viewProduct?jobToken=%@", baseUrl, [job.token URLEncode]];
     
-    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[[task.images objectAtIndex:0] thumbnailPath]]];
+    NSURL *imageUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@TaskController/showTaskImageThumbnail?id=%i",[baseUrl stringByReplacingOccurrencesOfString:@"api/" withString:@""], [[task.images objectAtIndex:0] entityId]]];
+    
+    NSData *imageData = [NSData dataWithContentsOfURL:imageUrl];
     
     NSString *desc = [[[NSAttributedString alloc] initWithData:[task.product.desc dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: [NSNumber numberWithInt:NSUTF8StringEncoding]} documentAttributes:nil error:nil] string];
     
@@ -373,7 +380,10 @@ static CGFloat PageControlHeight = 20.0f;
 
 -(void) twitterShare{
     NSString *link = [NSString stringWithFormat:@"%@JobController/viewProduct?jobToken=%@", baseUrl, [job.token URLEncode]];
-    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[[task.images objectAtIndex:0] thumbnailPath]]];
+    
+    NSURL *imageUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@TaskController/showTaskImageThumbnail?id=%i",[baseUrl stringByReplacingOccurrencesOfString:@"api/" withString:@""], [[task.images objectAtIndex:0] entityId]]];
+    
+    NSData *imageData = [NSData dataWithContentsOfURL:imageUrl];
     
     TWTRComposer *composer = [[TWTRComposer alloc] init];
     [composer setURL:[NSURL URLWithString:link]];

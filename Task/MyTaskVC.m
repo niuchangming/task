@@ -89,7 +89,9 @@
     MyTask *task = [tasks objectAtIndex:indexPath.row];
     
     UIImageView *taskIv = (UIImageView*)[cell viewWithTag:1];
-    [taskIv sd_setImageWithURL:[NSURL URLWithString:[[task.images objectAtIndex:0] thumbnailPath]]];
+    [taskIv sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@TaskController/showTaskImageThumbnail?id=%i",[baseUrl stringByReplacingOccurrencesOfString:@"api/" withString:@""], [[task.images objectAtIndex:0] entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
+    
+    
     
     UILabel *taskTitleLbl = (UILabel*)[cell viewWithTag:2];
     taskTitleLbl.text = task.title;

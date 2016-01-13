@@ -187,8 +187,8 @@
 }
 
 -(void) updateViews{
-    [avatarBgView sd_setImageWithURL:[NSURL URLWithString:user.avatar.thumbnailPath] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
-    [avatarIV sd_setImageWithURL:[NSURL URLWithString:user.avatar.thumbnailPath] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
+    [avatarBgView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@ProfileController/showAvatarById?id=%i", [baseUrl stringByReplacingOccurrencesOfString:@"api/" withString:@""], [user.avatar entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
+    [avatarIV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@ProfileController/showAvatarById?id=%i", [baseUrl stringByReplacingOccurrencesOfString:@"api/" withString:@""], [user.avatar entityId]]] placeholderImage:[UIImage imageNamed:@"default_avatar.jpg"]];
     
     nameLbl.text = [NSString stringWithFormat:@"%@ %@", user.profile.firstName, user.profile.lastName];
     [nameLbl sizeToFit];
@@ -421,7 +421,6 @@
                     [MozTopAlertView showWithType:MozAlertTypeError text:err doText:nil doBlock:nil parentView:self.view];
                 }else{
                     user.avatar.entityId = [[dic valueForKey:@"entityId"] intValue];
-                    user.avatar.thumbnailPath = [dic valueForKey:@"thumbnailPath"];
                     [MozTopAlertView showWithType:MozAlertTypeSuccess text:@"Successfully changed." doText:nil doBlock:nil parentView:self.view];
                 }
             }else{

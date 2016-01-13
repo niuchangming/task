@@ -234,7 +234,8 @@
         
         for(Image *image in job.task.reward.images){
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, y, self.view.frame.size.width, self.view.frame.size.width * 2 / 3)];
-            [imageView sd_setImageWithURL:[NSURL URLWithString:[image.thumbnailPath stringByReplacingOccurrencesOfString:@"thumbnails" withString:@"attachments"]]];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@TaskController/getImage?imageId=%i", [baseUrl stringByReplacingOccurrencesOfString:@"api/" withString:@""], [image entityId]]]];
+            
             [self.view addSubview:imageView];
             [imageViews addObject:imageView];
             
